@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import NavBar from '../NavBar/NavBar.jsx';
 
 const ProfilePage = () => {
 
@@ -35,6 +36,7 @@ const ProfilePage = () => {
 
   return (
     <div>
+      <NavBar />
       <div className="profile-header header">Username's Profile</div>
       <div className="profile-picture-display">ProfilePictureHere</div>
       <input className="profile-picture-upload" type="file"></input>

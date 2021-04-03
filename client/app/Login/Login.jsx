@@ -21,18 +21,18 @@ const Login = () => {
   }
 
   return (
-    <div>
-      <div className="log-in-header header">Welcome</div>
+    <div className="login-container">
+      <div className="login-header header">Welcome!</div>
       <form onSubmit={handleLogin}>
         <label>
-          {'Username: '}
-          <input type="text" onChange={handleUsernameChange}></input>
-        </label>
+          {'Username '}<br></br>
+          <input type="text" onChange={handleUsernameChange} className="login-input"></input>
+        </label><br></br>
         <label>
-          {'Password: '}
-          <input type="text" onChange={handlePasswordChange}></input>
-        </label>
-        <input type="submit" value="LOGIN" ></input>
+          {'Password '}<br></br>
+          <input type="text" onChange={handlePasswordChange} className="login-input"></input>
+        </label><br></br>
+        <input type="submit" value="LOGIN" className="login-button"></input>
       </form>
       <div className="sign-up-link">Don't have an account? Sign up here!</div>
     </div>

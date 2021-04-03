@@ -7,13 +7,12 @@ import NavBar from '../NavBar/NavBar.jsx';
 const App = () => {
   return (
     <div>
-      <NavBar />
-      {/* <Login />
-     <div className="temp-separator">
+      <Login />
+     {/* <div className="temp-separator">
        ------------------------
      </div>
      <SignUp /> */}
-      <ProfilePage />
+      {/* <ProfilePage /> */}
     </div>
   )
 }
