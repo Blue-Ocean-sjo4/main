@@ -32,7 +32,7 @@ const Login = () => {
           {'Password: '}
           <input type="text" onChange={handlePasswordChange}></input>
         </label>
-        <input type="submit" value="Login" ></input>
+        <input type="submit" value="LOGIN" ></input>
       </form>
       <div className="sign-up-link">Don't have an account? Sign up here!</div>
     </div>

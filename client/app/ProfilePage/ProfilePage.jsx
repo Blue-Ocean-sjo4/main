@@ -14,41 +14,59 @@ const ProfilePage = () => {
     // Set states with data
   }, [])
 
-  const handlePictureUpload = () => {};
-  const handleUsernameChange = () => {};
-  const handleCountryChange = () => {};
-  const handleGenderChange = () => {};
-  const handlePronounsChange = () => {};
-  const handleBioChange = () => {};
+  const handlePictureUpload = (e) => {
+    // TODO: Send picture to storage API, then post URL to database
+  };
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value)
+  };
+  const handleCountryChange = (e) => {
+    setCountry(e.target.value)
+  };
+  const handleGenderChange = (e) => {
+    setGender(e.target.value)
+  };
+  const handlePronounsChange = (e) => {
+    setPronouns(e.target.value)
+  };
+  const handleBioChange = (e) => {
+    setBio(e.target.value)
+  };
 
   return (
     <div>
-      <div className="profile-header header">Username</div>
+      <div className="profile-header header">Username's Profile</div>
+      <div className="profile-picture-display">ProfilePictureHere</div>
+      <input className="profile-picture-upload" type="file"></input>
       <form>
         <label>
-          <div className="profile-picture-display">ProfilePictureHere</div>
-          <input className="profile-picture-upload" type="file"></input>
-        </label>
-        <label>
           Username:
-          <input className="profile-" type="text" onChange={ handleUsernameChange } placeholder="YOUR USERNAME" value={username}></input>
+          <input className="profile-username" type="text" onChange={handleUsernameChange} placeholder="YOUR USERNAME" value={username}></input>
         </label>
         <label>
           Country:
-          <input className="profile-" type="text" onChange={ handleCountryChange } placeholder="YOUR COUNTRY" value={country}></input>
+          <input className="profile-country" type="text" onChange={handleCountryChange} placeholder="YOUR COUNTRY" value={country}></input>
         </label>
         <label>
           Gender:
-          <input className="profile-" type="text" onChange={ handleGenderChange } placeholder="CIS MAN / CIS WOMAN / TRANS MAN / TRANS WOMAN / NON-BINARY" value={gender}></input>
+          <select className="profile-gender" value={gender} onChange={handleGenderChange}>
+            <option>GENDER</option>
+            <option value="cis-man">CIS MAN</option>
+            <option value="cis-woman">CIS WOMAN</option>
+            <option value="trans-man">TRANS MAN</option>
+            <option value="trans-woman">TRANS WOMAN</option>
+            <option value="non-binary">NON-BINARY</option>
+          </select>
         </label>
         <label>
           Pronouns:
-          <input className="profile-" type="text" onChange={ handlePronounsChange } placeholder="YOUR PROUNOUNS" value={pronouns}></input>
+          <input className="profile-pronouns" type="text" onChange={handlePronounsChange} placeholder="YOUR PROUNOUNS" value={pronouns}></input>
         </label>
         <label>
           Bio:
-          <input className="profile-" type="text" onChange={ handleBioChange } placeholder="YOUR BIO" value={bio}></input>
+          <input className="profile-bio" type="text" onChange={handleBioChange} placeholder="YOUR BIO" value={bio}></input>
         </label>
+        <input type="submit" value="UPDATE PROFILE"></input>
       </form>
     </div>
   )
