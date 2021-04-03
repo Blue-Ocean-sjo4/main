@@ -1,0 +1,29 @@
+{
+  "name": "Blue_Ocean",
+  "version": "1.0.0",
+  "description": "### names & links of contributors",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Blue-Ocean-sjo4/main.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Blue-Ocean-sjo4/main/issues"
+  },
+  "homepage": "https://github.com/Blue-Ocean-sjo4/main#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.23.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-react": "^7.23.1",
+    "install": "^0.13.0",
+    "npm": "^7.8.0"
+  }
+}
