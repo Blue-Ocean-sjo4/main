@@ -1,0 +1,48 @@
+/* lil' birdie blue: #008FCC
+midnight blue: #202473
+message gray: #E4E4E4
+background: #FFFFFF
+text: #000000
+*/
+
+:root {
+  --birdie-blue: #008FCC;
+  --midnight-blue: #202473;
+  --message-gray: #E4E4E4;
+  --background: #FFFFFF;
+  --text: #000000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.nav-bar {
+  height: 65px;
+  width: 100%;
+  border-bottom: 2px solid var(--birdie-blue);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-title {
+  color: var(--midnight-blue);
+  font-weight: bold;
+  margin-left: 150px;
+  font-size: 30px;
+}
+
+.icon-container {
+  width: 160px;
+  display: flex;
+  justify-content: space-between;
+  float: right;
+  margin-right: 150px;
+}
+
+ion-icon {
+  font-size: 48px;
+  color: var(--birdie-blue);
+}
