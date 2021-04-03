@@ -33,23 +33,23 @@ const SignUp = () => {
       <form onSubmit={handleSignUpSubmit}>
         <label>
           Username:
-          <input className="sign-up-username sign-up-input" type="text" value={ signUpUsername } onChange={handleUsernameChange} required></input>
+          <input className="sign-up-username sign-up-input" type="text" onChange={handleUsernameChange} required></input>
         </label>
         <label>
           Password:
-          <input className="sign-up-password sign-up-input" type="text" value={ signUpPassword } onChange={handlePasswordChange} required></input>
+          <input className="sign-up-password sign-up-input" type="text" onChange={handlePasswordChange} required></input>
         </label>
         <label>
           Email:
-          <input className="sign-up-email sign-up-input" type="text" value={ signUpEmail } onChange={handleEmailChange} required></input>
+          <input className="sign-up-email sign-up-input" type="text" onChange={handleEmailChange} required></input>
         </label>
         <label>
           Country
-          <input className="sign-up-country sign-up-input" type="text" value={ signUpUsername } onChange={handleCountryChange} required></input>
+          <input className="sign-up-country sign-up-input" type="text" onChange={handleCountryChange} required></input>
         </label>
         <label>
           Birthdate:
-          <input className="sign-up-birthdate sign-up-input" type="text" value={ signUpBirthdate } onChange={handleBirthdateChange} placeholder="MM/DD/YYYY" required></input>
+          <input className="sign-up-birthdate sign-up-input" type="text" onChange={handleBirthdateChange} placeholder="MM/DD/YYYY" required></input>
         </label>
         <input type="submit" value="SIGNUP"></input>
       </form>
