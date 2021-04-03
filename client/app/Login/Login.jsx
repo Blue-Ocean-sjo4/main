@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import './Login.css';
 
 const Login = () => {
 
@@ -15,13 +16,13 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // To-do Authentication
+    // TODO: Authentication, Route to main page
     console.log('Login attempt');
   }
 
   return (
     <div>
-      <div>Welcome</div>
+      <div className="log-in-header header">Welcome</div>
       <form onSubmit={handleLogin}>
         <label>
           {'Username: '}
