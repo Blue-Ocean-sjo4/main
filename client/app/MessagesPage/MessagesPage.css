@@ -1,0 +1,15 @@
+#messages-page-grid {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  height: 100vh;
+}
+
+#messages-page-left {
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
+}
+
+#messages-page-right{
+  display: grid;
+  grid-template-rows: 10% 90%;
+}

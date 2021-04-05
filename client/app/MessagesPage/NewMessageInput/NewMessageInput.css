@@ -1,0 +1,27 @@
+#new-message-form {
+  grid-row: 3;
+  position: relative;
+  align-self: center;
+  margin: 0;
+  padding: 0 20px;
+}
+
+#new-message-input {
+  outline: none;
+  padding-left: 10px;
+  border: 2px solid #000;
+  width: 100%;
+  border-radius: 25px;
+  height: 2.75rem;
+}
+
+#new-message-form button {
+  position: absolute;
+  outline: none;
+  top: 7%;
+  right: 2.25%;
+  border: 1px solid #000;
+  height: 2.3rem;
+  width: 2.3rem;
+  border-radius: 50%;
+}

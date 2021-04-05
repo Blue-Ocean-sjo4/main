@@ -1,0 +1,4 @@
+#messages-list-container {
+  grid-row: 2;
+  align-self: end;
+}
