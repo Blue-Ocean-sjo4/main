@@ -19,4 +19,68 @@ module.exports.signup = async (response, request) => {
   }
 };
 
+module.exports.login = (username) => User.findOne({ username });
+
+module.exports.findID = (id) => User.findById({ _id: id });
+
+module.exports.findUserData = async (req, res) => {
+  try {
+    const loggedInUser = await User.findOne({ _id: id });
+    const rooms = Object.entries(loggedInUser.rooms);
+    const roomsPayload = rooms.map(async (room) => {
+      const connection = await User.findOne({ _id: room[1] });
+      return {
+        roomId: room[0],
+        user_id: connection._id,
+        name: connection.name,
+        bio: connection.bio,
+        country: connection.country,
+        birthdate: connection.birthdate
+      };
+    });
+
+    const pendingConnections = Object.entries(loggedInUser.pendingConnections);
+    const pendingConnectionsPayload = pendingConnections.map(async (pendingConnection) => {
+      const connection = await User.findOne({ _id: pendingConnection[0] });
+      return {
+        user_id: connection._id,
+        name: connection.name,
+        bio: connection.bio,
+        country: connection.country,
+        birthdate: connection.birthdate
+      };
+    });
+
+    loggedInUser.pendingConnections = pendingConnectionsPayload;
+    loggedInUser.rooms = roomsPayload;
+
+    res.send(loggedInUser);
+  } catch (error) {
+    res.status(404).send(err);
+    console.error(error);
+  };
+};
+
 //const hashPassword = await bcrypt.hash(<password>, 10);
+
+
+
+
+
+// User.findOne({ _id: id })
+// .then(userData => {
+//   var rooms = Object.entries(userData.rooms);
+//   var promiseArray = rooms.map((room) => {
+//     return User.findOne({ _id: room[1] })
+//   })
+
+//   Promise.all(promiseArray)
+//     .then((connections) => {
+
+//       res.send({
+//         ...userData, rooms
+//       })
+//     })
+//   //res.status(200).send(result.data)
+// };
+// .catch(err => res.status(404).send('user does not exist'));
