@@ -1,24 +1,25 @@
 const express = require('express');
 const path = require('path');
+const url = require('url');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 const session = require('express-session');
 const connectEnsureLogin = require('connect-ensure-login');
-const { login, signup, findID } = require('/database/model/queryFunctions.js');
+const { login, signup, findID, updateUserData } = require('../database/model/queryFunctions.js');
 const PORT = 1337;
 
 passport.use(new Strategy(async (username, password, done) => {
   try {
     const userData = await login(username);
-    console.log(userData, username, password);
     // if username does not exist
     // userData will be null
     if (!userData) return done(null, false, 'Username does not exist');
     // if password does not match
-    if (userData.password !== password) return done(null, false, 'Password does not match');
-    console.log(1);
+    if (!(await bcrypt.compare(password, userData.password))) return done(null, false, 'Password does not match');
     // username exists and password matches
     return done(null, userData);
   } catch (error) {
@@ -30,7 +31,6 @@ passport.serializeUser((user, done) => done(null, user._id));
 passport.deserializeUser(async (id, done) => {
   try {
     const userData = await findID(id);
-    console.log(2);
     done(null, userData);
   } catch (error) {
     console.error(error);
@@ -40,10 +40,11 @@ passport.deserializeUser(async (id, done) => {
 
 const app = express();
 
-app.use(morgan('dev'));
+app.use(cors());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false
 }));
@@ -51,16 +52,19 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', express.static('/client/dist'));
+app.use('/', express.static('client/dist'));
 
 app.post('/signup', signup);
+
+// remember to remove this
+app.get('/login', (req, res) => res.sendFile(path.resolve('client/dist/login.html')));
 
 app.post(
   '/login',
   passport.authenticate('local', { failureRedirect: '/login' }),
   (req, res) => {
-  console.log('hit');
-  res.redirect('/home');
+    console.log('req.body', req.body);
+    res.redirect(url.format({pathname: '/', query: { username: req.body.username }}));
 });
 
 app.get('/logout', (req, res) => {
@@ -68,9 +72,13 @@ app.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
-app.get('/connections', connectEnsureLogin.ensureLoggedIn(),
-  (req, res) =>
+app.get(
+  '/connections',
+  connectEnsureLogin.ensureLoggedIn(),
+  (req, res) => res.send('i am in homepage')
 );
+
+app.put('/update', updateUserData);
 
 app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
 
