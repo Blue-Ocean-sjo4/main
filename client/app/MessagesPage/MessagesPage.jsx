@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import NewMessageInput from './NewMessageInput/NewMessageInput.jsx';
+import MessagesPageBanner from './MessagesPageBanner/MessagesPageBanner.jsx';
 import MessagesList from './MessagesList/MessagesList.jsx';
-import './MessagesPage.css';
+import NewMessageInput from './NewMessageInput/NewMessageInput.jsx';
 import PalsList from './PalsList/PalsList.jsx'
+import './MessagesPage.css';
 
 const MessagesPage = () => {
   const [allMessages, setAllMessages] = useState([]);
   const [tracker, setTracker] = useState(0)
   const [roomID, setRoomID] = useState(0)
-  const [palsList, setPalsList] = useState([{pic: 'https://posterspy.com/wp-content/uploads/2019/05/TheDude_lr.jpg', name: 'the dude', country: 'US'},{pic: 'https://posterspy.com/wp-content/uploads/2019/05/TheDude_lr.jpg', name: 'the dude', country: 'US'}])
+  const [palsList, setPalsList] = useState([{pic: 'https://posterspy.com/wp-content/uploads/2019/05/TheDude_lr.jpg', name: 'the dude', country: 'US', bio:'thats just like your opinion man'},{pic: 'https://i.pinimg.com/originals/05/17/bf/0517bfa5e9d45208761756e1b0c1f5f9.jpg', name: 'the dude again', country: 'US', bio:'not on the carpet, come on'}])
+  const [currentPal, setCurrentPal] = useState({pic: '', name:'', country: '', bio: ''})
 
   // useEffect((
   //   axios.get(`/roomMessages/${roomID}`)
@@ -34,13 +36,13 @@ const MessagesPage = () => {
   return (
     <div id="messages-page-grid" >
       <div id="messages-page-left" >
-        <h1>This is going to be a banner but I need a quick test</h1>
-        <MessagesList allMessages={allMessages} />
+        <MessagesPageBanner currentPal={currentPal}/>
+        <MessagesList currentPal={currentPal} allMessages={allMessages} />
         <NewMessageInput tracker={tracker} handleAddMessage={handleAddMessage} />
       </div>
       <div id="messages-page-right">
         <div id="pals-list-title">Pals List</div>
-        <PalsList palsList={palsList}/>
+        <PalsList currentPal={currentPal} setCurrentPal={setCurrentPal} palsList={palsList}/>
       </div>
     </div>
   );

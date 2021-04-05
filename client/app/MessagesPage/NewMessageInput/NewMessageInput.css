@@ -22,7 +22,11 @@
   top: 30%;
   right: 2.5%;
   background-color: transparent;
-  border-radius: 50%;
+  cursor: pointer;
+}
+
+#new-message-form button:hover {
+  color: #6d6d6d;
 }
 
 #new-message-form button i {

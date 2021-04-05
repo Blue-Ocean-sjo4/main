@@ -1,12 +1,16 @@
 import React from 'react';
 import './SinglePal.css';
+import countryCodeToFlag from 'country-code-to-flag'
 
-function SinglePal({pal}) {
+function SinglePal({ pal, setCurrentPal }) {
 
   return (
-    <div className="single-pal">
+    <div onClick={() => { setCurrentPal(pal) }} className="single-pal">
       <img className="pic" src={pal.pic}></img>
-      {pal.name}
+        <div className="pal-name">
+          {pal.name}
+        </div>
+        <span className="pal-country">{countryCodeToFlag(pal.country)}</span>
     </div>
   )
 }

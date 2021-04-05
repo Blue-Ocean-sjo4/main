@@ -1,0 +1,19 @@
+#messages-page-banner-container {
+  /* border: 2px solid #000; */
+  background-color: #c4c4c4;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: flex-start; */
+  align-items: center;
+}
+
+.current-pal-profile-pic {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid #008FCC;
+}
+
+.messages-page-back {
+  /* flex-grow: 1; */
+}
