@@ -61,7 +61,7 @@ const SignUp = () => {
           <input className="sign-up-birthdate sign-up-input" type="text" onChange={handleBirthdateChange} placeholder="MM/DD/YYYY" required></input>
         </label>
         <br></br>
-        <input type="submit" value="SIGNUP" className="sign-up-button"></input>
+        <input type="submit" value="SIGN UP" className="sign-up-button"></input>
       </form>
       <div className="sign-up-login-link">Already have an account? Log in here!</div>
     </div>

@@ -40,6 +40,7 @@
   border-radius: 5px;
   background-color: var(--background);
   color: var(--midnight-blue);
+  font-weight: bolder;
 }
 
 .sign-up-button:hover {
