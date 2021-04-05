@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import SinglePal from './SinglePal/SinglePal.jsx'
+import './PalsList.css'
 
-function PalsList() {
+function PalsList({palsList}) {
 
   return (
-    <div id="messages-page-right" className="pals-list">
+    <div id="pals-list">
+      {palsList.map((pal) => {
+        return <SinglePal pal={pal}/>
+      })}
       </div>
   )
 }

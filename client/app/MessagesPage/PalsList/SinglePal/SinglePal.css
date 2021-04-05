@@ -1,0 +1,10 @@
+.single-pal{
+  border: 1px solid #008FCC;
+  margin: 10px;
+}
+
+.pic{
+  height: 60px;
+  width: 60px;
+  border: 1px solid #008FCC;
+}

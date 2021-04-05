@@ -18,10 +18,13 @@
 #new-message-form button {
   position: absolute;
   outline: none;
-  top: 7%;
-  right: 2.25%;
-  border: 1px solid #000;
-  height: 2.3rem;
-  width: 2.3rem;
+  border: none;
+  top: 30%;
+  right: 2.5%;
+  background-color: transparent;
   border-radius: 50%;
+}
+
+#new-message-form button i {
+  font-size: 1.25rem;
 }

@@ -1,4 +1,11 @@
 .my-message {
-  border: 3px solid #000;
   margin-bottom: 15px;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  border-radius: 10px;
+  background-color: #eaeaea;
+  padding: 10px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
 }

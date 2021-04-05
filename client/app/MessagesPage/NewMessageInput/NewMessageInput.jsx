@@ -21,7 +21,9 @@ const NewMessageInput = ({ handleAddMessage }) => {
             setCurrentMessageText('');
           }
         }
-        } >{'>'}</button>
+        }>
+          <i className="fas fa-pen-nib" />
+          </button>
     </form>
   );
 };

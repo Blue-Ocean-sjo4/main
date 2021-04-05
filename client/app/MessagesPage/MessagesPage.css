@@ -12,4 +12,10 @@
 #messages-page-right{
   display: grid;
   grid-template-rows: 10% 90%;
+  border-radius: 1px;
+}
+
+#pals-list-title{
+  text-align: center;
+  font-size: x-large;
 }
