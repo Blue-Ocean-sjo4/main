@@ -63,8 +63,22 @@ module.exports.findUserData = async (req, res) => {
   };
 };
 
-module.exports.updateUserData = (request, response) => {
+module.exports.updateUserData = async (request, response) => {
+  const { user_id, username, gender, pronoun, country, bio } = request.body;
 
+  try {
+    const update = {
+      gender,
+      pronoun,
+      country,
+      bio
+    };
+
+    const userData = await User.findOneAndUpdate({ _id: user_id }, update, { new: true });
+    response.status(201).send(userData);
+  } catch(error) {
+    response.status(404).send(error);
+  }
 };
 
 //const hashPassword = await bcrypt.hash(<password>, 10);
