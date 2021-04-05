@@ -8,8 +8,8 @@ import './App.css';
 const App = () => {
   return (
     <div>
-      <Login />
-      {/* <SignUp /> */}
+      {/* <Login /> */}
+      <SignUp />
       {/* <ProfilePage /> */}
     </div>
   )
