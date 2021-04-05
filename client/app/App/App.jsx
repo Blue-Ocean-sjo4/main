@@ -8,9 +8,9 @@ import './App.css';
 const App = () => {
   return (
     <div>
-      {/* <Login /> */}
+      <Login />
       {/* <SignUp /> */}
-      <ProfilePage />
+      {/* <ProfilePage /> */}
     </div>
   )
 }
