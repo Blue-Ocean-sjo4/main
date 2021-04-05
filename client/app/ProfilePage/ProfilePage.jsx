@@ -53,7 +53,7 @@ const ProfilePage = () => {
           <label>
             Username
           <br></br>
-            <input className="profile-username profile-input" type="text"  placeholder="YOUR USERNAME" value={username}></input>
+            <input className="profile-username profile-input" type="text"  placeholder="YOUR USERNAME" defaultValue={username}></input>
           </label>
           <br></br>
           <label>
@@ -84,7 +84,7 @@ const ProfilePage = () => {
           <label>
             Bio
           <br></br>
-            <textarea className="profile-bio profile-input" type="text" onChange={handleBioChange} placeholder="YOUR BIO" value={bio} maxlength="240"></textarea>
+            <textarea className="profile-bio profile-input" type="text" onChange={handleBioChange} placeholder="YOUR BIO" value={bio} maxLength="240"></textarea>
           </label>
           <br></br>
           <input className="profile-update-button" type="submit" value="UPDATE PROFILE"></input>
