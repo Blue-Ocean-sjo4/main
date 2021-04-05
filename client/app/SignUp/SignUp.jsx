@@ -40,7 +40,7 @@ const SignUp = () => {
         <label>
           Password
           <br></br>
-          <input className="sign-up-password sign-up-input" type="text" onChange={handlePasswordChange} required></input>
+          <input className="sign-up-password sign-up-input" type="password" onChange={handlePasswordChange} required></input>
         </label>
         <br></br>
         <label>

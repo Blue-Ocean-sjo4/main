@@ -21,6 +21,7 @@ body {
 .nav-bar {
   height: 65px;
   width: 100%;
+  background-color: var(--background);
   border-bottom: 2px solid var(--birdie-blue);
   display: flex;
   align-items: center;
@@ -46,4 +47,8 @@ body {
 ion-icon {
   font-size: 48px;
   color: var(--birdie-blue);
+}
+
+ion-icon:hover {
+  cursor: pointer;
 }
