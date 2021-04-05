@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import './SignUp.css';
 
 const SignUp = () => {
   const [signUpUsername, setSignUpUsername] = useState('')
@@ -28,32 +29,41 @@ const SignUp = () => {
   }
 
   return (
-    <div>
+    <div className="sign-up-container">
       <div className="sign-up-header header">Sign Up</div>
       <form onSubmit={handleSignUpSubmit}>
         <label>
-          Username:
+          Username
+          <br></br>
           <input className="sign-up-username sign-up-input" type="text" onChange={handleUsernameChange} required></input>
-        </label>
+        </label><br></br>
         <label>
-          Password:
+          Password
+          <br></br>
           <input className="sign-up-password sign-up-input" type="text" onChange={handlePasswordChange} required></input>
         </label>
+        <br></br>
         <label>
-          Email:
+          Email
+          <br></br>
           <input className="sign-up-email sign-up-input" type="text" onChange={handleEmailChange} required></input>
         </label>
+        <br></br>
         <label>
           Country
+          <br></br>
           <input className="sign-up-country sign-up-input" type="text" onChange={handleCountryChange} required></input>
         </label>
+        <br></br>
         <label>
-          Birthdate:
+          Birthdate
+          <br></br>
           <input className="sign-up-birthdate sign-up-input" type="text" onChange={handleBirthdateChange} placeholder="MM/DD/YYYY" required></input>
         </label>
-        <input type="submit" value="SIGNUP"></input>
+        <br></br>
+        <input type="submit" value="SIGNUP" className="sign-up-button"></input>
       </form>
-      <div className="sign-up-login">Already have an account? Log in here!</div>
+      <div className="sign-up-login-link">Already have an account? Log in here!</div>
     </div>
   )
 }

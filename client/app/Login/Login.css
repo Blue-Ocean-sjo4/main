@@ -47,6 +47,10 @@ body {
   color: var(--midnight-blue);
 }
 
+.login-button:hover {
+  cursor: pointer;
+}
+
 .sign-up-link {
   color: var(--midnight-blue);
   text-decoration: underline;
