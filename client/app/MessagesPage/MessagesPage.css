@@ -12,11 +12,11 @@
 #messages-page-right{
   display: grid;
   grid-template-rows: 10% 90%;
-  border-left: 1px solid #000;
+  border-left: 1px solid #a0a0a0;
 }
 
 #pals-list-title{
   margin: auto;
   text-align: center;
-  font-size: x-large;
+  font-size: 32px;
 }

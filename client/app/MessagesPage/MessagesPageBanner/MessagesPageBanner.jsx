@@ -4,15 +4,26 @@ import './MessagesPageBanner.css';
 const MessagesPageBanner = () => {
   return (
     <div id="messages-page-banner-container" >
-      <button className="messages-page-back" type="button">back</button>
+
+      <a href="#" className="messages-page-back">
+        <button type="button">
+          <i className="fas fa-arrow-left messages-page-back-arrow" />
+        </button>
+      </a>
+
       <img className="current-pal-profile-pic" src="https://wondersinthedark.files.wordpress.com/2012/09/the-big-lebowski-1.jpg" alt="Pal's Profile Picture"></img>
-      <div>
-        <div>Pal's name</div>
-        <div>Pal's bio</div>
+
+      <div className="current-pal-info" >
+        <p className="pal-name">El Duderino</p>
+        <p className="pal-bio">That's, like, your bio man.</p>
       </div>
-      <button type="button">Add new pal</button>
-      <button type="button">notifications</button>
-      <div>my profile</div>
+
+      <div className="messages-page-banner-icons">
+        <button type="button"><ion-icon name="add-circle-outline"></ion-icon></button>
+        <a href="#" ><button type="button"><ion-icon name="notifications-circle-outline"></ion-icon></button></a>
+        <a href="#" ><ion-icon name="ellipse-outline"></ion-icon></a>
+      </div>
+
     </div>
   );
 };

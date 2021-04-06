@@ -8,7 +8,7 @@
 
 #new-message-input {
   outline: none;
-  padding-left: 10px;
+  padding-left: 50px;
   border: 2px solid #000;
   width: 100%;
   border-radius: 25px;
@@ -20,9 +20,16 @@
   outline: none;
   border: none;
   top: 30%;
-  right: 2.5%;
   background-color: transparent;
   cursor: pointer;
+}
+
+#submit-new-message {
+  right: 2.5%;
+}
+
+#new-message-upload {
+  left: 2.5%;
 }
 
 #new-message-form button:hover {

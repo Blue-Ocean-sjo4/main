@@ -1,7 +1,7 @@
 .single-pal{
   display: grid;
   grid-template-columns: 30% 50% 20%;
-  border: 2px solid #008FCC;
+  border: 2px solid var(--birdie-blue);
   margin-top: 10px;
   margin-bottom: 10px;
   cursor: pointer;
@@ -10,7 +10,7 @@
 .pal-name{
   margin-left: 5px;
   grid-column: 2;
-  font-size: large;
+  font-size: 16px;
   align-self: center;
 }
 
@@ -28,6 +28,6 @@
   margin-left: 5px;
   height: 60px;
   width: 60px;
-  border: 3px solid #008FCC;
+  border: 3px solid var(--birdie-blue);
   border-radius: 50%;
 }

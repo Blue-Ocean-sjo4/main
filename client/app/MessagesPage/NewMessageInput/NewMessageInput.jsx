@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './NewMessageInput.css';
+import FilePicker from './FilePicker.jsx';
 
 const NewMessageInput = ({ handleAddMessage }) => {
   const [currentMessageText, setCurrentMessageText] = useState('');
+  const [showingFilePicker, showFilePicker] = useState(false);
 
   return (
     <form id="new-message-form" >
@@ -14,6 +16,7 @@ const NewMessageInput = ({ handleAddMessage }) => {
       </input>
       <button
         type='submit'
+        id="submit-new-message"
         onClick={(e) => {
           e.preventDefault();
           if (currentMessageText.length) {
@@ -22,8 +25,12 @@ const NewMessageInput = ({ handleAddMessage }) => {
           }
         }
         }>
-          <i className="fas fa-pen-nib" />
-          </button>
+        <i className="fas fa-pen-nib" />
+      </button>
+      {
+        showingFilePicker ? <FilePicker /> : null
+      }
+      <button id="new-message-upload" onMouseEnter={() => {showFilePicker(false)}} onClick={(e) => {e.preventDefault(); showFilePicker(true)}}><i class="fas fa-upload"></i></button>
     </form>
   );
 };

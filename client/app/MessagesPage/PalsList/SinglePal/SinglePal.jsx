@@ -10,7 +10,7 @@ function SinglePal({ pal, setCurrentPal }) {
         <div className="pal-name">
           {pal.name}
         </div>
-        <span className="pal-country">{countryCodeToFlag(pal.country)}</span>
+        <div className="pal-country">{countryCodeToFlag(pal.country)}</div>
     </div>
   )
 }
