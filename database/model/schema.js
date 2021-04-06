@@ -23,8 +23,8 @@ const userSchema = mongoose.Schema({
 module.exports.Room = mongoose.model('Room', roomSchema);
 module.exports.User = mongoose.model('User', userSchema);
 
-const testSchema = mongoose.Schema({
-  testDate: Date
-});
+// const testSchema = mongoose.Schema({
+//   testDate: Date
+// });
 
-module.exports.Test = mongoose.model('Test', testSchema);
+// module.exports.Test = mongoose.model('Test', testSchema);

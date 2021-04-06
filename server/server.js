@@ -91,7 +91,7 @@ app.get(
 
 app.put('/update', connectEnsureLogin.ensureLoggedIn(), updateUserData);
 
-app.post('/test', test);
+// app.post('/test', test);
 /*
 *-----------------------------------------------------------*
 |                                                           |
