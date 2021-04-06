@@ -155,65 +155,59 @@ module.exports.postMessage = async (request, response) => {
   }
 };
 
+// TODO: updated schema to include requestedConnections
 module.exports.findPal = async (request, response) => {
-  console.log(1);
-  const { user_id, country } = request.params;
-  // find user by user_id
-  console.log('country data', country);
-  const userData = await User.findOne({ _id: user_id });
-  const ineligiblePals = [];
-  // loop through pending;
-  Object.keys(userData.pendingConnections).forEach(user => ineligiblePals.push(user));
-  // loop through accepted;
-  Object.values(userData.rooms).forEach(user => ineligiblePals.push(user));
-  // user is requesting someone to be a pal
-  // requestedConnections
-  const userBirthDate = userData.birthdate;
-  const legalAge = new Date(moment().subtract(18, 'years'));
+  try {
+    const { user_id, country } = request.params;
+    const userData = await User.findOne({ _id: user_id });
+    const ineligiblePals = [user_id];
+    // loop through pending;
+    Object.keys(userData.pendingConnections).forEach(user => ineligiblePals.push(user));
+    // loop through accepted;
+    Object.values(userData.rooms).forEach(user => ineligiblePals.push(user));
+    // user is requesting someone to be a pal
+    // requestedConnections
+    const userBirthDate = userData.birthdate;
+    const legalAge = new Date(moment().subtract(18, 'years'));
 
-  let bdayCriteria = moment(userBirthDate) >= legalAge ? { $gte: legalAge } : { $lt: legalAge };
-  console.log('birthday criteria', bdayCriteria);
-  // TODO: randomize before limit
-  const randomPal = await User.aggregate([
-    {
-      $match: {
-        _id: { $nin: ineligiblePals },
-        country: country,
-        birthdate: bdayCriteria
+    let bdayCriteria = moment(userBirthDate) >= legalAge ? { $gte: legalAge } : { $lt: legalAge };
+
+    const randomPal = await User.aggregate([
+      {
+        $match: {
+          _id: { $nin: ineligiblePals },
+          country: country,
+          birthdate: bdayCriteria
+        },
       },
-    },
-    {
-      $sample: { size: 1 }
-    }
-  ]);
+      {
+        $sample: { size: 1 }
+      }
+    ]);
 
-  console.log('random pal', randomPal);
 
-  randomPal[0].pendingConnections[user_id] = 0;
-  await randomPal.save();
+    const updatedPendingConnections = randomPal[0].pendingConnections;
+    updatedPendingConnections[user_id] = 0;
 
-  response.sendStatus(200);
-  // const getAggregatedRatings = (reviewIds) => Reviews
-  // .aggregate([
-  //   { $match: { review_id: { $in: reviewIds } } },
-  //   { $group: { _id: '$rating', count: { $sum: 1 } } },
-  // ])
-  // ;
+    const newPal = await User.findOneAndUpdate({ _id: randomPal[0]._id }, {pendingConnections: updatedPendingConnections });
 
-  // const randomPal = possiblePals[Math.floor(Math.random() * possiblePals.length)];
-
+    response.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    response.sendStatus(400);
+  }
 };
 
 //db.mycoll.aggregate([{ $sample: { size: N } }])
 //const hashPassword = await bcrypt.hash(<password>, 10);
 
-module.exports.test = async (req, res) => {
-  await Test.create({ testDate: moment() });
-  const results = await Test.find({});
-  const testDate = results[0].testDate;
-  console.log(new Date(moment('1991-04-05')));
-  res.sendStatus(201);
-};
+// module.exports.test = async (req, res) => {
+//   await Test.create({ testDate: moment() });
+//   const results = await Test.find({});
+//   const testDate = results[0].testDate;
+//   console.log(new Date(moment('1991-04-05')));
+//   res.sendStatus(201);
+// };
 
 
 
