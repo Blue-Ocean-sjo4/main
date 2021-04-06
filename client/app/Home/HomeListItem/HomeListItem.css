@@ -1,0 +1,55 @@
+.pal-container {
+  display: grid;
+  margin: 10px auto;
+  height: 120px;
+  width: 75%;
+  grid-template: 1fr 2fr / 1fr 5fr 1fr;
+  background-color: var(--message-gray);
+  border-radius: 5px;
+  color: var(--midnight-blue);
+}
+
+.pal-container:hover {
+  cursor: pointer;
+}
+
+.pal-item-name {
+  grid-area: 1 / 2 / 2 / 3;
+  padding: 1px;
+  font-size: 20px;
+  font-weight: 600;
+  align-self: center;
+}
+
+.pal-item-bio {
+  grid-area: 2 / 2 / 3 / 3;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  color: black;
+}
+
+.pal-item-country {
+  grid-area: 1 / 3 / 3 / 4;
+  place-self: center;
+  font-size: 2rem;
+}
+
+.pal-item-picture-container {
+  width: 70px;
+  height: 70px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 1px solid var(--birdie-blue);
+  grid-area: 1 / 1 / 3 / 2;
+  place-self: center;
+}
+
+.pal-item-picture {
+  display: inline;
+  margin: 0 auto;
+  /* margin-left: -25%; we need some way to center img if its non-square*/
+  height: 100%;
+  width: auto;
+}

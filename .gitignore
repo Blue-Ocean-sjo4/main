@@ -1,5 +1,7 @@
 #our files
 package-lock.json
+filepickerConfig.js
+
 
 # Logs
 logs

@@ -1,0 +1,18 @@
+:root {
+  --birdie-blue: #008FCC;
+  --midnight-blue: #202473;
+  --message-gray: #E4E4E4;
+  --background: #FFFFFF;
+  --text: #000000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background);
+}
+
+#app {
+  height: 100%;
+  width: 100%;
+}
