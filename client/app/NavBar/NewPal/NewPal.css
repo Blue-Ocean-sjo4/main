@@ -13,10 +13,6 @@
   background-color: rgba(0,0,0,0.4);
 }
 
-.new-pal-model-hidden{
-  display: none;
-}
-
 .new-pal-modal-content {
   background-color: #fefefe;
   margin: auto;
