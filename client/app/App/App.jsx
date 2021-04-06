@@ -11,11 +11,11 @@ import './App.css';
 const App = () => {
   return (
     <div>
-      {/* <Login /> */}
+      <Login />
       {/* <SignUp /> */}
       {/* <ProfilePage /> */}
       {/* <Home /> */}
-      <Notifications />
+      {/* <Notifications /> */}
       {/* <MessagesPage /> */}
     </div>
   )
