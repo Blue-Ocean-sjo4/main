@@ -3,7 +3,7 @@
   grid-column-start: 2;
   grid-column-end: 4;
   border-radius: 10px;
-  background-color: #eaeaea;
+  background-color: var(--message-gray);
   padding: 10px;
   overflow-wrap: break-word;
   word-wrap: break-word;

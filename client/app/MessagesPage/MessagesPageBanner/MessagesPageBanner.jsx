@@ -1,7 +1,7 @@
 import React from 'react';
 import './MessagesPageBanner.css';
 
-const MessagesPageBanner = () => {
+const MessagesPageBanner = ({name, bio, profilePic}) => {
   return (
     <div id="messages-page-banner-container" >
 
@@ -11,11 +11,11 @@ const MessagesPageBanner = () => {
         </button>
       </a>
 
-      <img className="current-pal-profile-pic" src="https://wondersinthedark.files.wordpress.com/2012/09/the-big-lebowski-1.jpg" alt="Pal's Profile Picture"></img>
+      <img className="current-pal-profile-pic" src={profilePic} alt="Pal's Profile Picture"></img>
 
       <div className="current-pal-info" >
-        <p className="pal-name">El Duderino</p>
-        <p className="pal-bio">That's, like, your bio man.</p>
+        <p className="pal-name">{name}</p>
+        <p className="pal-bio">{bio}</p>
       </div>
 
       <div className="messages-page-banner-icons">

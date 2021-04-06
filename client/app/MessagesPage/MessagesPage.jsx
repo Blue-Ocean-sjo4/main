@@ -6,12 +6,24 @@ import NewMessageInput from './NewMessageInput/NewMessageInput.jsx';
 import PalsList from './PalsList/PalsList.jsx'
 import './MessagesPage.css';
 
+/*
+
+message object:
+{
+  senderID: String,
+  body: String,
+  timestamp: String
+  media: Array
+}
+
+*/
+
 const MessagesPage = () => {
   const [allMessages, setAllMessages] = useState([]);
   const [tracker, setTracker] = useState(0)
   const [roomID, setRoomID] = useState(0)
-  const [palsList, setPalsList] = useState([{pic: 'https://posterspy.com/wp-content/uploads/2019/05/TheDude_lr.jpg', name: 'the dude', country: 'US', bio:'thats just like your opinion man'},{pic: 'https://i.pinimg.com/originals/05/17/bf/0517bfa5e9d45208761756e1b0c1f5f9.jpg', name: 'the dude again', country: 'US', bio:'not on the carpet, come on'}])
-  const [currentPal, setCurrentPal] = useState({pic: '', name:'', country: '', bio: ''})
+  const [palsList, setPalsList] = useState([{pic: 'https://posterspy.com/wp-content/uploads/2019/05/TheDude_lr.jpg', name: 'the dude', country: 'US', bio:'thats just like your opinion man'},{pic: 'https://i.pinimg.com/originals/05/17/bf/0517bfa5e9d45208761756e1b0c1f5f9.jpg', name: 'the dude again', country: 'US', bio:'not on the carpet, come on'}, {pic: 'https://wondersinthedark.files.wordpress.com/2012/09/the-big-lebowski-1.jpg', name: 'El Duderino', country: 'IL', bio:'that\'s, like, your bio man.'}])
+  const [currentPal, setCurrentPal] = useState({pic: 'https://wondersinthedark.files.wordpress.com/2012/09/the-big-lebowski-1.jpg', name: 'El Duderino', country: 'IL', bio:'that\'s, like, your bio man.'})
 
   // useEffect((
   //   axios.get(`/roomMessages/${roomID}`)
@@ -36,7 +48,7 @@ const MessagesPage = () => {
   return (
     <div id="messages-page-grid" >
       <div id="messages-page-left" >
-        <MessagesPageBanner currentPal={currentPal}/>
+        <MessagesPageBanner name={currentPal.name} bio={currentPal.bio} profilePic={currentPal.pic} />
         <MessagesList currentPal={currentPal} allMessages={allMessages} />
         <NewMessageInput tracker={tracker} handleAddMessage={handleAddMessage} />
       </div>
