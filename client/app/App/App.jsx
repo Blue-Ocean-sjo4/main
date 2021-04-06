@@ -4,6 +4,7 @@ import SignUp from '../SignUp/SignUp.jsx';
 import NavBar from '../NavBar/NavBar.jsx';
 import ProfilePage from '../ProfilePage/ProfilePage.jsx';
 import Home from '../Home/Home.jsx';
+import Notifications from '../Notifications/Notifications.jsx';
 import './App.css';
 
 const App = () => {
@@ -11,8 +12,9 @@ const App = () => {
     <div>
       {/* <Login /> */}
       {/* <SignUp /> */}
-      <Home />
       {/* <ProfilePage /> */}
+      {/* <Home /> */}
+      <Notifications />
     </div>
   )
 }
