@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from '../NavBar/NavBar.jsx';
+import dummyData from '../../../dummyData.js';
+import HomeListItem from './HomeListItem/HomeListItem.jsx';
 import './Home.css';
 
 const Home = () => {
@@ -12,17 +14,18 @@ const Home = () => {
     // GET connections
     // axios.get('/connections')
     // .then((response) => {
-      // setRooms(response.data.rooms)
+    // setRooms(response.data.rooms)
     // })
     // .catch((err) => {console.log(`err`, err)})
   }, [])
+
   return (
     <>
       <NavBar />
       <div className="home-container">
-        {/* {data.map((pal) => {
-          <PalComponent key={pal.user_id} />
-        })} */}
+        {dummyData.dummyData.rooms.map((pal) => (
+          <HomeListItem key={pal.user_id} name={pal.name} bio={pal.bio} country={pal.country} />
+        ))}
       </div>
     </>
   )

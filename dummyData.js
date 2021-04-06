@@ -1,4 +1,4 @@
-var data = {
+module.exports.dummyData = {
   userID: "342654e810c76564de544ea",
   username: "lizardlover69",
   email: "lizardassociation@inquiry.com",
@@ -21,8 +21,8 @@ var data = {
       roomId: "507f191e810c19729de860ea",
       user_id: "555f191e2121crre29def43435ea",
       name: "donkeyhater69",
-      bio: "I hate donkeys with a passion, will connect to anyone similar",
-      country: "UK",
+      bio: "I hate donkeys with a passion, will connect to anyone similar, I hate donkeys with a passion, will connect to anyone similar, I hate donkeys with a passion, will connect to anyone similar, I hate donkeys with a passion, will connect to anyo",
+      country: "GB",
       gender: "female",
       pronouns: "she/her",
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
@@ -82,10 +82,10 @@ var data = {
       user_id: "555f191e2121crre29def43435ea",
       name: "donkeyhater69",
       bio: "I hate donkeys with a passion, will connect to anyone similar",
-      country: "UK",
+      country: "GB",
       gender: "female",
       pronouns: "she/her",
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
   ]
- }
+}
