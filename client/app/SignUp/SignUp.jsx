@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './SignUp.css';
 
 const SignUp = () => {
@@ -291,7 +292,7 @@ const SignUp = () => {
         <br></br>
         <input type="submit" value="SIGN UP" className="sign-up-button"></input>
       </form>
-      <div className="sign-up-login-link">Already have an account? Log in here!</div>
+      <Link to="/login" className="sign-up-login-link" >Already have an account? Log in here!</Link>
     </div>
   )
 }
