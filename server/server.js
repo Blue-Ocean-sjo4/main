@@ -1,4 +1,4 @@
-const express = require('express');
+ const express = require('express');
 const path = require('path');
 const url = require('url');
 const bodyParser = require('body-parser');
@@ -12,7 +12,7 @@ const connectEnsureLogin = require('connect-ensure-login');
 const {
   login, signup, findID,
   updateUserData, getMessages,
-  findPal } = require('../database/model/queryFunctions.js');
+  findPal, test } = require('../database/model/queryFunctions.js');
 const PORT = 1337;
 
 passport.use(new Strategy(async (username, password, done) => {
@@ -91,7 +91,7 @@ app.get(
 
 app.put('/update', connectEnsureLogin.ensureLoggedIn(), updateUserData);
 
-
+// app.post('/test', test);
 /*
 *-----------------------------------------------------------*
 |                                                           |
@@ -101,7 +101,7 @@ app.put('/update', connectEnsureLogin.ensureLoggedIn(), updateUserData);
 */
 app.get('/roomMessages/:room_id', connectEnsureLogin.ensureLoggedIn(), getMessages);
 
-
-app.post('/newPal/:user_id/:country_code', connectEnsureLogin.ensureLoggedIn(), findPal);
+// app.post('/newPal/:user_id/:country_code', connectEnsureLogin.ensureLoggedIn(), findPal);
+app.post('/newPal/:user_id/:country', findPal);
 
 app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));

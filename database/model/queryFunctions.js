@@ -1,5 +1,6 @@
-const { User, Room } = require('./schema.js');
+const { User, Room, Test } = require('./schema.js');
 const bcrypt = require('bcrypt');
+const moment = require('moment');
 
 /*
 *-----------------------------------------------------------*
@@ -19,7 +20,10 @@ function calculate_age(dob) {
 module.exports.signup = async (request, response) => {
   console.log('request body:', request.body);
   const { username, password, email, country, birthdate } = request.body;
-  const birthDate = new Date(birthdate.subString(0,3), birthdate.subString(5,6), birthdate.subString(8,9));
+  console.log(birthdate);
+  const birthDate = new Date(moment(birthdate));
+
+  // const birthDate = new Date(birthdate.subString(0,3), birthdate.subString(5,6), birthdate.subString(8,9));
   try {
     const doesExist = await User.exists({ username });
 
@@ -151,34 +155,59 @@ module.exports.postMessage = async (request, response) => {
   }
 };
 
+// TODO: updated schema to include requestedConnections
 module.exports.findPal = async (request, response) => {
-  const { user_id, country, birthdate } = request.query;
-  // find user by user_id
-  const userData = await User.findOne({ _id: user_id });
-  const ineligiblePals = [];
-  // loop through pending;
-  Object.keys(userData.pendingConnections).forEach(user => ineligiblePals.push(user));
-  // loop through accepted;
-  Object.values(userData.rooms).forEach(user => ineligiblePals.push(user));
-  // user is requesting someone to be a pal
-  // requestedConnections
+  try {
+    const { user_id, country } = request.params;
+    const userData = await User.findOne({ _id: user_id });
+    const ineligiblePals = [user_id];
+    // loop through pending;
+    Object.keys(userData.pendingConnections).forEach(user => ineligiblePals.push(user));
+    // loop through accepted;
+    Object.values(userData.rooms).forEach(user => ineligiblePals.push(user));
+    // user is requesting someone to be a pal
+    // requestedConnections
+    const userBirthDate = userData.birthdate;
+    const legalAge = new Date(moment().subtract(18, 'years'));
+
+    let bdayCriteria = moment(userBirthDate) >= legalAge ? { $gte: legalAge } : { $lt: legalAge };
+
+    const randomPal = await User.aggregate([
+      {
+        $match: {
+          _id: { $nin: ineligiblePals },
+          country: country,
+          birthdate: bdayCriteria
+        },
+      },
+      {
+        $sample: { size: 1 }
+      }
+    ]);
 
 
-  //18
-  // const bdayCriteria
-  // { $gte: value }
-  // <18
-  // { $lt: value }
-  // TODO: implement milisecond filter for age group
+    const updatedPendingConnections = randomPal[0].pendingConnections;
+    updatedPendingConnections[user_id] = 0;
 
-  const possiblePals = await User.find({ _id: { $nin: ineligiblePals }, country: country, birthdate: bdayCriteria })
-  // const getPhotos = (reviewIds) => ReviewsPhotos.find({ review_id: { $in: reviewIds } })
+    const newPal = await User.findOneAndUpdate({ _id: randomPal[0]._id }, {pendingConnections: updatedPendingConnections });
+
+    response.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    response.sendStatus(400);
+  }
 };
-// db.movies.update({'seasons.episodes.videos._id': data._id}, {$push: {'seasons.0.episodes.0.videos.$.reports': data.details}})
 
+//db.mycoll.aggregate([{ $sample: { size: N } }])
 //const hashPassword = await bcrypt.hash(<password>, 10);
 
-
+// module.exports.test = async (req, res) => {
+//   await Test.create({ testDate: moment() });
+//   const results = await Test.find({});
+//   const testDate = results[0].testDate;
+//   console.log(new Date(moment('1991-04-05')));
+//   res.sendStatus(201);
+// };
 
 
 
