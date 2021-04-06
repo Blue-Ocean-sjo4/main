@@ -60,7 +60,7 @@ app.use('/', express.static('client/dist'));
 app.post('/signup', signup);
 
 // remember to remove this
-app.get('/login', (req, res) => res.sendFile(path.resolve('client/dist/login.html')));
+// app.get('/login', (req, res) => res.sendFile(path.resolve('client/dist/login.html')));
 
 app.post(
   '/login',
@@ -103,5 +103,14 @@ app.get('/roomMessages/:room_id', connectEnsureLogin.ensureLoggedIn(), getMessag
 
 
 app.post('/newPal/:user_id/:country_code', connectEnsureLogin.ensureLoggedIn(), findPal);
+
+// React router base
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+});
 
 app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));

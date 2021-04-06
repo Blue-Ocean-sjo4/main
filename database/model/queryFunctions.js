@@ -19,7 +19,7 @@ function calculate_age(dob) {
 module.exports.signup = async (request, response) => {
   console.log('request body:', request.body);
   const { username, password, email, country, birthdate } = request.body;
-  const birthDate = new Date(birthdate.subString(0,3), birthdate.subString(5,6), birthdate.subString(8,9));
+  const birthDate = new Date(birthdate.substring(0,3), birthdate.substring(5,6), birthdate.substring(8,9));
   try {
     const doesExist = await User.exists({ username });
 
@@ -28,8 +28,9 @@ module.exports.signup = async (request, response) => {
     } else {
       const hashPassword = await bcrypt.hash(password, 10);
       await User.create({ username, password: hashPassword, email, country, birthdate: birthDate });
-      // response.redirect('/login');
-      response.send('registered');
+      console.log('else block reached')
+      response.redirect('/login');
+      // response.send('registered');
     }
   } catch (error) {
     console.error(error);

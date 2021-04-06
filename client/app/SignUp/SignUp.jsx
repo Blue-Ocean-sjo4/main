@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './SignUp.css';
 
 const SignUp = () => {
@@ -25,8 +26,20 @@ const SignUp = () => {
     setSignUpBirthdate(e.target.value)
   }
   const handleSignUpSubmit = (e) => {
-    // TODO: Post to database, Route to profile
-    console.log('Sign up submitted: ', e)
+    // send all state gathered information
+    axios.post('/signup', {
+      username: signUpUsername,
+      password: signUpPassword,
+      email: signUpEmail,
+      country: signUpCountry,
+      birthdate: signUpBirthdate
+    })
+      .then((response) => {
+        console.log(`response: `, response)
+      })
+      .catch((error) => {
+        console.log(`error`, error)
+      })
   }
 
   return (

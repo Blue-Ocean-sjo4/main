@@ -49,3 +49,31 @@
   height: 100%;
   width: auto;
 }
+
+.notification-buttons {
+  grid-area: 1 / 3 / 3 / 4;
+  align-self: flex-end;
+  width: 100%;
+}
+
+.accept-connection {
+  width: 50%;
+  border: none;
+  outline: none;
+  background-color: greenyellow;
+}
+
+.accept-connection:hover {
+  cursor: pointer;
+}
+
+.deny-connection {
+  width: 50%;
+  border: none;
+  outline: none;
+  background-color: red;
+}
+
+.deny-connection:hover {
+  cursor: pointer;
+}
