@@ -52,7 +52,7 @@ const SignUp = () => {
         <label>
           Country
           <br></br>
-          <select className="sign-up-country sign-up-input" onChange={handleCountryChange} required>
+          <select className="sign-up-country sign-up-input" onChange={handleCountryChange} value={signUpCountry} required>
             <option value="AF">Afghanistan</option>
             <option value="AL">Albania</option>
             <option value="DZ">Algeria</option>
@@ -267,7 +267,7 @@ const SignUp = () => {
             <option value="UA">Ukraine</option>
             <option value="AE">United Arab Emirates</option>
             <option value="GB">United Kingdom</option>
-            <option value="US" selected>United States</option>
+            <option value="US">United States</option>
             <option value="UY">Uruguay</option>
             <option value="UZ">Uzbekistan</option>
             <option value="VU">Vanuatu</option>
