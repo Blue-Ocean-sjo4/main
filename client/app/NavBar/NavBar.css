@@ -32,3 +32,7 @@ ion-icon {
 ion-icon:hover {
   cursor: pointer;
 }
+
+.new-pal{
+  display: hidden;
+}
