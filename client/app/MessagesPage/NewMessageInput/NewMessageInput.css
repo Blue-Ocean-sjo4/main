@@ -1,0 +1,41 @@
+#new-message-form {
+  grid-row: 3;
+  position: relative;
+  align-self: center;
+  margin: 0;
+  padding: 0 20px;
+}
+
+#new-message-input {
+  outline: none;
+  padding-left: 50px;
+  border: 2px solid var(--birdie-blue);
+  width: 100%;
+  border-radius: 25px;
+  height: 2.75rem;
+}
+
+#new-message-form button {
+  position: absolute;
+  outline: none;
+  border: none;
+  top: 30%;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+#submit-new-message {
+  right: 2.5%;
+}
+
+#new-message-upload {
+  left: 2.5%;
+}
+
+#new-message-form button:hover {
+  color: #6d6d6d;
+}
+
+#new-message-form button i {
+  font-size: 1.25rem;
+}

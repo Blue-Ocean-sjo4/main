@@ -1,0 +1,61 @@
+#messages-page-banner-container {
+  border-bottom: 2px solid var(--birdie-blue);
+  display: grid;
+  grid-template-columns: 5% 10% 60% 25%;
+}
+
+#messages-page-banner-container button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.messages-page-back-arrow {
+  font-size: 1.5rem;
+  color: var(--birdie-blue);
+}
+
+ion-icon {
+  font-size: 48px;
+  color: var(--birdie-blue);
+  cursor: pointer;
+}
+
+.current-pal-profile-pic {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid var(--birdie-blue);
+}
+
+.current-pal-profile-pic,
+.messages-page-back {
+  place-self: center;
+}
+
+.messages-page-banner-icons {
+  align-self: center;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.current-pal-info {
+  margin-top: 5px;
+}
+
+p.pal-name {
+  color: var(--midnight-blue);
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.pal-bio {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  font-size: 0.9rem;
+}
+
+.current-pal-info p {
+  margin: 5px 0 0 5px;
+}

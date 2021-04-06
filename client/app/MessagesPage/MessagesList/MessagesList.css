@@ -1,0 +1,10 @@
+#messages-list-container {
+  overflow: auto;
+  max-height: 80vh;
+  grid-row: 2;
+  align-self: end;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
+  padding: 0 10px;
+}

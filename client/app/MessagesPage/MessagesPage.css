@@ -1,0 +1,22 @@
+#messages-page-grid {
+  display: grid;
+  grid-template-columns: 80% 20%;
+  height: 100vh;
+}
+
+#messages-page-left {
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
+}
+
+#messages-page-right{
+  display: grid;
+  grid-template-rows: 10% 90%;
+  border-left: 2px solid var(--birdie-blue);
+}
+
+#pals-list-title{
+  margin: auto;
+  text-align: center;
+  font-size: 32px;
+}

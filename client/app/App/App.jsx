@@ -5,6 +5,7 @@ import NavBar from '../NavBar/NavBar.jsx';
 import ProfilePage from '../ProfilePage/ProfilePage.jsx';
 import Home from '../Home/Home.jsx';
 import Notifications from '../Notifications/Notifications.jsx';
+import MessagesPage from '../MessagesPage/MessagesPage.jsx';
 import './App.css';
 
 const App = () => {
@@ -15,6 +16,7 @@ const App = () => {
       {/* <ProfilePage /> */}
       {/* <Home /> */}
       <Notifications />
+      {/* <MessagesPage /> */}
     </div>
   )
 }
