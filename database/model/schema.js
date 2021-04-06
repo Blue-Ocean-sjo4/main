@@ -3,7 +3,7 @@ const mongoose = require('../index.js');
 const roomSchema = mongoose.Schema({
   userOneID: String,
   userTwoID: String,
-  messages: Array
+  messages: Array // array of objects with senderID, body, timestamp
 });
 
 const userSchema = mongoose.Schema({
