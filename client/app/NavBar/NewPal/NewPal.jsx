@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import './NewPal.css'
 
-function NewPal() {
+function NewPal({ newPalClass, setNewPalClass }) {
 
-  const hideModal = () => {
-    var modal = document.getElementById('newPal')
-    modal.style.display = "none";
+  function hideNewPal() {
+    setNewPalClass('new-pal-modal-hidden');
   }
 
-
   return (
-    <div className="new-pal">
-      <div id="newPal" className="new-pal-modal">
-        <span className="new-pal-modal-close" onClick={(e) => { hideModal(e); }} >&times;</span>
-      </div>
+    <div id="newPal" className={newPalClass}>
+      <div className="new-pal-modal-content">
+        <span className="new-pal-modal-close" onClick={hideNewPal} >&times;</span>
+        hello yes this is a modal window
+        </div>
     </div>
   )
 }

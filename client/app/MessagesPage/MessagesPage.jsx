@@ -43,8 +43,8 @@ const MessagesPage = () => {
     });
     setAllMessages(prevState);
     setTracker(tracker + 1);
-    // const messagesList = document.querySelector('#messages-list-container');
-    // messagesList.scrollTo(0, messagesList.scrollHeight);
+    const messagesList = document.querySelector('#messages-list-container');
+    messagesList.scrollTo(0, messagesList.scrollHeight);
   }
 
   return (
