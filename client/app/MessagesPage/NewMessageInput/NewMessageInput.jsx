@@ -31,9 +31,9 @@ const NewMessageInput = ({ handleAddMessage }) => {
         showingFilePicker ? <FilePicker /> : null
       }
       <button id="new-message-upload"
-        onMouseEnter={() => {showFilePicker(false)}}
-        onClick={(e) => {e.preventDefault(); showFilePicker(true)}}>
-        <i class="fas fa-upload"></i>
+        onMouseEnter={() => { showFilePicker(false) }}
+        onClick={(e) => { e.preventDefault(); showFilePicker(true) }}>
+        <i className="fas fa-upload"></i>
       </button>
     </form>
   );

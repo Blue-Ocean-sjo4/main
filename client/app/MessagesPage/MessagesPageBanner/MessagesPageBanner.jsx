@@ -6,13 +6,11 @@ const MessagesPageBanner = ({ name, bio, profilePic }) => {
   return (
     <div id="messages-page-banner-container" >
 
-      <a href="#" className="messages-page-back">
-        <button type="button">
-          <Link to="/" >
-            <i className="fas fa-arrow-left messages-page-back-arrow" />
-          </Link>
-        </button>
-      </a>
+      <button type="button" className="messages-page-back" >
+        <Link to="/" >
+          <i className="fas fa-arrow-left messages-page-back-arrow" />
+        </Link>
+      </button>
 
       <img className="current-pal-profile-pic" src={profilePic} alt="Pal's Profile Picture"></img>
 
@@ -22,12 +20,16 @@ const MessagesPageBanner = ({ name, bio, profilePic }) => {
       </div>
 
       <div className="messages-page-banner-icons">
-        <button type="button"><ion-icon name="add-circle-outline"></ion-icon></button>
-        <Link to="/notifications" >
-          <a href="#" ><button type="button"><ion-icon name="notifications-circle-outline"></ion-icon></button></a>
-        </Link>
+        <button type="button">
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </button>
+        <button type="button">
+          <Link to="/notifications" >
+            <ion-icon name="notifications-circle-outline"></ion-icon>
+          </Link>
+        </button>
         <Link to="/profile" >
-          <a href="#" ><ion-icon name="ellipse-outline"></ion-icon></a>
+          <ion-icon name="ellipse-outline" id="my-profile"></ion-icon>
         </Link>
       </div>
 

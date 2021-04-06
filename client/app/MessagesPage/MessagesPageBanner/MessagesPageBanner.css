@@ -10,6 +10,10 @@
   outline: none;
 }
 
+.messages-page-back {
+  place-self: center;
+}
+
 .messages-page-back-arrow {
   font-size: 1.5rem;
   color: var(--birdie-blue);
@@ -58,4 +62,8 @@ p.pal-name {
 
 .current-pal-info p {
   margin: 5px 0 0 5px;
+}
+
+#my-profile {
+  padding: 0 2px;
 }
