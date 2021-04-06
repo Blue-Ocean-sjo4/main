@@ -9,7 +9,10 @@ const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 const session = require('express-session');
 const connectEnsureLogin = require('connect-ensure-login');
-const { login, signup, findID, updateUserData } = require('../database/model/queryFunctions.js');
+const {
+  login, signup, findID,
+  updateUserData, getMessages,
+  findPal } = require('../database/model/queryFunctions.js');
 const PORT = 1337;
 
 passport.use(new Strategy(async (username, password, done) => {
@@ -78,35 +81,27 @@ app.get(
   (req, res) => res.send('i am in homepage')
 );
 
-app.put('/update', updateUserData);
+/*
+*-----------------------------------------------------------*
+|                                                           |
+|                    Update User Data                       |
+|                                                           |
+*-----------------------------------------------------------*
+*/
 
-app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
+app.put('/update', connectEnsureLogin.ensureLoggedIn(), updateUserData);
+
 
 /*
-// Requirements
-const express = require('express');
-const passport = require('passport');
-const db = require('../database/model/queryFunctions.js');
-const app = express();
-const PORT = 3000;
-const flash = require('express-flash');
-// Middleware
-
-app.get('/login', db.login);
-app.post('/login', passport.authenticate('local', { successRedirect: '/',
-                                                    failureRedirect: '/login',
-                                                    failureFlash: true }));
-
-app.post('/signup', db.signup);
-
-app.use(express.static(__dirname + '/../client/dist'));
-
-// Routing
-
-
-
-// Listener
-app.listen(PORT, () => {
-  console.log(`server running at http://localhost:${PORT}`);
-});
+*-----------------------------------------------------------*
+|                                                           |
+|                  Get existing messages                    |
+|                                                           |
+*-----------------------------------------------------------*
 */
+app.get('/roomMessages/:room_id', connectEnsureLogin.ensureLoggedIn(), getMessages);
+
+
+app.post('/newPal/:user_id/:country_code', connectEnsureLogin.ensureLoggedIn(), findPal);
+
+app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
