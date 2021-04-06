@@ -12,7 +12,7 @@
 #messages-page-right{
   display: grid;
   grid-template-rows: 10% 90%;
-  border-left: 1px solid #a0a0a0;
+  border-left: 2px solid var(--birdie-blue);
 }
 
 #pals-list-title{
