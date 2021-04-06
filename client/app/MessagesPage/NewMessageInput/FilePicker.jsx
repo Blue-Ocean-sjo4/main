@@ -1,6 +1,6 @@
 import React from 'react';
 import { PickerOverlay } from 'filestack-react';
-import TOKEN from '../../../../filepickerConfig.js';
+import { TOKEN } from '../../../../filepickerConfig.js';
 const client = require('filestack-js').init(TOKEN);
 
 function FilePicker() {
