@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './NavBar.css';
 import NewPal from './NewPal/NewPal.jsx'
 
@@ -11,11 +12,17 @@ const NavBar = () => {
 
   return (
     <div className="nav-bar">
-      <span className="nav-title">CORRESPOND</span>
+      <Link to="/" className="nav-title">
+        <span>CORRESPOND</span>
+      </Link>
       <span className="icon-container">
-        <span className="nav-new-pal" onClick={showNewPal} ><NewPal /><ion-icon name="add-circle-outline"></ion-icon></span>
-        <span className="nav-notifications"><ion-icon name="notifications-circle-outline"></ion-icon></span>
-        <span className="nav-profile"><ion-icon name="ellipse-outline"></ion-icon></span>
+        <span className="nav-new-pal"><ion-icon name="add-circle-outline"></ion-icon></span>
+        <Link to="/notifications" className="nav-notifications">
+          <span><ion-icon name="notifications-circle-outline"></ion-icon></span>
+        </Link>
+        <Link to="/profile" className="nav-profile">
+          <span><ion-icon name="ellipse-outline"></ion-icon></span>
+        </Link>
       </span>
     </div>
   )
