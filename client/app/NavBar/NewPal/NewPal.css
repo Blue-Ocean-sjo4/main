@@ -1,0 +1,45 @@
+.new-pal-modal{
+  display: block;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin-right: -28px;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.new-pal-model-hidden{
+  display: none;
+}
+
+.new-pal-modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  margin-bottom: 10%;
+  padding: 30px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.new-pal-modal-close {
+  color: #aaaaaa;
+  float: right;
+  position:relative;
+  left: 3px;
+  bottom: 35px;
+  width: 0px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.new-pal-modal-close:hover,
+.new-pal-modal-close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}

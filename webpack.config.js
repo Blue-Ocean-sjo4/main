@@ -17,6 +17,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: ['@babel/env', '@babel/react'],
+          plugins: ['@babel/plugin-transform-async-to-generator', '@babel/plugin-transform-runtime'],
         },
       },
       {
