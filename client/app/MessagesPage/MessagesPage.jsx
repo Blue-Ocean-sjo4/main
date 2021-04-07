@@ -8,10 +8,9 @@ import PalsList from './PalsList/PalsList.jsx'
 import './MessagesPage.css';
 
 let socketID = '';
-const socket = io('http://localhost:1337');
-socket.on('connect', () => {
-  socketID = socket.id;
-})
+const socket = io('http://localhost:1337', { autoConnect: false });
+const testRooms = ['room1', 'room2'];
+const myRoom = testRooms[Math.floor(Math.random() * testRooms.length)];
 
 /*
 
@@ -43,8 +42,19 @@ const MessagesPage = () => {
       console.log('Sender\'s SocketID:', otherSocketID);
       setAllMessages(prevState => [...prevState, {senderID: otherSocketID, body: msg, timestamp: 'date'}]);
       setTracker(tracker + 1);
-    })
-  },[]);
+    });
+
+    socket.auth = {
+      room: myRoom,
+      username: 'wilson'
+    };
+    socket.connect();
+
+    // watch for change currentPal.name, ideally currnetPal.id
+    // TODO add a clean up function to disconnect from the current pal/room before entering a chat with the new pal
+    //socket.emit('forceDisconnect');
+    return () => socket.disconnect();
+  },[currentPal.name]);
 
   // useEffect((
   //   axios.get(`/roomMessages/${roomID}`)
@@ -64,7 +74,7 @@ const MessagesPage = () => {
     });
     setAllMessages(prevState);
     setTracker(tracker + 1);
-    socket.emit('send new message', {msg, socketID});
+    socket.emit('send new message', { msg, room: myRoom });
   }
 
 
