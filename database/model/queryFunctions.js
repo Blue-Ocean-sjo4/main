@@ -83,11 +83,10 @@ module.exports.findUserData = async (req, res) => {
 
     loggedInUser.pendingConnections = pendingConnectionsPayload;
     loggedInUser.rooms = roomsPayload;
-
-    res.send(loggedInUser);
+    res.json(loggedInUser);
   } catch (error) {
-    res.status(404).send(error);
     console.error(error);
+    res.status(404).send(error);
   };
 };
 

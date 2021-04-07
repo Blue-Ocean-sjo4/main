@@ -88,7 +88,7 @@ app.post('/signup', signup);
 
 app.post(
   '/login',
-  passport.authenticate('local', { failureRedirect: '/login' }),
+  passport.authenticate('local'),
   (req, res) => {
     console.log('req.body', req.body);
     // res.redirect(url.format({pathname: '/', query: { username: req.body.username }}));

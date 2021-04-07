@@ -6,24 +6,20 @@ import HomeListItem from './HomeListItem/HomeListItem.jsx';
 import axios from 'axios';
 import './Home.css';
 
-const Home = ({ loggedIn, setLoggedIn, username, rooms, setUserData, setCurrentRoom }) => {
-
-  // useEffect(() => {
-  //   axios.get(`/connections/${username}`)
-  //     .then((response) => {
-  //       console.log('connections response data: ', response.data)
-  //       setUserData(response.data)
-  //     })
-  //     .catch((err) => { console.log(`err`, err) })
-  // }, [/* Conditions for useEffect to re-run */])
+const Home = ({ loggedIn, setLoggedIn, username="", rooms = [], setUserData, setCurrentRoom }) => {
 
   useEffect(() => {
-    setUserData(dummyData.dummyData)
+    axios.get(`/connections?username=${username}`)
+      .then((response) => {
+        console.log('connections response data: ', response.data)
+        setUserData(response.data)
+      })
+      .catch((err) => { console.log(`err`, err) })
   }, [])
 
   // useEffect(() => {
-
-  // }, [rooms])
+  //   setUserData(dummyData.dummyData)
+  // }, [])
 
   if (!loggedIn) {
     return (
