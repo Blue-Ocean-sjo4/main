@@ -88,6 +88,7 @@ app.get('/logout', (req, res) => {
 });
 
 app.get('/connections', connectEnsureLogin.ensureLoggedIn(), getConnections);
+// app.get('/connections', getConnections);
 
 /*
 *-----------------------------------------------------------*

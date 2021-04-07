@@ -205,6 +205,9 @@ module.exports.getConnections = async (req, res) => {
     .lean()
     .select({ password: 0 });
 
+    userData.userID = userData._id;
+    delete userData._id;
+
     res.send(userData);
   } catch (error) {
     console.error(error);
