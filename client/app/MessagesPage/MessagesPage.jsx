@@ -33,8 +33,8 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
   const [currentPal, setCurrentPal] = useState({ pic: 'https://wondersinthedark.files.wordpress.com/2012/09/the-big-lebowski-1.jpg', name: 'El Duderino', country: 'IL', bio: 'that\'s, like, your bio man.' })
 
   useEffect(() => {
-    const { pic, name, country, bio } = currentRoom.room;
-    setCurrentPal({ pic, name, country, bio });
+    const { pic, name, country, bio, pronouns } = currentRoom.room;
+    setCurrentPal({ pic, name, country, bio, pronouns });
     setPalsList(rooms.reduce((acc, room) => {
       acc.push({ pic: room.pic, name: room.name, country: room.country, bio: room.bio });
       return acc;
@@ -96,7 +96,12 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
   return (
     <div id="messages-page-grid" >
       <div id="messages-page-left" >
-        <MessagesPageBanner name={currentPal.name} bio={currentPal.bio} profilePic={currentPal.pic} />
+        <MessagesPageBanner
+          name={currentPal.name}
+          pronouns={currentPal.pronouns}
+          bio={currentPal.bio}
+          profilePic={currentPal.pic}
+        />
         <MessagesList currentPal={currentPal} allMessages={allMessages} myID={socketID} />
         <NewMessageInput tracker={tracker} handleAddMessage={handleAddMessage} />
       </div>
