@@ -24,10 +24,10 @@ message object:
 
 const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => {
   const [allMessages, setAllMessages] = useState([]);
-  const [tracker, setTracker] = useState(0);
+  const [tracker, setTracker] = useState(0)
   const [roomID, setRoomID] = useState('');
-  const [palsList, setPalsList] = useState([{ pic: '', name: '', pronouns: '', country: '', bio: '' }]);
-  const [currentPal, setCurrentPal] = useState({ pic: '', name: '', pronouns: '', country: '', bio: '' });
+  const [palsList, setPalsList] = useState([])
+  const [currentPal, setCurrentPal] = useState({ pic: '', name: '', pronouns: '', country: '', bio: '' })
 
   useEffect(() => {
     const { pic, name, country, bio, pronouns } = currentRoom.room;
