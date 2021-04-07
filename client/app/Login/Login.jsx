@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
 import './Login.css';
 
-const Login = () => {
+const Login = ({ loggedIn, setLoggedIn, username, setUsername }) => {
 
-  const [username, setUsername] = useState('');
+
   const [password, setPassword] = useState('');
+
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -18,7 +20,25 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     // TODO: Authentication, Route to main page
-    console.log('Login attempt');
+    axios.post('/login', {
+      username: username,
+      password: password
+    })
+      .then((response) => {
+        // console.log('Login success');
+        // console.log(`response`, response);
+        setLoggedIn(true);
+      })
+      .catch((error) => {
+        console.log('Login failure');
+        console.log(`error`, error);
+      })
+  }
+
+  if (loggedIn) {
+    return (
+      <Redirect to="/" />
+    )
   }
 
   return (
@@ -31,7 +51,7 @@ const Login = () => {
         </label><br></br>
         <label>
           {'Password '}<br></br>
-          <input type="text" onChange={handlePasswordChange} className="login-input"></input>
+          <input type="password" onChange={handlePasswordChange} className="login-input"></input>
         </label><br></br>
         <input type="submit" value="LOGIN" className="login-button"></input>
       </form>

@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 75% 25%;
   height: 100vh;
+  background-color: #FFF;
 }
 
 #messages-page-left {

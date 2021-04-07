@@ -91,7 +91,8 @@ app.post(
   passport.authenticate('local', { failureRedirect: '/login' }),
   (req, res) => {
     console.log('req.body', req.body);
-    res.redirect(url.format({pathname: '/', query: { username: req.body.username }}));
+    // res.redirect(url.format({pathname: '/', query: { username: req.body.username }}));
+    res.send('Success');
 });
 
 app.get('/logout', (req, res) => {

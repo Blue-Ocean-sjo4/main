@@ -17,8 +17,11 @@ const NotificationsListItem = ({ name, bio, country }) => {
         <div className="connection-item-bio">{bio}</div>
         <div className="connection-item-country">{countryCodeToFlag(country)}
         </div>
-        <button className="accept-connection">Accept</button>
-        <button className="deny-connection">Deny</button>
+        <div className="notification-buttons" >
+          {/* TODO: make these buttons appear as a green rectangle with white check mark and a red rectangle with white x */}
+          <button className="accept-connection">Accept</button>
+          <button className="deny-connection">Deny</button>
+        </div>
       </div>
     </>
   )

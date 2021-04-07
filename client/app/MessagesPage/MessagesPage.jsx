@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import io from 'socket.io-client';
 import MessagesPageBanner from './MessagesPageBanner/MessagesPageBanner.jsx';
@@ -24,7 +25,7 @@ message object:
 
 */
 
-const MessagesPage = () => {
+const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
   const [allMessages, setAllMessages] = useState([]);
   const [tracker, setTracker] = useState(0)
   const [roomID, setRoomID] = useState(0)
@@ -77,6 +78,11 @@ const MessagesPage = () => {
     socket.emit('send new message', { msg, room: myRoom });
   }
 
+  if (!loggedIn) {
+    return (
+      <Redirect to="/login" />
+    )
+  }
 
   return (
     <div id="messages-page-grid" >
