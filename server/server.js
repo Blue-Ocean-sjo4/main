@@ -1,4 +1,4 @@
- const express = require('express');
+const express = require('express');
 const path = require('path');
 const url = require('url');
 const bodyParser = require('body-parser');
@@ -12,7 +12,7 @@ const connectEnsureLogin = require('connect-ensure-login');
 const {
   login, signup, findID,
   updateUserData, getMessages,
-  findPal, test } = require('../database/model/queryFunctions.js');
+  findPal, getConnections, test } = require('../database/model/queryFunctions.js');
 const PORT = 1337;
 
 passport.use(new Strategy(async (username, password, done) => {
@@ -42,6 +42,23 @@ passport.deserializeUser(async (id, done) => {
 });
 
 const app = express();
+const httpServer = require("http").createServer(app);
+const io = require('socket.io')(httpServer);
+
+io.on('connection', socket => {
+  // console.log('socket', socket);
+  console.log(`user ${socket.id} connected!`);
+  // send new message
+  socket.on('send new message', ({ msg, socketID }) => {
+    console.log(msg);
+    console.log('this is the sender\'s socketID', socketID);
+    socket.broadcast.emit('receive new message', { msg, 'otherSocketID': socketID });
+  });
+  // receive new message
+  socket.on('disconnecting', () => {
+    console.log(`user ${socket.id} disconnected`);
+  });
+});
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -51,16 +68,11 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use('/', express.static('client/dist'));
+app.use(express.static(path.resolve('client/dist')));
 
 app.post('/signup', signup);
-
-// remember to remove this
-// app.get('/login', (req, res) => res.sendFile(path.resolve('client/dist/login.html')));
 
 app.post(
   '/login',
@@ -76,17 +88,12 @@ app.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
-app.get(
-  '/connections',
-  connectEnsureLogin.ensureLoggedIn(),
-  (req, res) => res.send('i am in homepage')
-);
+app.get('/connections', connectEnsureLogin.ensureLoggedIn(), getConnections);
+// app.get('/connections', getConnections);
 
 /*
 *-----------------------------------------------------------*
-|                                                           |
 |                    Update User Data                       |
-|                                                           |
 *-----------------------------------------------------------*
 */
 
@@ -95,9 +102,7 @@ app.put('/update', connectEnsureLogin.ensureLoggedIn(), updateUserData);
 // app.post('/test', test);
 /*
 *-----------------------------------------------------------*
-|                                                           |
 |                  Get existing messages                    |
-|                                                           |
 *-----------------------------------------------------------*
 */
 app.get('/roomMessages/:room_id', connectEnsureLogin.ensureLoggedIn(), getMessages);
@@ -105,7 +110,6 @@ app.get('/roomMessages/:room_id', connectEnsureLogin.ensureLoggedIn(), getMessag
 // app.post('/newPal/:user_id/:country_code', connectEnsureLogin.ensureLoggedIn(), findPal);
 app.post('/newPal/:user_id/:country', findPal);
 
-// React router base
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
     if (err) {
@@ -114,4 +118,5 @@ app.get('/*', (req, res) => {
   })
 });
 
-app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
+
+httpServer.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));

@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import io from 'socket.io-client';
 import MessagesPageBanner from './MessagesPageBanner/MessagesPageBanner.jsx';
 import MessagesList from './MessagesList/MessagesList.jsx';
 import NewMessageInput from './NewMessageInput/NewMessageInput.jsx';
 import PalsList from './PalsList/PalsList.jsx'
 import './MessagesPage.css';
+
+let socketID = '';
+const socket = io('http://localhost:1337');
+socket.on('connect', () => {
+  socketID = socket.id;
+})
 
 /*
 
@@ -29,7 +36,16 @@ const MessagesPage = ({ loggedIn, setLoggedIn }) => {
   useEffect(() => {
     const messagesList = document.querySelector('#messages-list-container');
     messagesList.scrollTo(0, messagesList.scrollHeight);
-  }, [allMessages.length])
+  }, [allMessages.length]);
+
+  useEffect(() => {
+    socket.on('receive new message', ({ msg, otherSocketID }) => {
+      console.log('I received this message:', msg);
+      console.log('Sender\'s SocketID:', otherSocketID);
+      setAllMessages(prevState => [...prevState, {senderID: otherSocketID, body: msg, timestamp: 'date'}]);
+      setTracker(tracker + 1);
+    })
+  },[]);
 
   // useEffect((
   //   axios.get(`/roomMessages/${roomID}`)
@@ -43,12 +59,13 @@ const MessagesPage = ({ loggedIn, setLoggedIn }) => {
     element.value = '';
     const prevState = allMessages;
     prevState.push({
-      senderID: '42069',
+      senderID: socketID,
       body: msg,
       timestamp: 'date'
     });
-    setTracker(tracker + 1);
     setAllMessages(prevState);
+    setTracker(tracker + 1);
+    socket.emit('send new message', {msg, socketID});
   }
 
   if (!loggedIn) {
@@ -61,7 +78,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn }) => {
     <div id="messages-page-grid" >
       <div id="messages-page-left" >
         <MessagesPageBanner name={currentPal.name} bio={currentPal.bio} profilePic={currentPal.pic} />
-        <MessagesList currentPal={currentPal} allMessages={allMessages} />
+        <MessagesList currentPal={currentPal} allMessages={allMessages} myID={socketID} />
         <NewMessageInput tracker={tracker} handleAddMessage={handleAddMessage} />
       </div>
       <div id="messages-page-right">
