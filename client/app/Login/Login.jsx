@@ -25,8 +25,8 @@ const Login = ({ loggedIn, setLoggedIn, username, setUsername }) => {
       password: password
     })
       .then((response) => {
-        console.log('Login success');
-        console.log(`response`, response);
+        // console.log('Login success');
+        // console.log(`response`, response);
         setLoggedIn(true);
       })
       .catch((error) => {

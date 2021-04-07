@@ -5,8 +5,7 @@ import NotificationsListItem from './NotificationsListItem/NotificationsListItem
 import dummyData from '../../../dummyData.js';
 import './Notifications.css'
 
-const Notifications = ({ loggedIn, setLoggedIn }) => {
-  const [pendingConnections, setPendingConnections] = useState([]);
+const Notifications = ({ loggedIn, setLoggedIn, pendingConnections }) => {
 
   // Will need to retrieve username from URL, or state passed from previous page(?)
 
@@ -18,7 +17,7 @@ const Notifications = ({ loggedIn, setLoggedIn }) => {
     // setPendingConnections(response.data.pendingConnections)
     // })
     // .catch((err) => {console.log(`err`, err)})
-  }, [])
+  }, [pendingConnections])
 
   if (!loggedIn) {
     return (
@@ -30,7 +29,7 @@ const Notifications = ({ loggedIn, setLoggedIn }) => {
     <>
       <NavBar />
       <div className="notifications-container">
-        {dummyData.dummyData.pendingConnections.map((connection) => (
+        {pendingConnections.map((connection) => (
           <NotificationsListItem key={connection.user_id} name={connection.name} bio={connection.bio} country={connection.country} />
         ))}
       </div>

@@ -3,13 +3,13 @@ module.exports.dummyData = {
   username: "lizardlover69",
   email: "lizardassociation@inquiry.com",
   bio: "I've been harrassed by donkeys and this needs to stop!",
-  country_code: 'US',
+  country: 'US',
   gender: "male",
   pronouns: "he/him",
   birthdate: "Mon Apr 05 2001 16:58:42 GMT-0700 (Pacific Daylight Time)",
   pendingConnections: [
     {
-      user_id: "555f191e2121crre29def43435ea",
+      userID: "555f191e2121crre29def43435ea",
       name: "donkeyLover420",
       bio: "I love donkeys with a passion, will connect to anyone similar",
       country: "AU",
@@ -18,8 +18,8 @@ module.exports.dummyData = {
   ],
   rooms: [
     {
-      roomId: "507f191e810c19729de860ea",
-      user_id: "555f191e2121crre29def43435ea",
+      roomID: "507f191e810c19729de860ea",
+      userID: "555f191e2121crre29def43435ea",
       name: "donkeyhater69",
       bio: "I hate donkeys with a passion, will connect to anyone similar, I hate donkeys with a passion, will connect to anyone similar, I hate donkeys with a passion, will connect to anyone similar, I hate donkeys with a passion, will connect to anyo",
       country: "GB",
@@ -28,8 +28,8 @@ module.exports.dummyData = {
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
     {
-      roomId: "507f191e810c19729de860ea",
-      user_id: "555f191e2121crre29def43435ea",
+      roomID: "randomletters",
+      userID: "555f191e2121crre29def43435ea",
       name: "testUser123",
       bio: "Im a good boy who tests well",
       country: "US",
@@ -38,8 +38,8 @@ module.exports.dummyData = {
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
     {
-      roomId: "507f191e810c19729de860ea",
-      user_id: "555f191e2121crre29def43435ea",
+      roomID: "poqw507f191e810c19729de860ea",
+      userID: "555f191e2121crre29def43435ea",
       name: "BigTom",
       bio: "I might be short, but in my heart im Big Tom",
       country: "AE",
@@ -48,8 +48,8 @@ module.exports.dummyData = {
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
     {
-      roomId: "507f191e810c19729de860ea",
-      user_id: "555f191e2121crre29def43435ea",
+      roomID: "oias507f191e810c19729de860ea",
+      userID: "555f191e2121crre29def43435ea",
       name: "littleTim",
       bio: "I am little Tim and I have fun all the time",
       country: "AU",
@@ -58,8 +58,8 @@ module.exports.dummyData = {
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
     {
-      roomId: "507f191e810c19729de860ea",
-      user_id: "555f191e2121crre29def43435ea",
+      roomID: "lqj507f191e810c19729de860ea",
+      userID: "555f191e2121crre29def43435ea",
       name: "sadBridge",
       bio: "all bridges are sad to me, even the golden gate bridge",
       country: "RU",
@@ -68,8 +68,8 @@ module.exports.dummyData = {
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
     {
-      roomId: "507f191e810c19729de860ea",
-      user_id: "555f191e2121crre29def43435ea",
+      roomID: "faty507f191e810c19729de860ea",
+      userID: "555f191e2121crre29def43435ea",
       name: "donkeyhater69",
       bio: "I hate donkeys with a passion, will connect to anyone similar",
       country: "CN",
@@ -78,8 +78,8 @@ module.exports.dummyData = {
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
     {
-      roomId: "507f191e810c19729de860ea",
-      user_id: "555f191e2121crre29def43435ea",
+      roomID: "ea507f191e810c19729de860ea",
+      userID: "555f191e2121crre29def43435ea",
       name: "donkeyhater69",
       bio: "I hate donkeys with a passion, will connect to anyone similar",
       country: "GB",

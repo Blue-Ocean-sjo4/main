@@ -26,7 +26,7 @@ message object:
 
 */
 
-const MessagesPage = ({ loggedIn, setLoggedIn }) => {
+const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
   const [allMessages, setAllMessages] = useState([]);
   const [tracker, setTracker] = useState(0)
   const [roomID, setRoomID] = useState(0)

@@ -12,12 +12,14 @@ import './App.css';
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
+  const [userData, setUserData] = useState({});
+  const [currentRoom, setCurrentRoom] = useState({});
 
   return (
     <Router>
       <Switch>
         <Route path="/" exact render={() => (
-          <Home loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
+          <Home loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} rooms={userData.rooms} setUserData={setUserData} setCurrentRoom={setCurrentRoom} />
         )}/>
         <Route path="/login" exact render={() => (
           <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} setUsername={setUsername} />
@@ -29,10 +31,10 @@ const App = () => {
           <ProfilePage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         )}/>
         <Route path="/notifications" exact render={() => (
-          <Notifications loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <Notifications loggedIn={loggedIn} setLoggedIn={setLoggedIn} pendingConnections={userData.pendingConnections} />
         )}/>
         <Route path="/messages" exact render={() => (
-          <MessagesPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <MessagesPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} rooms={userData.rooms} currentRoom={currentRoom} />
         )}/>
       </Switch>
     </Router>
