@@ -3,9 +3,9 @@ import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
 
-const Login = ({ loggedIn, setLoggedIn }) => {
+const Login = ({ loggedIn, setLoggedIn, username, setUsername }) => {
 
-  const [username, setUsername] = useState('');
+
   const [password, setPassword] = useState('');
 
 
@@ -26,16 +26,14 @@ const Login = ({ loggedIn, setLoggedIn }) => {
     })
       .then((response) => {
         console.log('Login success');
-        console.log(`response`, response)
-        setLoggedIn(true)
+        console.log(`response`, response);
+        setLoggedIn(true);
       })
       .catch((error) => {
         console.log('Login failure');
-        console.log(`error`, error)
+        console.log(`error`, error);
       })
   }
-
-  console.log(loggedIn);
 
   if (loggedIn) {
     return (

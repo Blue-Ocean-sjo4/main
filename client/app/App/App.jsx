@@ -11,16 +11,16 @@ import './App.css';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
 
   return (
     <Router>
       <Switch>
-
         <Route path="/" exact render={() => (
-          <Home loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <Home loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
         )}/>
         <Route path="/login" exact render={() => (
-          <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} setUsername={setUsername} />
         )}/>
         <Route path="/signup" exact render={() => (
           <SignUp />
@@ -34,7 +34,6 @@ const App = () => {
         <Route path="/messages" exact render={() => (
           <MessagesPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         )}/>
-
       </Switch>
     </Router>
   )
