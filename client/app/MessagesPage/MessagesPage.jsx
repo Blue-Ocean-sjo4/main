@@ -29,7 +29,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => 
   const [allMessages, setAllMessages] = useState([]);
   const [tracker, setTracker] = useState(0)
   const [roomID, setRoomID] = useState(0)
-  const [palsList, setPalsList] = useState([{ pic: '', name: '', pronouns: '', country: '', bio: '' }])
+  const [palsList, setPalsList] = useState([])
   const [currentPal, setCurrentPal] = useState({ pic: '', name: '', pronouns: '', country: '', bio: '' })
 
   useEffect(() => {
