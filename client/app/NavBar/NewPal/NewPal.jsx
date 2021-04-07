@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'
-import './NewPal.css'
-import { VectorMap } from 'react-jvectormap'
-import countryCodeToFlag from 'country-code-to-flag'
+import axios from 'axios';
+import './NewPal.css';
+import { VectorMap } from 'react-jvectormap';
+import countryCodeToFlag from 'country-code-to-flag';
 
 function NewPal({ showingNewPal, setShowingNewPal, userID }) {
 

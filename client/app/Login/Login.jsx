@@ -4,8 +4,6 @@ import axios from 'axios';
 import './Login.css';
 
 const Login = ({ loggedIn, setLoggedIn, username, setUsername }) => {
-
-
   const [password, setPassword] = useState('');
 
 
@@ -20,6 +18,11 @@ const Login = ({ loggedIn, setLoggedIn, username, setUsername }) => {
   const handleLogin = (e) => {
     e.preventDefault();
     // TODO: Authentication, Route to main page
+    const config = {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    }
     axios.post('/login', {
       username: username,
       password: password
@@ -32,6 +35,7 @@ const Login = ({ loggedIn, setLoggedIn, username, setUsername }) => {
       .catch((error) => {
         console.log('Login failure');
         console.log(`error`, error);
+        alert('Invalid login credentials')
       })
   }
 
