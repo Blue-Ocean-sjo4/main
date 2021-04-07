@@ -1,32 +1,49 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar.jsx';
 import dummyData from '../../../dummyData.js';
 import HomeListItem from './HomeListItem/HomeListItem.jsx';
+import axios from 'axios';
 import './Home.css';
 
-const Home = () => {
-  const [rooms, setRooms] = useState([]);
+const Home = ({ loggedIn, setLoggedIn, username, rooms, setUserData, setCurrentRoom }) => {
 
-  // Will need to retrieve username from URL
+  // useEffect(() => {
+  //   axios.get(`/connections/${username}`)
+  //     .then((response) => {
+  //       console.log('connections response data: ', response.data)
+  //       setUserData(response.data)
+  //     })
+  //     .catch((err) => { console.log(`err`, err) })
+  // }, [/* Conditions for useEffect to re-run */])
 
   useEffect(() => {
-    // Use username
-    // GET connections
-    // axios.get('/connections')
-    // .then((response) => {
-    // setRooms(response.data.rooms)
-    // })
-    // .catch((err) => {console.log(`err`, err)})
+    setUserData(dummyData.dummyData)
   }, [])
+
+  // useEffect(() => {
+
+  // }, [rooms])
+
+  if (!loggedIn) {
+    return (
+      <Redirect to="/login" />
+    )
+  }
 
   return (
     <>
       <NavBar />
       <div className="home-container">
-        {dummyData.dummyData.rooms.map((pal) => (
-          <HomeListItem key={pal.user_id} name={pal.name} bio={pal.bio} country={pal.country} />
+        {rooms.map((room, index) => (
+          <HomeListItem key={room.userID} room={room} setCurrentRoom={setCurrentRoom} />
         ))}
       </div>
+      {/* <div className="home-container">
+        {rooms.map((pal) => (
+          <HomeListItem key={pal.userID} name={pal.name} bio={pal.bio} country={pal.country} />
+        ))}
+      </div> */}
     </>
   )
 }

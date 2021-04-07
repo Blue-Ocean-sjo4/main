@@ -32,6 +32,7 @@ module.exports.signup = async (request, response) => {
     } else {
       const hashPassword = await bcrypt.hash(password, 10);
       await User.create({ username, password: hashPassword, email, country, birthdate: birthDate });
+      console.log('else block reached')
       // response.redirect('/login');
       response.send('registered');
     }

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
+import axios from 'axios';
+import Login from '../Login/Login.jsx';
 import './SignUp.css';
 
 const SignUp = () => {
@@ -8,6 +10,7 @@ const SignUp = () => {
   const [signUpEmail, setSignUpEmail] = useState('')
   const [signUpCountry, setSignUpCountry] = useState('US')
   const [signUpBirthdate, setSignUpBirthdate] = useState('')
+  const [signedUp, setSignedUp] = useState(false);
 
   const handleUsernameChange = (e) => {
     setSignUpUsername(e.target.value)
@@ -25,8 +28,29 @@ const SignUp = () => {
     setSignUpBirthdate(e.target.value)
   }
   const handleSignUpSubmit = (e) => {
-    // TODO: Post to database, Route to profile
-    console.log('Sign up submitted: ', e)
+    e.preventDefault();
+    // send all state gathered information
+    axios.post('/signup', {
+      username: signUpUsername,
+      password: signUpPassword,
+      email: signUpEmail,
+      country: signUpCountry,
+      birthdate: signUpBirthdate
+    })
+      .then((response) => {
+        console.log(`response: `, response.data)
+        setSignedUp(true)
+      })
+      .catch((error) => {
+        console.log(`error`, error)
+        alert('username already taken')
+      })
+  }
+
+  if (signedUp) {
+    return (
+      <Redirect to="/login" />
+    )
   }
 
   return (
