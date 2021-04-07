@@ -1,4 +1,4 @@
- const express = require('express');
+const express = require('express');
 const path = require('path');
 const url = require('url');
 const bodyParser = require('body-parser');
@@ -42,6 +42,23 @@ passport.deserializeUser(async (id, done) => {
 });
 
 const app = express();
+const httpServer = require("http").createServer(app);
+const io = require('socket.io')(httpServer);
+
+io.on('connection', socket => {
+  // console.log('socket', socket);
+  console.log(`user ${socket.id} connected!`);
+  // send new message
+  socket.on('send new message', ({ msg, socketID }) => {
+    console.log(msg);
+    console.log('this is the sender\'s socketID', socketID);
+    socket.broadcast.emit('receive new message', { msg, 'otherSocketID': socketID });
+  });
+  // receive new message
+  socket.on('disconnecting', () => {
+    console.log(`user ${socket.id} disconnected`);
+  });
+});
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -55,12 +72,12 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', express.static('client/dist'));
+app.use(express.static(path.resolve('client/dist')));
 
 app.post('/signup', signup);
 
 // remember to remove this
-app.get('/login', (req, res) => res.sendFile(path.resolve('client/dist/login.html')));
+// app.get('/login', (req, res) => res.sendFile(path.resolve('client/dist/login.html')));
 
 app.post(
   '/login',
@@ -83,9 +100,7 @@ app.get(
 
 /*
 *-----------------------------------------------------------*
-|                                                           |
 |                    Update User Data                       |
-|                                                           |
 *-----------------------------------------------------------*
 */
 
@@ -94,9 +109,7 @@ app.put('/update', connectEnsureLogin.ensureLoggedIn(), updateUserData);
 // app.post('/test', test);
 /*
 *-----------------------------------------------------------*
-|                                                           |
 |                  Get existing messages                    |
-|                                                           |
 *-----------------------------------------------------------*
 */
 app.get('/roomMessages/:room_id', connectEnsureLogin.ensureLoggedIn(), getMessages);
@@ -104,4 +117,13 @@ app.get('/roomMessages/:room_id', connectEnsureLogin.ensureLoggedIn(), getMessag
 // app.post('/newPal/:user_id/:country_code', connectEnsureLogin.ensureLoggedIn(), findPal);
 app.post('/newPal/:user_id/:country', findPal);
 
-app.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+});
+
+
+httpServer.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));

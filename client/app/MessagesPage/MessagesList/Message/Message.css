@@ -1,11 +1,21 @@
-.my-message {
+.message-by-me,
+.message-by-pal {
   margin-bottom: 15px;
-  grid-column-start: 2;
-  grid-column-end: 4;
   border-radius: 10px;
-  background-color: var(--message-gray);
   padding: 10px;
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
+}
+
+.message-by-me {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  background-color: var(--message-gray);
+}
+
+.message-by-pal {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  background-color: #D3D3D3;
 }
