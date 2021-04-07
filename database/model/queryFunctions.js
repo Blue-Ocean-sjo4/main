@@ -54,13 +54,13 @@ module.exports.findID = (id) => User.findById({ _id: id });
 */
 module.exports.findUserData = async (req, res) => {
   try {
-    const loggedInUser = await User.findOne({ _id: req.body.id });
+    const loggedInUser = await User.findOne({ username: req.query.username });
     const rooms = Object.entries(loggedInUser.rooms);
     const roomsPayload = rooms.map(async (room) => {
       const connection = await User.findOne({ _id: room[1] });
       return {
-        roomId: room[0],
-        user_id: connection._id,
+        roomID: room[0],
+        userID: connection._id,
         name: connection.name,
         bio: connection.bio,
         country: connection.country,
@@ -72,7 +72,7 @@ module.exports.findUserData = async (req, res) => {
     const pendingConnectionsPayload = pendingConnections.map(async (pendingConnection) => {
       const connection = await User.findOne({ _id: pendingConnection[0] });
       return {
-        user_id: connection._id,
+        userID: connection._id,
         name: connection.name,
         bio: connection.bio,
         country: connection.country,
@@ -195,23 +195,6 @@ module.exports.findPal = async (request, response) => {
   } catch (error) {
     console.error(error);
     response.sendStatus(400);
-  }
-};
-
-module.exports.getConnections = async (req, res) => {
-  const username = req.query.username;
-  try {
-    const userData = await User.findOne({ username })
-    .lean()
-    .select({ password: 0 });
-
-    userData.userID = userData._id;
-    delete userData._id;
-
-    res.send(userData);
-  } catch (error) {
-    console.error(error);
-    res.send(404);
   }
 };
 
