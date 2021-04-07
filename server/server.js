@@ -49,9 +49,10 @@ io.on('connection', socket => {
   // console.log('socket', socket);
   console.log(`user ${socket.id} connected!`);
   // send new message
-  socket.on('send new message', msg => {
+  socket.on('send new message', ({ msg, socketID }) => {
     console.log(msg);
-    socket.broadcast.emit('receive new message', msg);
+    console.log('this is the sender\'s socketID', socketID);
+    socket.broadcast.emit('receive new message', { msg, 'otherSocketID': socketID });
   });
   // receive new message
   socket.on('disconnecting', () => {
