@@ -249,6 +249,23 @@ module.exports.acceptPal = async (req, res) => {
   }
 };
 
+module.exports.rejectPal = async (req, res) => {
+  const { user_id, user_pal_id} = req.params;
+  try {
+    const userData = await User.findOne({ _id: user_id }).lean();
+    const updatedPendingConnections = userData.pendingConnections;
+    delete updatedPendingConnections[user_pal_id];
+    await User.findOneAndUpdate(
+      { _id: user_id },
+      { pendingConnections: updatedPendingConnections });
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(404);
+  }
+};
+
 // module.exports.test = async (req, res) => {
 //   await Test.create({ testDate: moment() });
 //   const results = await Test.find({});
