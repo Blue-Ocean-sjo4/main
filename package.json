@@ -43,6 +43,9 @@
     "webpack-cli": "^4.6.0"
   },
   "dependencies": {
+    "@amcharts/amcharts4": "^4.10.17",
+    "@amcharts/amcharts4-fonts": "^4.0.1",
+    "@amcharts/amcharts4-geodata": "^4.1.19",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
@@ -60,6 +63,7 @@
     "passport-local": "^1.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
+    "react-jvectormap": "0.0.16",
     "react-router-dom": "^5.2.0",
     "socket.io": "^4.0.1",
     "socket.io-client": "^4.0.1",
