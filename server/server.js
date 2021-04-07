@@ -12,7 +12,7 @@ const connectEnsureLogin = require('connect-ensure-login');
 const {
   login, signup, findID,
   updateUserData, getMessages,
-  findPal, test } = require('../database/model/queryFunctions.js');
+  findPal, getConnections, test } = require('../database/model/queryFunctions.js');
 const PORT = 1337;
 
 passport.use(new Strategy(async (username, password, done) => {
@@ -68,16 +68,11 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(express.static(path.resolve('client/dist')));
 
 app.post('/signup', signup);
-
-// remember to remove this
-// app.get('/login', (req, res) => res.sendFile(path.resolve('client/dist/login.html')));
 
 app.post(
   '/login',
@@ -92,11 +87,7 @@ app.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
-app.get(
-  '/connections',
-  connectEnsureLogin.ensureLoggedIn(),
-  (req, res) => res.send('i am in homepage')
-);
+app.get('/connections', connectEnsureLogin.ensureLoggedIn(), getConnections);
 
 /*
 *-----------------------------------------------------------*
