@@ -45,14 +45,25 @@ const app = express();
 const httpServer = require("http").createServer(app);
 const io = require('socket.io')(httpServer);
 
+io.use((socket, next) => {
+  socket.room = socket.handshake.auth.room;
+  socket.username = socket.handshake.auth.username;
+  // console.log(socket.room);
+  // console.log(socket.username);
+  next();
+});
+
 io.on('connection', socket => {
+  console.log('room inside connection', socket.room);
+  console.log('username inside connection', socket.username);
   // console.log('socket', socket);
-  console.log(`user ${socket.id} connected!`);
+  // console.log(`user ${socket.id} connected!`);
+  socket.join(socket.room);
   // send new message
-  socket.on('send new message', ({ msg, socketID }) => {
+  socket.on('send new message', ({ msg, room }) => {
     console.log(msg);
-    console.log('this is the sender\'s socketID', socketID);
-    socket.broadcast.emit('receive new message', { msg, 'otherSocketID': socketID });
+    // console.log('this is the sender\'s socketID', socketID);
+    socket.to(room).emit('receive new message', { msg, 'otherSocketID': 'somesocket' });
   });
   // receive new message
   socket.on('disconnecting', () => {
