@@ -198,8 +198,22 @@ module.exports.findPal = async (request, response) => {
   }
 };
 
-//db.mycoll.aggregate([{ $sample: { size: N } }])
-//const hashPassword = await bcrypt.hash(<password>, 10);
+module.exports.getConnections = async (req, res) => {
+  const username = req.query.username;
+  try {
+    const userData = await User.findOne({ username })
+    .lean()
+    .select({ password: 0 });
+
+    userData.userID = userData._id;
+    delete userData._id;
+
+    res.send(userData);
+  } catch (error) {
+    console.error(error);
+    res.send(404);
+  }
+};
 
 // module.exports.test = async (req, res) => {
 //   await Test.create({ testDate: moment() });
@@ -208,23 +222,3 @@ module.exports.findPal = async (request, response) => {
 //   console.log(new Date(moment('1991-04-05')));
 //   res.sendStatus(201);
 // };
-
-
-
-// User.findOne({ _id: id })
-// .then(userData => {
-//   var rooms = Object.entries(userData.rooms);
-//   var promiseArray = rooms.map((room) => {
-//     return User.findOne({ _id: room[1] })
-//   })
-
-//   Promise.all(promiseArray)
-//     .then((connections) => {
-
-//       res.send({
-//         ...userData, rooms
-//       })
-//     })
-//   //res.status(200).send(result.data)
-// };
-// .catch(err => res.status(404).send('user does not exist'));
