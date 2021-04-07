@@ -28,7 +28,7 @@ const App = () => {
           <SignUp />
         )}/>
         <Route path="/profile" exact render={() => (
-          <ProfilePage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+          <ProfilePage loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
         )}/>
         <Route path="/notifications" exact render={() => (
           <Notifications loggedIn={loggedIn} setLoggedIn={setLoggedIn} pendingConnections={userData.pendingConnections} />
