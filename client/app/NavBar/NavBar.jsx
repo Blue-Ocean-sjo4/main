@@ -4,7 +4,7 @@ import './NavBar.css';
 import './NewPal/NewPal.css'
 import NewPal from './NewPal/NewPal.jsx'
 
-const NavBar = () => {
+const NavBar = ({ userID }) => {
 
   const [showingNewPal, setShowingNewPal] = useState(false)
 
@@ -18,7 +18,7 @@ const NavBar = () => {
         <span>CORRESPOND</span>
       </Link>
       <span className="icon-container">
-        <span className="nav-new-pal"><NewPal showingNewPal={showingNewPal} setShowingNewPal={setShowingNewPal} /><ion-icon name="add-circle-outline" onClick={showNewPal}></ion-icon></span>
+        <span className="nav-new-pal"><NewPal userID={userID} showingNewPal={showingNewPal} setShowingNewPal={setShowingNewPal} /><ion-icon name="add-circle-outline" onClick={showNewPal}></ion-icon></span>
         <Link to="/notifications" className="nav-notifications">
           <span><ion-icon name="notifications-circle-outline"></ion-icon></span>
         </Link>

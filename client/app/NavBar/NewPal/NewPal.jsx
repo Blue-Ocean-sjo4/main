@@ -4,7 +4,7 @@ import './NewPal.css';
 import { VectorMap } from 'react-jvectormap';
 import countryCodeToFlag from 'country-code-to-flag';
 
-function NewPal({ showingNewPal, setShowingNewPal }) {
+function NewPal({ showingNewPal, setShowingNewPal, userID }) {
 
   const [country, setCountry] = useState('');
 
@@ -18,7 +18,7 @@ function NewPal({ showingNewPal, setShowingNewPal }) {
 
   function addPal(e) {
     e.preventDefault();
-    //axios.post(`/newPall/${user_id}/${country}`)
+    //axios.post(`/newPal/${userId}/${country}`)
   }
 
   return (

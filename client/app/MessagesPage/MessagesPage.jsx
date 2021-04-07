@@ -25,7 +25,7 @@ message object:
 
 */
 
-const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
+const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => {
   const [allMessages, setAllMessages] = useState([]);
   const [tracker, setTracker] = useState(0)
   const [roomID, setRoomID] = useState(0)
@@ -51,7 +51,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
     socket.on('receive new message', ({ msg, otherSocketID }) => {
       console.log('I received this message:', msg);
       console.log('Sender\'s SocketID:', otherSocketID);
-      setAllMessages(prevState => [...prevState, {senderID: otherSocketID, body: msg, timestamp: 'date'}]);
+      setAllMessages(prevState => [...prevState, { senderID: otherSocketID, body: msg, timestamp: 'date' }]);
       setTracker(tracker + 1);
     });
 
@@ -65,7 +65,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
     // TODO add a clean up function to disconnect from the current pal/room before entering a chat with the new pal
     //socket.emit('forceDisconnect');
     return () => socket.disconnect();
-  },[currentPal.name]);
+  }, [currentPal.name]);
 
   // useEffect((
   //   axios.get(`/roomMessages/${roomID}`)
@@ -102,6 +102,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
           pronouns={currentPal.pronouns}
           bio={currentPal.bio}
           profilePic={currentPal.pic}
+          userID={userID}
         />
         <MessagesList currentPal={currentPal} allMessages={allMessages} myID={socketID} />
         <NewMessageInput tracker={tracker} handleAddMessage={handleAddMessage} />
