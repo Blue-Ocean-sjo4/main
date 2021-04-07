@@ -33,6 +33,11 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
   const [currentPal, setCurrentPal] = useState({ pic: 'https://wondersinthedark.files.wordpress.com/2012/09/the-big-lebowski-1.jpg', name: 'El Duderino', country: 'IL', bio: 'that\'s, like, your bio man.' })
 
   useEffect(() => {
+    const { pic, name, country, bio } = currentRoom.room;
+    setCurrentPal({ pic, name, country, bio })
+  }, []);
+
+  useEffect(() => {
     const messagesList = document.querySelector('#messages-list-container');
     messagesList.scrollTo(0, messagesList.scrollHeight);
   }, [allMessages.length]);
