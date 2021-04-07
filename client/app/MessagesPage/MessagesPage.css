@@ -1,6 +1,6 @@
 #messages-page-grid {
   display: grid;
-  grid-template-columns: 80% 20%;
+  grid-template-columns: 75% 25%;
   height: 100vh;
 }
 

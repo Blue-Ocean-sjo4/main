@@ -1,8 +1,8 @@
 .message-by-me,
 .message-by-pal {
-  margin-bottom: 15px;
+  margin: 0 15px 15px;
   border-radius: 10px;
-  padding: 10px;
+  padding: 10px 15px;
   overflow-wrap: break-word;
   word-wrap: break-word;
   hyphens: auto;
