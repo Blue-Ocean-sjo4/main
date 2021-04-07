@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './MessagesPageBanner.css';
 
-const MessagesPageBanner = ({ name, pronouns, bio, profilePic }) => {
+const MessagesPageBanner = ({ name, pronouns, bio, profilePic, userID }) => {
   return (
     <div id="messages-page-banner-container" >
 
