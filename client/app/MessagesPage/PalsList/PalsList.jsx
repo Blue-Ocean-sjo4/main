@@ -6,9 +6,13 @@ function PalsList({ palsList, setCurrentPal, currentPal }) {
 
   return (
     <div id="pals-list">
-      {palsList.map((pal, i) => (
-        <SinglePal key={i} setCurrentPal={setCurrentPal} pal={pal} />
-      ))}
+      {palsList.map((pal, i) => {
+        if (pal.name !== currentPal.name) {
+          return <SinglePal key={i} setCurrentPal={setCurrentPal} pal={pal} />
+        } else {
+          return null;
+        }
+      })}
     </div>
   )
 }
