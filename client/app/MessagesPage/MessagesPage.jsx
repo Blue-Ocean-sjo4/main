@@ -29,10 +29,11 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
   const [allMessages, setAllMessages] = useState([]);
   const [tracker, setTracker] = useState(0)
   const [roomID, setRoomID] = useState(0)
-  const [palsList, setPalsList] = useState([{ pic: 'https://posterspy.com/wp-content/uploads/2019/05/TheDude_lr.jpg', name: 'the dude', pronouns: 'he/him', country: 'US', bio: 'thats just like your opinion man' }, { pic: 'https://i.pinimg.com/originals/05/17/bf/0517bfa5e9d45208761756e1b0c1f5f9.jpg', name: 'the dude again', pronouns: 'he/him', country: 'US', bio: 'not on the carpet, come on' }, { pic: 'https://wondersinthedark.files.wordpress.com/2012/09/the-big-lebowski-1.jpg', name: 'El Duderino', pronouns: 'he/him', country: 'IL', bio: 'that\'s, like, your bio man.' }])
-  const [currentPal, setCurrentPal] = useState({ pic: 'https://wondersinthedark.files.wordpress.com/2012/09/the-big-lebowski-1.jpg', name: 'El Duderino', pronouns: 'he/him', country: 'IL', bio: 'that\'s, like, your bio man.' })
+  const [palsList, setPalsList] = useState([{ pic: '', name: '', pronouns: '', country: '', bio: '' }])
+  const [currentPal, setCurrentPal] = useState({ pic: '', name: '', pronouns: '', country: '', bio: '' })
 
   useEffect(() => {
+    console.log(currentRoom);
     const { pic, name, country, bio, pronouns } = currentRoom.room;
     setCurrentPal({ pic, name, country, bio, pronouns });
     setPalsList(rooms.reduce((acc, room) => {
