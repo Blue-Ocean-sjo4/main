@@ -55,36 +55,49 @@ module.exports.findID = (id) => User.findById({ _id: id });
 */
 module.exports.findUserData = async (req, res) => {
   try {
-    const loggedInUser = await User.findOne({ username: req.query.username });
+    const loggedInUser = await User.findOne({ username: req.query.username }).lean();
+    // console.log(loggedInUser);
     const rooms = Object.entries(loggedInUser.rooms);
-    const roomsPayload = rooms.map(async (room) => {
-      const connection = await User.findOne({ _id: room[1] });
-      return {
-        roomID: room[0],
-        userID: connection._id,
-        name: connection.name,
-        bio: connection.bio,
-        country: connection.country,
-        birthdate: connection.birthdate
-      };
-    });
+    let roomsPayload = [];
+    let pendingConnectionsPayload = [];
+
+    const promisesRooms = rooms.map(room => User.findOne({ _id: room[1] })
+      .lean()
+      .then(connection => {
+        return {
+            roomID: room[0],
+            userID: connection._id,
+            name: connection.username,
+            bio: connection.bio,
+            country: connection.country,
+            birthdate: connection.birthdate
+          };
+      })
+    );
 
     const pendingConnections = Object.entries(loggedInUser.pendingConnections);
-    const pendingConnectionsPayload = pendingConnections.map(async (pendingConnection) => {
-      const connection = await User.findOne({ _id: pendingConnection[0] });
-      return {
-        userID: connection._id,
-        name: connection.name,
-        bio: connection.bio,
-        country: connection.country,
-        birthdate: connection.birthdate
-      };
+    const promisesPendingConnections = pendingConnections.map(pendingConnection => User.findOne({ _id: pendingConnection[0] })
+      .lean()
+      .then(connection => {
+        return {
+          userID: connection._id,
+          name: connection.username,
+          bio: connection.bio,
+          country: connection.country,
+          birthdate: connection.birthdate
+        };
+      })
+    );
+
+    Promise.all(promisesRooms).then(roomsPayload => {
+      Promise.all(promisesPendingConnections).then(pendingConnectionsPayload => {
+        loggedInUser.pendingConnections = pendingConnectionsPayload;
+        loggedInUser.rooms = roomsPayload;
+        console.log(loggedInUser);
+
+        res.send(loggedInUser);
+      });
     });
-
-    loggedInUser.pendingConnections = pendingConnectionsPayload;
-    loggedInUser.rooms = roomsPayload;
-
-    res.send(loggedInUser);
   } catch (error) {
     res.status(404).send(error);
     console.error(error);
