@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar.jsx';
 import dummyData from '../../../dummyData.js';
 import HomeListItem from './HomeListItem/HomeListItem.jsx';
 import './Home.css';
 
-const Home = () => {
+const Home = ({ loggedIn, setLoggedIn }) => {
   const [rooms, setRooms] = useState([]);
 
   // Will need to retrieve username from URL
@@ -18,6 +19,12 @@ const Home = () => {
     // })
     // .catch((err) => {console.log(`err`, err)})
   }, [])
+
+  if (!loggedIn) {
+    return (
+      <Redirect to="/login" />
+    )
+  }
 
   return (
     <>

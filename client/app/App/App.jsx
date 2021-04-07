@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from '../Login/Login.jsx';
 import SignUp from '../SignUp/SignUp.jsx';
@@ -10,15 +10,31 @@ import MessagesPage from '../MessagesPage/MessagesPage.jsx';
 import './App.css';
 
 const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <Router>
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={SignUp} />
-        <Route path="/profile" component={ProfilePage} />
-        <Route path="/notifications" component={Notifications} />
-        <Route path="/messages" component={MessagesPage} />
+
+        <Route path="/" exact render={() => (
+          <Home loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        )}/>
+        <Route path="/login" exact render={() => (
+          <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        )}/>
+        <Route path="/signup" exact render={() => (
+          <SignUp />
+        )}/>
+        <Route path="/profile" exact render={() => (
+          <ProfilePage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        )}/>
+        <Route path="/notifications" exact render={() => (
+          <Notifications loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        )}/>
+        <Route path="/messages" exact render={() => (
+          <MessagesPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        )}/>
+
       </Switch>
     </Router>
   )

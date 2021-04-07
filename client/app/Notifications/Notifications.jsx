@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar.jsx';
 import NotificationsListItem from './NotificationsListItem/NotificationsListItem.jsx';
 import dummyData from '../../../dummyData.js';
 import './Notifications.css'
 
-const Notifications = () => {
+const Notifications = ({ loggedIn, setLoggedIn }) => {
   const [pendingConnections, setPendingConnections] = useState([]);
 
   // Will need to retrieve username from URL, or state passed from previous page(?)
@@ -18,6 +19,12 @@ const Notifications = () => {
     // })
     // .catch((err) => {console.log(`err`, err)})
   }, [])
+
+  if (!loggedIn) {
+    return (
+      <Redirect to="/login" />
+    )
+  }
 
   return (
     <>

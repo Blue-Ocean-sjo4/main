@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar.jsx';
 import './ProfilePage.css';
 
-const ProfilePage = () => {
+const ProfilePage = ({ loggedIn, setLoggedIn }) => {
 
   const [profilePicture, setProfilePicture] = useState(''); /* Consider data type from backend */
   const [bio, setBio] = useState('');
@@ -34,6 +35,12 @@ const ProfilePage = () => {
   const handleBioChange = (e) => {
     setBio(e.target.value)
   };
+
+  if (!loggedIn) {
+    return (
+      <Redirect to="/login" />
+    )
+  }
 
   return (
     <>

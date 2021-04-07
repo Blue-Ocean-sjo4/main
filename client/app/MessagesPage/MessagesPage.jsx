@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import MessagesPageBanner from './MessagesPageBanner/MessagesPageBanner.jsx';
 import MessagesList from './MessagesList/MessagesList.jsx';
@@ -18,7 +19,7 @@ message object:
 
 */
 
-const MessagesPage = () => {
+const MessagesPage = ({ loggedIn, setLoggedIn }) => {
   const [allMessages, setAllMessages] = useState([]);
   const [tracker, setTracker] = useState(0)
   const [roomID, setRoomID] = useState(0)
@@ -48,6 +49,12 @@ const MessagesPage = () => {
     });
     setTracker(tracker + 1);
     setAllMessages(prevState);
+  }
+
+  if (!loggedIn) {
+    return (
+      <Redirect to="/login" />
+    )
   }
 
   return (
