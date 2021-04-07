@@ -3,6 +3,8 @@ package-lock.json
 filepickerConfig.js
 client/dist/canvg.bundle.js
 client/dist/pdfmake.bundle.js
+client/dist/xlsx.bundle.js
+client/dist/vendors-node_modules_xlsx_xlsx_js.bundle.js
 
 # Logs
 logs
