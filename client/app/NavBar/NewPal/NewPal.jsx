@@ -18,7 +18,10 @@ function NewPal({ showingNewPal, setShowingNewPal, userID }) {
 
   function addPal(e) {
     e.preventDefault();
-    //axios.post(`/newPal/${userId}/${country}`)
+    axios.post(`/newPal/${userID}/${country}`)
+      .then(() => { alert('Pal request sent!') })
+      .then(() => { setShowingNewPal(false) })
+      .catch((err) => { alert('error adding new pal, check console'); console.log('err: ', err) })
   }
 
   return (
