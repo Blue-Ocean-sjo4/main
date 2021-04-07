@@ -86,6 +86,8 @@ typings/
 # Nuxt.js build / generate output
 .nuxt
 client/dist/bundle.js
+client/dist/canvg.bundle.js
+client/dist/xlsx.bundle.js
 
 # Gatsby files
 .cache/
