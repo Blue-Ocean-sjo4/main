@@ -13,7 +13,7 @@ const {
   login, signup, findID, findUserData,
   updateUserData, getMessages,
   findPal, getConnections, acceptPal,
-  rejectPal, test } = require('../database/model/queryFunctions.js');
+  rejectPal, saveMessages } = require('../database/model/queryFunctions.js');
 const PORT = 1337;
 
 passport.use(new Strategy(async (username, password, done) => {
@@ -56,13 +56,15 @@ io.use((socket, next) => {
 
 io.on('connection', socket => {
   console.log('room inside connection', socket.room);
-  console.log('username inside connection', socket.username);
   // console.log('socket', socket);
   // console.log(`user ${socket.id} connected!`);
   socket.join(socket.room);
   // send new message
-  socket.on('send new message', ({ msg, room }) => {
+  socket.on('send new message', ({ msg, room, senderID }) => {
     console.log(msg);
+
+    //send data to queryFunctions through saveMessages
+    saveMessages(room, msg, senderID);
     // console.log('this is the sender\'s socketID', socketID);
     socket.to(room).emit('receive new message', { msg, 'otherSocketID': 'somesocket' });
   });
