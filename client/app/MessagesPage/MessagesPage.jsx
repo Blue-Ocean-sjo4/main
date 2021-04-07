@@ -34,7 +34,12 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
 
   useEffect(() => {
     const { pic, name, country, bio } = currentRoom.room;
-    setCurrentPal({ pic, name, country, bio })
+    console.log(rooms);
+    setCurrentPal({ pic, name, country, bio });
+    setPalsList(rooms.reduce((acc, room) => {
+      acc.push({ pic: room.pic, name: room.name, country: room.country, bio: room.bio });
+      return acc;
+    }, []));
   }, []);
 
   useEffect(() => {
