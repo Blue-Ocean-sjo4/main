@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar.jsx';
 import './ProfilePage.css';
 
-const ProfilePage = () => {
+const ProfilePage = ({ loggedIn, setLoggedIn, username }) => {
 
   const [profilePicture, setProfilePicture] = useState(''); /* Consider data type from backend */
   const [bio, setBio] = useState('');
   const [gender, setGender] = useState('');
   const [pronouns, setPronouns] = useState('');
-  const [username, setUsername] = useState('');
   const [country, setCountry] = useState('US');
 
   useEffect(() => {
@@ -18,9 +18,6 @@ const ProfilePage = () => {
 
   const handlePictureUpload = (e) => {
     // TODO: Send picture to storage API, then post URL to database
-  };
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value)
   };
   const handleCountryChange = (e) => {
     setCountry(e.target.value)
@@ -35,11 +32,17 @@ const ProfilePage = () => {
     setBio(e.target.value)
   };
 
+  if (!loggedIn) {
+    return (
+      <Redirect to="/login" />
+    )
+  }
+
   return (
     <>
       <NavBar />
       <div className="profile-container">
-        <div className="profile-header header">Username's Profile</div>
+        <div className="profile-header header">{`${username}'s Profile`}</div>
         <div className="profile-pic-container">
           <div className="profile-pic-cropper">
             <img className="profile-pic-display" src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" alt="avatar" />
@@ -53,7 +56,7 @@ const ProfilePage = () => {
           <label>
             Username
           <br></br>
-            <input className="profile-username profile-input" type="text" placeholder="YOUR USERNAME" defaultValue={username}></input>
+            <input className="profile-username profile-input" type="text" disabled defaultValue={username} ></input>
           </label>
           <br></br>
           <label>
