@@ -54,13 +54,13 @@ module.exports.findID = (id) => User.findById({ _id: id });
 */
 module.exports.findUserData = async (req, res) => {
   try {
-    const loggedInUser = await User.findOne({ _id: req.body.id });
+    const loggedInUser = await User.findOne({ username: req.query.username });
     const rooms = Object.entries(loggedInUser.rooms);
     const roomsPayload = rooms.map(async (room) => {
       const connection = await User.findOne({ _id: room[1] });
       return {
-        roomId: room[0],
-        user_id: connection._id,
+        roomID: room[0],
+        userID: connection._id,
         name: connection.name,
         bio: connection.bio,
         country: connection.country,
@@ -72,7 +72,7 @@ module.exports.findUserData = async (req, res) => {
     const pendingConnectionsPayload = pendingConnections.map(async (pendingConnection) => {
       const connection = await User.findOne({ _id: pendingConnection[0] });
       return {
-        user_id: connection._id,
+        userID: connection._id,
         name: connection.name,
         bio: connection.bio,
         country: connection.country,
@@ -198,20 +198,24 @@ module.exports.findPal = async (request, response) => {
   }
 };
 
-module.exports.getConnections = async (req, res) => {
-  const username = req.query.username;
+module.exports.acceptPal = async (req, res) => {
+  const { user_id, user_pal_id} = req.params;
+
   try {
-    const userData = await User.findOne({ username })
-    .lean()
-    .select({ password: 0 });
+    // create a room for userId and palID
+    const newRoom = await Room.create({ userOneID: user_id, userTwoID: user_pal_id });
+    const newRoomId = newRoom._id;
+    console.log(newRoomId);
+    // remove palId from userId's pending connections
+    const userData = User.findOne({ _id: user_id });
+    // add the room_id to userId's rooms with palId
 
-    userData.userID = userData._id;
-    delete userData._id;
+    // add the room_id to palId's rooms with userId
 
-    res.send(userData);
+    res.sendStatus(200);
   } catch (error) {
     console.error(error);
-    res.send(404);
+    res.sendStatus(404);
   }
 };
 

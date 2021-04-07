@@ -4,7 +4,7 @@ const roomSchema = mongoose.Schema({
   userOneID: String,
   userTwoID: String,
   messages: { type: Array, default: [] } // array of objects with senderID, body, timestamp
-});
+}, { minimize: false });
 
 const userSchema = mongoose.Schema({
   username: String,
