@@ -4,8 +4,6 @@ import axios from 'axios';
 import './Login.css';
 
 const Login = ({ loggedIn, setLoggedIn, username, setUsername }) => {
-
-
   const [password, setPassword] = useState('');
 
 
