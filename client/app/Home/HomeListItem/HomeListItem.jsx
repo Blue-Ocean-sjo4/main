@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import countryCodeToFlag from "country-code-to-flag";
 import './HomeListItem.css';
 
-const HomeListItem = ({ roomId, name, bio, country }) => {
+const HomeListItem = ({ pals, roomId, name, bio, country }) => {
   // TODO: Link up with messages team, discuss fetching database messages
 
   return (
-    <Link to={{
+    <Link className="pal-messages-link" to={{
       pathname: `/messages`,
       state: {
+        pals,
         roomId,
         name,
         bio,

@@ -1,12 +1,24 @@
-.pal-container {
-  display: grid;
+.pal-messages-link {
   margin: 10px auto;
   height: 120px;
   width: 75%;
-  grid-template: 1fr 2fr / 1fr 5fr 1fr;
+  /* grid-template: 1fr 2fr / 1fr 5fr 1fr; */
   background-color: var(--message-gray);
   border-radius: 5px;
   color: var(--midnight-blue);
+  text-decoration: none;
+}
+
+.pal-container {
+  display: grid;
+  height: 100%;
+  /* margin: 10px auto; */
+  /* height: 120px; */
+  /* width: 75%; */
+  grid-template: 1fr 2fr / 1fr 5fr 1fr;
+  /* background-color: var(--message-gray); */
+  /* border-radius: 5px; */
+  /* color: var(--midnight-blue); */
 }
 
 .pal-container:hover {
