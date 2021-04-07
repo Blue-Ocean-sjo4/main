@@ -24,6 +24,7 @@ module.exports.dummyData = {
       bio: "I hate donkeys with a passion, will connect to anyone similar, I hate donkeys with a passion, will connect to anyone similar, I hate donkeys with a passion, will connect to anyone similar, I hate donkeys with a passion, will connect to anyo",
       country: "GB",
       gender: "female",
+      pic: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg",
       pronouns: "she/her",
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
@@ -34,6 +35,7 @@ module.exports.dummyData = {
       bio: "Im a good boy who tests well",
       country: "US",
       gender: "female",
+      pic: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg",
       pronouns: "she/her",
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
@@ -44,6 +46,7 @@ module.exports.dummyData = {
       bio: "I might be short, but in my heart im Big Tom",
       country: "AE",
       gender: "male",
+      pic: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg",
       pronouns: "he/him",
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
@@ -54,6 +57,7 @@ module.exports.dummyData = {
       bio: "I am little Tim and I have fun all the time",
       country: "AU",
       gender: "male",
+      pic: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg",
       pronouns: "he/him",
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
@@ -64,6 +68,7 @@ module.exports.dummyData = {
       bio: "all bridges are sad to me, even the golden gate bridge",
       country: "RU",
       gender: "female",
+      pic: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg",
       pronouns: "she/her",
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
@@ -74,6 +79,7 @@ module.exports.dummyData = {
       bio: "I hate donkeys with a passion, will connect to anyone similar",
       country: "CN",
       gender: "female",
+      pic: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg",
       pronouns: "she/her",
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
@@ -84,6 +90,7 @@ module.exports.dummyData = {
       bio: "I hate donkeys with a passion, will connect to anyone similar",
       country: "GB",
       gender: "female",
+      pic: "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg",
       pronouns: "she/her",
       birthdate:  "Mon Apr 05 2003 16:58:42 GMT-0700 (Pacific Daylight Time)"
     },
