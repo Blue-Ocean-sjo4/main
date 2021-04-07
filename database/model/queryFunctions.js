@@ -76,24 +76,31 @@ module.exports.findUserData = async (req, res) => {
     );
 
     const pendingConnections = Object.entries(loggedInUser.pendingConnections);
-    const promisesPendingConnections = pendingConnections.map(pendingConnection => User.findOne({ _id: pendingConnection[0] })
-      .lean()
-      .then(connection => {
-        return {
-          userID: connection._id,
-          name: connection.username,
-          bio: connection.bio,
-          country: connection.country,
-          birthdate: connection.birthdate
-        };
-      })
-    );
+    const promisesPendingConnections = [];
+    pendingConnections.forEach(pendingConnection => {
+
+      if (!pendingConnection[1]) {
+        promisesPendingConnections.push(User.findOne({ _id: pendingConnection[0] })
+          .lean()
+          .then(connection => {
+            return {
+              userID: connection._id,
+              name: connection.username,
+              bio: connection.bio,
+              country: connection.country,
+              birthdate: connection.birthdate
+            };
+          }));
+      }
+    });
 
     Promise.all(promisesRooms).then(roomsPayload => {
       Promise.all(promisesPendingConnections).then(pendingConnectionsPayload => {
         loggedInUser.pendingConnections = pendingConnectionsPayload;
         loggedInUser.rooms = roomsPayload;
-        console.log(loggedInUser);
+
+        loggedInUser.userID = loggedInUser._id;
+        delete loggedInUser._id;
 
         res.send(loggedInUser);
       });
@@ -138,13 +145,6 @@ module.exports.updateUserData = async (request, response) => {
 *-----------------------------------------------------------*
 */
 
-/*
-const roomSchema = mongoose.Schema({
-  userOneID: String,
-  userTwoID: String,
-  messages: Array
-});
-*/
 module.exports.getMessages = async (request, response) => {
   const { room_id } = request.params;
 
@@ -261,6 +261,10 @@ module.exports.rejectPal = async (req, res) => {
     console.error(error);
     res.sendStatus(404);
   }
+};
+
+module.exports.saveMessages = async (roomID, message, senderID) => {
+  console.log('from query function: ', roomID, message, senderID);
 };
 
 // module.exports.test = async (req, res) => {
