@@ -29,8 +29,18 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
   const [allMessages, setAllMessages] = useState([]);
   const [tracker, setTracker] = useState(0)
   const [roomID, setRoomID] = useState(0)
-  const [palsList, setPalsList] = useState([{ pic: 'https://posterspy.com/wp-content/uploads/2019/05/TheDude_lr.jpg', name: 'the dude', country: 'US', bio: 'thats just like your opinion man' }, { pic: 'https://i.pinimg.com/originals/05/17/bf/0517bfa5e9d45208761756e1b0c1f5f9.jpg', name: 'the dude again', country: 'US', bio: 'not on the carpet, come on' }, { pic: 'https://wondersinthedark.files.wordpress.com/2012/09/the-big-lebowski-1.jpg', name: 'El Duderino', country: 'IL', bio: 'that\'s, like, your bio man.' }])
-  const [currentPal, setCurrentPal] = useState({ pic: 'https://wondersinthedark.files.wordpress.com/2012/09/the-big-lebowski-1.jpg', name: 'El Duderino', country: 'IL', bio: 'that\'s, like, your bio man.' })
+  const [palsList, setPalsList] = useState([{ pic: '', name: '', pronouns: '', country: '', bio: '' }])
+  const [currentPal, setCurrentPal] = useState({ pic: '', name: '', pronouns: '', country: '', bio: '' })
+
+  useEffect(() => {
+    console.log(currentRoom);
+    const { pic, name, country, bio, pronouns } = currentRoom.room;
+    setCurrentPal({ pic, name, country, bio, pronouns });
+    setPalsList(rooms.reduce((acc, room) => {
+      acc.push({ pic: room.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio });
+      return acc;
+    }, []));
+  }, []);
 
   useEffect(() => {
     const messagesList = document.querySelector('#messages-list-container');
@@ -87,7 +97,12 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
   return (
     <div id="messages-page-grid" >
       <div id="messages-page-left" >
-        <MessagesPageBanner name={currentPal.name} bio={currentPal.bio} profilePic={currentPal.pic} />
+        <MessagesPageBanner
+          name={currentPal.name}
+          pronouns={currentPal.pronouns}
+          bio={currentPal.bio}
+          profilePic={currentPal.pic}
+        />
         <MessagesList currentPal={currentPal} allMessages={allMessages} myID={socketID} />
         <NewMessageInput tracker={tracker} handleAddMessage={handleAddMessage} />
       </div>
