@@ -215,6 +215,27 @@ module.exports.getConnections = async (req, res) => {
   }
 };
 
+module.exports.acceptPal = async (req, res) => {
+  const { user_id, user_pal_id} = req.params;
+
+  try {
+    // create a room for userId and palID
+    const newRoom = await Room.create({ userOneID: user_id, userTwoID: user_pal_id });
+    const newRoomId = newRoom._id;
+    console.log(newRoomId);
+    // remove palId from userId's pending connections
+    const userData = User.findOne({ _id: user_id });
+    // add the room_id to userId's rooms with palId
+
+    // add the room_id to palId's rooms with userId
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(404);
+  }
+};
+
 // module.exports.test = async (req, res) => {
 //   await Test.create({ testDate: moment() });
 //   const results = await Test.find({});
