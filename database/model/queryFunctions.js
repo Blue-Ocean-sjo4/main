@@ -1,6 +1,7 @@
 const { User, Room, Test } = require('./schema.js');
 const bcrypt = require('bcrypt');
 const moment = require('moment');
+const { Types } = require('mongoose');
 
 /*
 *-----------------------------------------------------------*
@@ -20,7 +21,6 @@ function calculate_age(dob) {
 module.exports.signup = async (request, response) => {
   console.log('request body:', request.body);
   const { username, password, email, country, birthdate } = request.body;
-  console.log(birthdate);
   const birthDate = new Date(moment(birthdate));
 
   // const birthDate = new Date(birthdate.subString(0,3), birthdate.subString(5,6), birthdate.subString(8,9));
@@ -55,13 +55,13 @@ module.exports.findID = (id) => User.findById({ _id: id });
 */
 module.exports.findUserData = async (req, res) => {
   try {
-    const loggedInUser = await User.findOne({ _id: req.body.id });
+    const loggedInUser = await User.findOne({ username: req.query.username });
     const rooms = Object.entries(loggedInUser.rooms);
     const roomsPayload = rooms.map(async (room) => {
       const connection = await User.findOne({ _id: room[1] });
       return {
-        roomId: room[0],
-        user_id: connection._id,
+        roomID: room[0],
+        userID: connection._id,
         name: connection.name,
         bio: connection.bio,
         country: connection.country,
@@ -73,7 +73,7 @@ module.exports.findUserData = async (req, res) => {
     const pendingConnectionsPayload = pendingConnections.map(async (pendingConnection) => {
       const connection = await User.findOne({ _id: pendingConnection[0] });
       return {
-        user_id: connection._id,
+        userID: connection._id,
         name: connection.name,
         bio: connection.bio,
         country: connection.country,
@@ -161,11 +161,11 @@ module.exports.findPal = async (request, response) => {
   try {
     const { user_id, country } = request.params;
     const userData = await User.findOne({ _id: user_id });
-    const ineligiblePals = [user_id];
+    const ineligiblePals = [Types.ObjectId(user_id)];
     // loop through pending;
-    Object.keys(userData.pendingConnections).forEach(user => ineligiblePals.push(user));
+    Object.keys(userData.pendingConnections).forEach(user => ineligiblePals.push(Types.ObjectId(user)));
     // loop through accepted;
-    Object.values(userData.rooms).forEach(user => ineligiblePals.push(user));
+    Object.values(userData.rooms).forEach(user => ineligiblePals.push(Types.ObjectId(user)));
     // user is requesting someone to be a pal
     // requestedConnections
     const userBirthDate = userData.birthdate;
@@ -186,7 +186,6 @@ module.exports.findPal = async (request, response) => {
       }
     ]);
 
-
     const updatedPendingConnections = randomPal[0].pendingConnections;
     updatedPendingConnections[user_id] = 0;
 
@@ -199,20 +198,55 @@ module.exports.findPal = async (request, response) => {
   }
 };
 
-module.exports.getConnections = async (req, res) => {
-  const username = req.query.username;
+module.exports.acceptPal = async (req, res) => {
+  const { user_id, user_pal_id} = req.params;
+
   try {
-    const userData = await User.findOne({ username })
-    .lean()
-    .select({ password: 0 });
+    // create a room for userId and palID
+    const newRoom = await Room.create({ userOneID: user_id, userTwoID: user_pal_id });
+    const newRoomId = newRoom._id;
 
-    userData.userID = userData._id;
-    delete userData._id;
+    // remove palId from userId's pending connections
+    // add the room_id to userId's rooms with palId
+    const userData = await User.findOne({ _id: user_id }).lean();
+    const updatedPendingConnections = userData.pendingConnections;
+    delete updatedPendingConnections[user_pal_id];
+    const updatedRooms = userData.rooms;
+    updatedRooms[newRoomId] = user_pal_id;
+    await User.findOneAndUpdate(
+      { _id: user_id },
+      {
+        pendingConnections: updatedPendingConnections,
+        rooms: updatedRooms
+      });
 
-    res.send(userData);
+    // add the room_id to palId's rooms with userId
+    const palData = await User.findOne({ _id: user_pal_id }).lean();
+    const updatedPalRooms = palData.rooms;
+    updatedPalRooms[newRoomId] = user_id;
+    await User.findOneAndUpdate({ _id: user_pal_id }, { rooms: updatedPalRooms });
+
+    res.sendStatus(200);
   } catch (error) {
     console.error(error);
-    res.send(404);
+    res.sendStatus(404);
+  }
+};
+
+module.exports.rejectPal = async (req, res) => {
+  const { user_id, user_pal_id} = req.params;
+  try {
+    const userData = await User.findOne({ _id: user_id }).lean();
+    const updatedPendingConnections = userData.pendingConnections;
+    delete updatedPendingConnections[user_pal_id];
+    await User.findOneAndUpdate(
+      { _id: user_id },
+      { pendingConnections: updatedPendingConnections });
+
+    res.sendStatus(200);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(404);
   }
 };
 
