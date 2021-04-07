@@ -34,14 +34,16 @@
   margin-top: 10px;
   border: 2px solid var(--midnight-blue);
   border-radius: 5px;
-  background-color: var(--birdie-blue);
+  background-color: var(--midnight-blue);
+  transition: background-color .2s;
   color: #FFF;
   font-weight: bolder;
 }
 
 .login-button:hover {
   cursor: pointer;
-  background-color: var(--midnight-blue);
+  background-color: var(--birdie-blue);
+  transition: background-color .2s;
 }
 
 .sign-up-link {
