@@ -210,7 +210,7 @@ module.exports.acceptPal = async (req, res) => {
     // add the room_id to userId's rooms with palId
     const userData = await User.findOne({ _id: user_id }).lean();
     const updatedPendingConnections = userData.pendingConnections;
-    delete updatedPendingConnections[user_pal_id];
+    updatedPendingConnections[user_pal_id] = 1;
     const updatedRooms = userData.rooms;
     updatedRooms[newRoomId] = user_pal_id;
     await User.findOneAndUpdate(
@@ -238,7 +238,7 @@ module.exports.rejectPal = async (req, res) => {
   try {
     const userData = await User.findOne({ _id: user_id }).lean();
     const updatedPendingConnections = userData.pendingConnections;
-    delete updatedPendingConnections[user_pal_id];
+    updatedPendingConnections[user_pal_id] = 2;
     await User.findOneAndUpdate(
       { _id: user_id },
       { pendingConnections: updatedPendingConnections });
