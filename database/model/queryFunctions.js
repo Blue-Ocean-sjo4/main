@@ -160,7 +160,7 @@ module.exports.postMessage = async (request, response) => {
 module.exports.findPal = async (request, response) => {
   try {
     const { user_id, country } = request.params;
-    const userData = await User.findOne({ _id: user_id });
+    const userData = await User.findOne({ _id: user_id }).lean();
     const ineligiblePals = [Types.ObjectId(user_id)];
     // loop through pending;
     Object.keys(userData.pendingConnections).forEach(user => ineligiblePals.push(Types.ObjectId(user)));
@@ -189,7 +189,11 @@ module.exports.findPal = async (request, response) => {
     const updatedPendingConnections = randomPal[0].pendingConnections;
     updatedPendingConnections[user_id] = 0;
 
-    const newPal = await User.findOneAndUpdate({ _id: randomPal[0]._id }, {pendingConnections: updatedPendingConnections });
+    await User.findOneAndUpdate({ _id: randomPal[0]._id }, { pendingConnections: updatedPendingConnections });
+
+    const updatedRequestedConnections = userData.requestedConnections;
+    updatedRequestedConnections[randomPal[0]._id] = 0;
+    await User.findOneAndUpdate({ _id: user_id }, { requestedConnections: updatedRequestedConnections });
 
     response.sendStatus(200);
   } catch (error) {
