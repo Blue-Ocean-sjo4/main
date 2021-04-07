@@ -19,23 +19,23 @@ const App = () => {
     <Router>
       <Switch>
         <Route path="/" exact render={() => (
-          <Home loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} rooms={userData.rooms} setUserData={setUserData} setCurrentRoom={setCurrentRoom} />
-        )}/>
+          <Home userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} rooms={userData.rooms} setUserData={setUserData} setCurrentRoom={setCurrentRoom} />
+        )} />
         <Route path="/login" exact render={() => (
           <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} setUsername={setUsername} />
-        )}/>
+        )} />
         <Route path="/signup" exact render={() => (
           <SignUp />
-        )}/>
+        )} />
         <Route path="/profile" exact render={() => (
-          <ProfilePage loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
-        )}/>
+          <ProfilePage userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
+        )} />
         <Route path="/notifications" exact render={() => (
-          <Notifications loggedIn={loggedIn} setLoggedIn={setLoggedIn} pendingConnections={userData.pendingConnections} />
-        )}/>
+          <Notifications userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} pendingConnections={userData.pendingConnections} />
+        )} />
         <Route path="/messages" exact render={() => (
-          <MessagesPage loggedIn={loggedIn} setLoggedIn={setLoggedIn} rooms={userData.rooms} currentRoom={currentRoom} />
-        )}/>
+          <MessagesPage userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} rooms={userData.rooms} currentRoom={currentRoom} />
+        )} />
       </Switch>
     </Router>
   )

@@ -6,7 +6,7 @@ import HomeListItem from './HomeListItem/HomeListItem.jsx';
 import axios from 'axios';
 import './Home.css';
 
-const Home = ({ loggedIn, setLoggedIn, username, rooms, setUserData, setCurrentRoom }) => {
+const Home = ({ loggedIn, setLoggedIn, username, rooms, setUserData, setCurrentRoom, userID }) => {
 
   // useEffect(() => {
   //   axios.get(`/connections/${username}`)
@@ -33,7 +33,7 @@ const Home = ({ loggedIn, setLoggedIn, username, rooms, setUserData, setCurrentR
 
   return (
     <>
-      <NavBar />
+      <NavBar userID={userID} />
       <div className="home-container">
         {rooms.map((room, index) => (
           <HomeListItem key={room.userID} room={room} setCurrentRoom={setCurrentRoom} />
