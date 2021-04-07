@@ -18,7 +18,7 @@ const NavBar = () => {
         <span>CORRESPOND</span>
       </Link>
       <span className="icon-container">
-        <span className="nav-new-pal"><NewPal showingNewPal={showingNewPal} setShowingNewPal={setShowingNewPal} /><ion-icon name="add-circle-outline" onClick={showNewPal}></ion-icon></span>
+        <span className="nav-new-pal"><NewPal user_id={user_id} showingNewPal={showingNewPal} setShowingNewPal={setShowingNewPal} /><ion-icon name="add-circle-outline" onClick={showNewPal}></ion-icon></span>
         <Link to="/notifications" className="nav-notifications">
           <span><ion-icon name="notifications-circle-outline"></ion-icon></span>
         </Link>

@@ -19,7 +19,7 @@
   margin-bottom: 10%;
   padding: 30px;
   border: 1px solid #888;
-  width: 80%;
+  width: 1000px;
 }
 
 .new-pal-modal-close {
@@ -38,4 +38,10 @@
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+.current-country-flag{
+  text-align: center;
+  height: 60px;
+  font-size: 60px;
 }
