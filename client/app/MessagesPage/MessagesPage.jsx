@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import io from 'socket.io-client';
 import MessagesPageBanner from './MessagesPageBanner/MessagesPageBanner.jsx';
 import MessagesList from './MessagesList/MessagesList.jsx';
 import NewMessageInput from './NewMessageInput/NewMessageInput.jsx';
 import PalsList from './PalsList/PalsList.jsx'
 import './MessagesPage.css';
+
+let socketID = '';
+const socket = io('http://localhost:1337');
 
 /*
 
@@ -30,6 +34,14 @@ const MessagesPage = () => {
     messagesList.scrollTo(0, messagesList.scrollHeight);
   }, [allMessages.length])
 
+  useEffect(() => {
+    socket.on('receive new message', (msg) => {
+      console.log('I received this message:', msg);
+      setAllMessages(prevState => [...prevState, {senderID: '42069', body: msg, timestamp: 'date'}]);
+      setTracker(tracker + 1);
+    })
+  },[]);
+
   // useEffect((
   //   axios.get(`/roomMessages/${roomID}`)
   //     .then((res) => {
@@ -46,9 +58,11 @@ const MessagesPage = () => {
       body: msg,
       timestamp: 'date'
     });
-    setTracker(tracker + 1);
     setAllMessages(prevState);
+    setTracker(tracker + 1);
+    socket.emit('send new message', msg);
   }
+
 
   return (
     <div id="messages-page-grid" >
