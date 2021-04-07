@@ -1,7 +1,8 @@
 #our files
 package-lock.json
 filepickerConfig.js
-
+client/dist/canvg.bundle.js
+client/dist/pdfmake.bundle.js
 
 # Logs
 logs
@@ -86,8 +87,7 @@ typings/
 # Nuxt.js build / generate output
 .nuxt
 client/dist/bundle.js
-client/dist/canvg.bundle.js
-client/dist/xlsx.bundle.js
+
 
 # Gatsby files
 .cache/
