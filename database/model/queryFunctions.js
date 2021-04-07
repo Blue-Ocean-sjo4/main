@@ -99,8 +99,8 @@ module.exports.findUserData = async (req, res) => {
       });
     });
   } catch (error) {
-    res.status(404).send(error);
     console.error(error);
+    res.status(404).send(error);
   };
 };
 

@@ -31,6 +31,10 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username }) => {
   const handleBioChange = (e) => {
     setBio(e.target.value)
   };
+  const handleProfileUpdate = (e) => {
+    e.preventDefault();
+    alert('Profile Updated')
+  }
 
   if (!loggedIn) {
     return (
@@ -319,7 +323,7 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username }) => {
             <textarea className="profile-bio profile-input" type="text" onChange={handleBioChange} placeholder="YOUR BIO" value={bio} maxLength="240"></textarea>
           </label>
           <br></br>
-          <input className="profile-update-button" type="submit" value="UPDATE PROFILE"></input>
+          <input className="profile-update-button" type="submit" value="UPDATE PROFILE" onClick={handleProfileUpdate}></input>
         </form>
       </div>
     </>

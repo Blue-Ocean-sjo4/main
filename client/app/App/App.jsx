@@ -12,7 +12,18 @@ import './App.css';
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({
+    userID: "",
+    username: "",
+    email: "",
+    bio: "",
+    country: "",
+    gender: "",
+    pronouns: "",
+    birthdate: "",
+    pendingConnections: [],
+    rooms: []
+  });
   const [currentRoom, setCurrentRoom] = useState({});
 
   return (
