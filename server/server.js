@@ -10,7 +10,7 @@ const Strategy = require('passport-local').Strategy;
 const session = require('express-session');
 const connectEnsureLogin = require('connect-ensure-login');
 const {
-  login, signup, findID,
+  login, signup, findID, findUserData,
   updateUserData, getMessages,
   findPal, getConnections, acceptPal,
   test } = require('../database/model/queryFunctions.js');
@@ -88,8 +88,8 @@ app.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
-app.get('/connections', connectEnsureLogin.ensureLoggedIn(), getConnections);
-// app.get('/connections', getConnections);
+app.get('/connections', connectEnsureLogin.ensureLoggedIn(), findUserData);
+// app.get('/connections', findUserData);
 
 /*
 *-----------------------------------------------------------*
