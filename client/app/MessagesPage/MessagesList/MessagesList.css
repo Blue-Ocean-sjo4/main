@@ -6,6 +6,5 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: end;
-  padding: 10px;
-  padding-bottom: 0;
+  margin-top: 10px;
 }
