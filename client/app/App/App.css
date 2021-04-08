@@ -2,14 +2,17 @@
   --birdie-blue: #008FCC;
   --midnight-blue: #202473;
   --message-gray: #E4E4E4;
-  --background: #FFFFFF;
-  --text: #000000;
+  --background: #CCDADE;
+  --ocean-blue: #005470;
+  --lighter-blue: #B2EDFF;
+  --text-blue: #003049;
+  --input-blue: #E8F0FE;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--message-gray);
+  background-color: var(--background);
 }
 
 #app {
