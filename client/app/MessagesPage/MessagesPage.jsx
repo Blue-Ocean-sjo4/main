@@ -30,6 +30,12 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => 
   const [currentPal, setCurrentPal] = useState({ pic: '', name: '', pronouns: '', country: '', bio: '' })
 
   useEffect(() => {
+    //make pull request
+    axios.get(`http://localhost:1337/roomMessages/${currentRoom.room.roomID}`)
+      .then((messages) => {
+        setAllMessages(messages.data.messages);
+      })
+
     const { pic, name, country, bio, pronouns } = currentRoom.room;
     setRoomID(currentRoom.room.roomID);
     setCurrentPal({ pic, name, country, bio, pronouns });
@@ -51,9 +57,8 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => 
       };
       socket.connect();
 
-      socket.on('receive new message', ({ msg }) => {
-        console.log('I received this message:', msg);
-        setAllMessages(prevState => [...prevState, { senderID: userID, body: msg, timestamp: new Date() }]);
+      socket.on('receive new message', ({ msg, senderID }) => {
+        setAllMessages(prevState => [...prevState, { senderID, body: msg, timestamp: new Date() }]);
         setTracker(tracker + 1);
       });
     }
@@ -68,7 +73,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => 
     prevState.push({
       senderID: userID,
       body: msg,
-      timestamp: 'date',
+      timestamp: new Date(),
       media
     });
     setAllMessages(prevState);
@@ -92,7 +97,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => 
           profilePic={currentPal?.pic}
           userID={userID}
         />
-        <MessagesList currentPal={currentPal} allMessages={allMessages} myID={roomID} />
+        <MessagesList currentPal={currentPal} allMessages={allMessages} myID={userID} />
         <NewMessageInput tracker={tracker} handleAddMessage={handleAddMessage} />
       </div>
       <div id="messages-page-right">
