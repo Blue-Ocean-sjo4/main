@@ -14,6 +14,10 @@ function NewPal({ showingNewPal, setShowingNewPal, userID }) {
 
   function closeModal() {
     setShowingNewPal(false)
+    var elements = document.getElementsByClassName('jvectormap-tip');
+    for (var element of elements) {
+      element.style.display = 'none';
+    }
   }
 
   function addPal(e) {
