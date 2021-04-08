@@ -9,6 +9,7 @@ function SinglePal({ pal, setCurrentPal }) {
       <img className="pic" src={pal.pic}></img>
         <div className="pal-name">
           {pal.name}
+          <div className="pal-pronouns">{pal.pronouns}</div>
         </div>
         <div className="pal-country">{countryCodeToFlag(pal.country)}</div>
     </div>

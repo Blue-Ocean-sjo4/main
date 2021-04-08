@@ -6,24 +6,20 @@ import HomeListItem from './HomeListItem/HomeListItem.jsx';
 import axios from 'axios';
 import './Home.css';
 
-const Home = ({ loggedIn, setLoggedIn, username, rooms, setUserData, setCurrentRoom }) => {
-
-  // useEffect(() => {
-  //   axios.get(`/connections/${username}`)
-  //     .then((response) => {
-  //       console.log('connections response data: ', response.data)
-  //       setUserData(response.data)
-  //     })
-  //     .catch((err) => { console.log(`err`, err) })
-  // }, [/* Conditions for useEffect to re-run */])
+const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserData, setCurrentRoom }) => {
 
   useEffect(() => {
-    setUserData(dummyData.dummyData)
+    axios.get(`/connections?username=${username}`)
+      .then((response) => {
+        console.log('connections response data: ', response.data)
+        setUserData(response.data)
+      })
+      .catch((err) => { console.log(`err`, err) })
   }, [])
 
   // useEffect(() => {
-
-  // }, [rooms])
+  //   setUserData(dummyData.dummyData)
+  // }, [])
 
   if (!loggedIn) {
     return (
@@ -33,7 +29,7 @@ const Home = ({ loggedIn, setLoggedIn, username, rooms, setUserData, setCurrentR
 
   return (
     <>
-      <NavBar />
+      <NavBar userID={userID} />
       <div className="home-container">
         {rooms.map((room, index) => (
           <HomeListItem key={room.userID} room={room} setCurrentRoom={setCurrentRoom} />

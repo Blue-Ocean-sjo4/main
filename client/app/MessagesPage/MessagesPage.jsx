@@ -8,10 +8,7 @@ import NewMessageInput from './NewMessageInput/NewMessageInput.jsx';
 import PalsList from './PalsList/PalsList.jsx'
 import './MessagesPage.css';
 
-let socketID = '';
 const socket = io('http://localhost:1337', { autoConnect: false });
-const testRooms = ['room1', 'room2'];
-const myRoom = testRooms[Math.floor(Math.random() * testRooms.length)];
 
 /*
 
@@ -25,12 +22,22 @@ message object:
 
 */
 
-const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
+const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => {
   const [allMessages, setAllMessages] = useState([]);
   const [tracker, setTracker] = useState(0)
-  const [roomID, setRoomID] = useState(0)
-  const [palsList, setPalsList] = useState([{ pic: 'https://posterspy.com/wp-content/uploads/2019/05/TheDude_lr.jpg', name: 'the dude', country: 'US', bio: 'thats just like your opinion man' }, { pic: 'https://i.pinimg.com/originals/05/17/bf/0517bfa5e9d45208761756e1b0c1f5f9.jpg', name: 'the dude again', country: 'US', bio: 'not on the carpet, come on' }, { pic: 'https://wondersinthedark.files.wordpress.com/2012/09/the-big-lebowski-1.jpg', name: 'El Duderino', country: 'IL', bio: 'that\'s, like, your bio man.' }])
-  const [currentPal, setCurrentPal] = useState({ pic: 'https://wondersinthedark.files.wordpress.com/2012/09/the-big-lebowski-1.jpg', name: 'El Duderino', country: 'IL', bio: 'that\'s, like, your bio man.' })
+  const [roomID, setRoomID] = useState('');
+  const [palsList, setPalsList] = useState([])
+  const [currentPal, setCurrentPal] = useState({ pic: '', name: '', pronouns: '', country: '', bio: '' })
+
+  useEffect(() => {
+    const { pic, name, country, bio, pronouns } = currentRoom.room;
+    setRoomID(currentRoom.room.roomID);
+    setCurrentPal({ pic, name, country, bio, pronouns });
+    setPalsList(rooms.reduce((acc, room) => {
+      acc.push({ pic: room.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio });
+      return acc;
+    }, []));
+  }, []);
 
   useEffect(() => {
     const messagesList = document.querySelector('#messages-list-container');
@@ -38,44 +45,34 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
   }, [allMessages.length]);
 
   useEffect(() => {
-    socket.on('receive new message', ({ msg, otherSocketID }) => {
-      console.log('I received this message:', msg);
-      console.log('Sender\'s SocketID:', otherSocketID);
-      setAllMessages(prevState => [...prevState, {senderID: otherSocketID, body: msg, timestamp: 'date'}]);
-      setTracker(tracker + 1);
-    });
+    if (roomID) {
+      socket.auth = {
+        room: roomID
+      };
+      socket.connect();
 
-    socket.auth = {
-      room: myRoom,
-      username: 'wilson'
-    };
-    socket.connect();
+      socket.on('receive new message', ({ msg }) => {
+        console.log('I received this message:', msg);
+        setAllMessages(prevState => [...prevState, { senderID: userID, body: msg, timestamp: new Date() }]);
+        setTracker(tracker + 1);
+      });
+    }
 
-    // watch for change currentPal.name, ideally currnetPal.id
-    // TODO add a clean up function to disconnect from the current pal/room before entering a chat with the new pal
-    //socket.emit('forceDisconnect');
     return () => socket.disconnect();
-  },[currentPal.name]);
-
-  // useEffect((
-  //   axios.get(`/roomMessages/${roomID}`)
-  //     .then((res) => {
-  //       setAllMessages(res.messages)
-  //     })
-  // ),[])
+  }, [currentPal.name]);
 
   const handleAddMessage = (msg) => {
     const element = document.querySelector('#new-message-input');
     element.value = '';
     const prevState = allMessages;
     prevState.push({
-      senderID: socketID,
+      senderID: userID,
       body: msg,
       timestamp: 'date'
     });
     setAllMessages(prevState);
     setTracker(tracker + 1);
-    socket.emit('send new message', { msg, room: myRoom });
+    socket.emit('send new message', { msg, room: roomID, senderID: userID });
   }
 
   if (!loggedIn) {
@@ -87,8 +84,14 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom }) => {
   return (
     <div id="messages-page-grid" >
       <div id="messages-page-left" >
-        <MessagesPageBanner name={currentPal.name} bio={currentPal.bio} profilePic={currentPal.pic} />
-        <MessagesList currentPal={currentPal} allMessages={allMessages} myID={socketID} />
+        <MessagesPageBanner
+          name={currentPal.name}
+          pronouns={currentPal.pronouns}
+          bio={currentPal.bio}
+          profilePic={currentPal?.pic}
+          userID={userID}
+        />
+        <MessagesList currentPal={currentPal} allMessages={allMessages} myID={roomID} />
         <NewMessageInput tracker={tracker} handleAddMessage={handleAddMessage} />
       </div>
       <div id="messages-page-right">

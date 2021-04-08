@@ -55,39 +55,59 @@ module.exports.findID = (id) => User.findById({ _id: id });
 */
 module.exports.findUserData = async (req, res) => {
   try {
-    const loggedInUser = await User.findOne({ username: req.query.username });
+    const loggedInUser = await User.findOne({ username: req.query.username }).lean();
+    // console.log(loggedInUser);
     const rooms = Object.entries(loggedInUser.rooms);
-    const roomsPayload = rooms.map(async (room) => {
-      const connection = await User.findOne({ _id: room[1] });
-      return {
-        roomID: room[0],
-        userID: connection._id,
-        name: connection.name,
-        bio: connection.bio,
-        country: connection.country,
-        birthdate: connection.birthdate
-      };
-    });
+    let roomsPayload = [];
+    let pendingConnectionsPayload = [];
+
+    const promisesRooms = rooms.map(room => User.findOne({ _id: room[1] })
+      .lean()
+      .then(connection => {
+        return {
+            roomID: room[0],
+            userID: connection._id,
+            name: connection.username,
+            bio: connection.bio,
+            country: connection.country,
+            birthdate: connection.birthdate
+          };
+      })
+    );
 
     const pendingConnections = Object.entries(loggedInUser.pendingConnections);
-    const pendingConnectionsPayload = pendingConnections.map(async (pendingConnection) => {
-      const connection = await User.findOne({ _id: pendingConnection[0] });
-      return {
-        userID: connection._id,
-        name: connection.name,
-        bio: connection.bio,
-        country: connection.country,
-        birthdate: connection.birthdate
-      };
+    const promisesPendingConnections = [];
+    pendingConnections.forEach(pendingConnection => {
+
+      if (!pendingConnection[1]) {
+        promisesPendingConnections.push(User.findOne({ _id: pendingConnection[0] })
+          .lean()
+          .then(connection => {
+            return {
+              userID: connection._id,
+              name: connection.username,
+              bio: connection.bio,
+              country: connection.country,
+              birthdate: connection.birthdate
+            };
+          }));
+      }
     });
 
-    loggedInUser.pendingConnections = pendingConnectionsPayload;
-    loggedInUser.rooms = roomsPayload;
+    Promise.all(promisesRooms).then(roomsPayload => {
+      Promise.all(promisesPendingConnections).then(pendingConnectionsPayload => {
+        loggedInUser.pendingConnections = pendingConnectionsPayload;
+        loggedInUser.rooms = roomsPayload;
 
-    res.send(loggedInUser);
+        loggedInUser.userID = loggedInUser._id;
+        delete loggedInUser._id;
+
+        res.send(loggedInUser);
+      });
+    });
   } catch (error) {
-    res.status(404).send(error);
     console.error(error);
+    res.status(404).send(error);
   };
 };
 
@@ -125,18 +145,13 @@ module.exports.updateUserData = async (request, response) => {
 *-----------------------------------------------------------*
 */
 
-/*
-const roomSchema = mongoose.Schema({
-  userOneID: String,
-  userTwoID: String,
-  messages: Array
-});
-*/
 module.exports.getMessages = async (request, response) => {
   const { room_id } = request.params;
 
   try {
-    response.send(await Room.findOne({ _id: room_id }));
+    const roomData = await Room.findOne({ _id: room_id }).lean();
+    delete roomData._id;
+    response.send(roomData);
   } catch (error) {
     response.status(404).send(error);
   }
@@ -251,6 +266,21 @@ module.exports.rejectPal = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.sendStatus(404);
+  }
+};
+
+module.exports.saveMessages = async (roomID, message, senderID) => {
+  try {
+    let messageObj = {
+      senderID: senderID,
+      body: message,
+      timestamp: new Date()
+    };
+
+    await Room.update({ _id: roomID }, { $push: { messages: messageObj } });
+
+  } catch (error) {
+    console.error(error);
   }
 };
 
