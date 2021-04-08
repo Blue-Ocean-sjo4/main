@@ -24,26 +24,32 @@ message object:
 
 const MessagesPage = ({ loggedIn, setLoggedIn, rooms = { room: { roomID: '' } }, currentRoom, userID }) => {
   const [allMessages, setAllMessages] = useState([]);
-  const [tracker, setTracker] = useState(0)
-  const [roomID, setRoomID] = useState('');
-  const [palsList, setPalsList] = useState([])
-  const [currentPal, setCurrentPal] = useState({ pic: '', name: '', pronouns: '', country: '', bio: '' })
+  const [tracker, setTracker] = useState(0);
+  const [roomID, setRoomID] = useState(currentRoom.room.roomID);
+  const [room, setRoom] = useState(currentRoom.room);
+
+  const [palsList, setPalsList] = useState(
+    rooms.map((room) => {
+      return { pic: room.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio, roomID: room.roomID };
+    })
+  );
+  const [currentPal, setCurrentPal] = useState({ pic: room.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio });
 
   useEffect(() => {
     //make pull request
-    axios.get(`http://localhost:1337/roomMessages/${currentRoom.room.roomID}`)
+    axios.get(`http://localhost:1337/roomMessages/${roomID}`)
       .then((messages) => {
         setAllMessages(messages.data.messages);
-      })
+      });
 
-    const { pic, name, country, bio, pronouns } = currentRoom.room;
-    setRoomID(currentRoom.room.roomID);
-    setCurrentPal({ pic, name, country, bio, pronouns });
-    setPalsList(rooms.reduce((acc, room) => {
-      acc.push({ pic: room.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio });
-      return acc;
-    }, []));
-  }, []);
+    // const { pic, name, country, bio, pronouns } = room;
+    //setRoomID(currentRoom.room.roomID);
+    // setCurrentPal({ pic, name, country, bio, pronouns });
+    // setPalsList(rooms.reduce((acc, room) => {
+    //   acc.push({ pic: room.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio });
+    //   return acc;
+    // }, []));
+  }, [roomID]);
 
   useEffect(() => {
     const messagesList = document.querySelector('#messages-list-container');
@@ -64,7 +70,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms = { room: { roomID: '' } },
     }
 
     return () => socket.disconnect();
-  }, [currentPal.name]);
+  }, [roomID]);
 
   const handleAddMessage = (msg, media) => {
     const element = document.querySelector('#new-message-input');
@@ -102,7 +108,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms = { room: { roomID: '' } },
       </div>
       <div id="messages-page-right">
         <div id="pals-list-title">Pals List</div>
-        <PalsList currentPal={currentPal} setCurrentPal={setCurrentPal} palsList={palsList} />
+        <PalsList setRoomID={setRoomID} currentPal={currentPal} setCurrentPal={setCurrentPal} palsList={palsList} />
       </div>
     </div>
   );
