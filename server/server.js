@@ -13,7 +13,7 @@ const {
   login, signup, findID, findUserData,
   updateUserData, getMessages,
   findPal, getConnections, acceptPal,
-  rejectPal, saveMessages, removePal } = require('../database/model/queryFunctions.js');
+  rejectPal, saveMessages, removePal, importBio } = require('../database/model/queryFunctions.js');
 const PORT = 1337;
 
 passport.use(new Strategy(async (username, password, done) => {
@@ -126,6 +126,8 @@ app.post('/newPal/:user_id/:country', findPal);
 app.put('/acceptPal/:user_id/:user_pal_id', acceptPal);
 app.put('/rejectPal/:user_id/:user_pal_id', rejectPal);
 app.put('/removePal/:user_id/:user_pal_id/:room_id', removePal);
+
+// app.put('/updatebio', importBio);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
