@@ -120,6 +120,7 @@ app.put('/update', connectEnsureLogin.ensureLoggedIn(), updateUserData);
 *-----------------------------------------------------------*
 */
 app.get('/roomMessages/:room_id', connectEnsureLogin.ensureLoggedIn(), getMessages);
+// app.get('/roomMessages/:room_id', getMessages);
 
 // app.post('/newPal/:user_id/:country_code', connectEnsureLogin.ensureLoggedIn(), findPal);
 app.post('/newPal/:user_id/:country', findPal);
