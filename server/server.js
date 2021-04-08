@@ -56,12 +56,13 @@ io.on('connection', socket => {
   console.log('room inside connection', socket.room);
   socket.join(socket.room);
   // send new message
-  socket.on('send new message', ({ msg, room, senderID }) => {
+  socket.on('send new message', ({ msg, room, senderID, media }) => {
     console.log(msg);
+    // console.log(media);
 
     //send data to queryFunctions through saveMessages
-    saveMessages(room, msg, senderID);
-    socket.to(room).emit('receive new message', { msg, senderID });
+    saveMessages(room, msg, senderID, media);
+    socket.to(room).emit('receive new message', { msg, senderID, media });
   });
   // receive new message
   socket.on('disconnecting', () => {
