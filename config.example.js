@@ -1,0 +1,6 @@
+// MAKE SURE YOU MAKE COPY OF THIS FILE AND SAVE AS config.js IN ROOT DIRECTORY
+
+module.exports = {
+  DB_UP: 'IP ADDRESS HERE'
+}
+
