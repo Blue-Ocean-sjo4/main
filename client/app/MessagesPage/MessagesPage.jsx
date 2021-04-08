@@ -57,8 +57,8 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms = { room: { roomID: '' } },
       };
       socket.connect();
 
-      socket.on('receive new message', ({ msg, senderID }) => {
-        setAllMessages(prevState => [...prevState, { senderID, body: msg, timestamp: new Date() }]);
+      socket.on('receive new message', ({ msg, senderID, media }) => {
+        setAllMessages(prevState => [...prevState, { senderID, body: msg, timestamp: new Date(), media }]);
         setTracker(tracker + 1);
       });
     }
