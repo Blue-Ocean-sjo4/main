@@ -106,9 +106,7 @@ module.exports.findUserData = async (req, res) => {
 
 /*
 *-----------------------------------------------------------*
-|                                                           |
 |                    Update User Data                       |
-|                                                           |
 *-----------------------------------------------------------*
 */
 
@@ -290,6 +288,56 @@ module.exports.saveMessages = async (roomID, message, senderID) => {
 
   } catch (error) {
     console.error(error);
+  }
+};
+
+module.exports.removePal = async (req, res) => {
+  const { user_id, user_pal_id, room_id} = req.params;
+
+  try {
+    await Room.deleteOne({ _id: room_id });
+    const userData = await User.findOne({ _id: user_id }).lean();
+    const palData = await User.findOne({ _id: user_pal_id }).lean();
+    delete userData.rooms[room_id];
+    delete palData.rooms[room_id];
+
+    if (userData.pendingConnections[user_pal_id]) {
+      userData.pendingConnections[user_pal_id] = 3;
+      palData.requestedConnections[user_id] = 3;
+      await User.findOneAndUpdate(
+        { _id: user_id },
+        {
+          pendingConnections: userData.pendingConnections,
+          rooms: userData.rooms
+         });
+      await User.findOneAndUpdate(
+        { _id: user_pal_id },
+        {
+          requestedConnections: palData.requestedConnections,
+          rooms: palData.rooms
+         });
+    } else {
+      console.log('inside else block');
+      userData.requestedConnections[user_pal_id] = 3;
+      palData.pendingConnections[user_id] = 3;
+      await User.findOneAndUpdate(
+        { _id: user_id },
+        {
+          requestedConnections: userData.requestedConnections,
+          rooms: userData.rooms
+         });
+      await User.findOneAndUpdate(
+        { _id: user_pal_id },
+        {
+          pendingConnections: palData.pendingConnections,
+          rooms: palData.rooms
+         });
+    }
+
+    res.sendStatus(200)
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(404);
   }
 };
 
