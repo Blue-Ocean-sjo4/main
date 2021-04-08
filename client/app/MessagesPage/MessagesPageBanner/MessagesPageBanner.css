@@ -1,5 +1,6 @@
 #messages-page-banner-container {
-  border-bottom: 2px solid var(--birdie-blue);
+  background-color: var(--ocean-blue);
+  /* border-bottom: 2px solid var(--birdie-blue); */
   display: grid;
   grid-template-columns: 5% 10% 60% 25%;
 }
@@ -16,7 +17,7 @@
 
 .messages-page-back-arrow {
   font-size: 1.5rem;
-  color: var(--birdie-blue);
+  color: var(--lighter-blue);
 }
 
 ion-icon {
@@ -48,7 +49,7 @@ ion-icon {
 }
 
 p.pal-name {
-  color: var(--midnight-blue);
+  color: #fff;
   font-weight: 600;
   font-size: 1.25rem;
 }
@@ -58,6 +59,7 @@ p.pal-name {
   word-wrap: break-word;
   hyphens: auto;
   font-size: 0.9rem;
+  color: var(--lighter-blue);
 }
 
 .current-pal-info p {

@@ -2,7 +2,6 @@
   height: 65px;
   width: 100%;
   background-color: var(--ocean-blue);
-  /* border-bottom: 2px solid var(--birdie-blue); */
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -13,7 +13,8 @@
 #messages-page-right{
   display: grid;
   grid-template-rows: 10% 90%;
-  border-left: 2px solid var(--birdie-blue);
+  /* border-left: 2px solid var(--ocean-blue); */
+  background-color: var(--background);
 }
 
 #pals-list-title{
