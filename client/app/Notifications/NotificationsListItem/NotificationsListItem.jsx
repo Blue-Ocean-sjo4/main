@@ -49,7 +49,7 @@ const NotificationsListItem = ({ userID, palID, name, bio, country }) => {
         <div className={buttonClass} >
           {/* TODO: make these buttons appear as a green rectangle with white check mark and a red rectangle with white x */}
           <button className="accept-connection" onClick={handleAcceptPal} >&#10003;</button>
-          <button className="deny-connection" onClick={handleDenyPal}>&#10006;</button>
+          <button className="deny-connection" onClick={handleDenyPal}>&#10005;</button>
         </div>
         <div className={acceptedClass}>
           Accepted

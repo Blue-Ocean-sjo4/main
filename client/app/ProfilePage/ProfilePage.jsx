@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar.jsx';
 import './ProfilePage.css';
 
-const ProfilePage = ({ loggedIn, setLoggedIn, username }) => {
+const ProfilePage = ({ loggedIn, setLoggedIn, username, userData }) => {
 
   const [profilePicture, setProfilePicture] = useState(''); /* Consider data type from backend */
   const [bio, setBio] = useState('');
@@ -14,6 +14,9 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username }) => {
   useEffect(() => {
     // Fetch user data
     // Set states with data
+    setBio(userData.bio)
+    setGender(userData.gender)
+    setCountry(userData.country)
   }, [])
 
   const handlePictureUpload = (e) => {
@@ -320,7 +323,7 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username }) => {
           <label>
             Bio
           <br></br>
-            <textarea className="profile-bio profile-input" type="text" onChange={handleBioChange} placeholder="YOUR BIO" value={bio} maxLength="240"></textarea>
+            <textarea className="profile-bio profile-input" type="text" onChange={handleBioChange} placeholder="YOUR BIO" defaultValue={bio} maxLength="240"></textarea>
           </label>
           <br></br>
           <input className="profile-update-button" type="submit" value="UPDATE PROFILE" onClick={handleProfileUpdate}></input>
