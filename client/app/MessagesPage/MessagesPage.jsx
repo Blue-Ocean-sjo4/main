@@ -51,9 +51,8 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => 
       };
       socket.connect();
 
-      socket.on('receive new message', ({ msg }) => {
-        console.log('I received this message:', msg);
-        setAllMessages(prevState => [...prevState, { senderID: userID, body: msg, timestamp: new Date() }]);
+      socket.on('receive new message', ({ msg, senderID }) => {
+        setAllMessages(prevState => [...prevState, { senderID, body: msg, timestamp: new Date() }]);
         setTracker(tracker + 1);
       });
     }
@@ -68,7 +67,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => 
     prevState.push({
       senderID: userID,
       body: msg,
-      timestamp: 'date'
+      timestamp: new Date()
     });
     setAllMessages(prevState);
     setTracker(tracker + 1);
@@ -91,7 +90,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => 
           profilePic={currentPal?.pic}
           userID={userID}
         />
-        <MessagesList currentPal={currentPal} allMessages={allMessages} myID={roomID} />
+        <MessagesList currentPal={currentPal} allMessages={allMessages} myID={userID} />
         <NewMessageInput tracker={tracker} handleAddMessage={handleAddMessage} />
       </div>
       <div id="messages-page-right">
