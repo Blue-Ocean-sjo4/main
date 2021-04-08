@@ -68,6 +68,8 @@
 .profile-bio {
   height: 140;
   resize: none;
+  padding: 5px;
+  text-indent: 0px;
 }
 
 /* .profile-bio:hover {

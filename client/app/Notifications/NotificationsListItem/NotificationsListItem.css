@@ -3,6 +3,7 @@
   margin: 10px auto;
   height: 120px;
   width: 75%;
+  /* grid-template: 1fr 2fr / 2fr 9fr 1fr 1fr; */
   grid-template: 1fr 2fr / 1fr 5fr 1fr;
   background-color: rgba(204, 218, 222, 0.15);
   border: 2px solid var(--text-blue);
@@ -52,15 +53,24 @@
 
 .notification-buttons {
   grid-area: 1 / 3 / 3 / 4;
+  /* grid-area: 1 / 4 / 3 / 5; */
   align-self: flex-end;
   width: 100%;
+  min-height: 18px;
+}
+
+.notification-buttons-hidden {
+  display: none;
 }
 
 .accept-connection {
   width: 50%;
+  height: 18px;
   border: none;
   outline: none;
-  background-color: greenyellow;
+  color: white;
+  font-weight: bold;
+  background-color: green;
 }
 
 .accept-connection:hover {
@@ -69,11 +79,48 @@
 
 .deny-connection {
   width: 50%;
+  height: 18px;
   border: none;
   outline: none;
+  color: white;
+  font-weight: bold;
   background-color: red;
 }
 
 .deny-connection:hover {
   cursor: pointer;
+}
+
+.clicked-accepted {
+  grid-area: 1 / 3 / 3 / 4;
+  align-self: flex-end;
+  width: 100%;
+  height: 18px;
+  border: none;
+  outline: none;
+  background-color: green;
+  color: #FFF;
+  font-weight: bold;
+  text-align: center;
+}
+
+.clicked-accepted-hidden {
+  display: none;
+}
+
+.clicked-rejected {
+  grid-area: 1 / 3 / 3 / 4;
+  align-self: flex-end;
+  width: 100%;
+  height: 18px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: #FFF;
+  font-weight: bold;
+  text-align: center;
+}
+
+.clicked-rejected-hidden {
+  display: none;
 }
