@@ -7,10 +7,10 @@ function PalsList({ palsList, setCurrentPal, currentPal }) {
   return (
     <div id="pals-list">
       {palsList.map((pal, i) => {
-        if (pal.name !== currentPal.name) {
-          return <SinglePal key={i} setCurrentPal={setCurrentPal} pal={pal} />
+        if (pal.name === currentPal.name) {
+          return <SinglePal isCurrentPal={true} key={i} setCurrentPal={setCurrentPal} pal={pal} />
         } else {
-          return null;
+          return <SinglePal isCurrentPal={false} key={i} setCurrentPal={setCurrentPal} pal={pal} />
         }
       })}
     </div>

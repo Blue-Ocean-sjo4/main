@@ -4,7 +4,9 @@
   height: 120px;
   width: 75%;
   grid-template: 1fr 2fr / 1fr 5fr 1fr;
-  background-color: var(--message-gray);
+  background-color: rgba(204, 218, 222, 0.15);
+  border: 2px solid var(--text-blue);
+  box-shadow: 2px 2px 0 var(--text-blue);
   border-radius: 5px;
   color: var(--midnight-blue);
 }
@@ -37,7 +39,6 @@
   position: relative;
   overflow: hidden;
   border-radius: 50%;
-  border: 1px solid var(--birdie-blue);
   grid-area: 1 / 1 / 3 / 2;
   place-self: center;
 }
@@ -45,7 +46,6 @@
 .connection-item-picture {
   display: inline;
   margin: 0 auto;
-  /* margin-left: -25%; we need some way to center img if its non-square*/
   height: 100%;
   width: auto;
 }
