@@ -9,7 +9,7 @@ const roomSchema = mongoose.Schema({
 const userSchema = mongoose.Schema({
   username: String,
   password: String,
-  // profile picture
+  profilePicture: String,
   email: String,
   bio: String,
   country: String,
