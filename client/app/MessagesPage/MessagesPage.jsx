@@ -66,18 +66,19 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => 
     return () => socket.disconnect();
   }, [currentPal.name]);
 
-  const handleAddMessage = (msg) => {
+  const handleAddMessage = (msg, media) => {
     const element = document.querySelector('#new-message-input');
     element.value = '';
     const prevState = allMessages;
     prevState.push({
       senderID: userID,
       body: msg,
-      timestamp: new Date()
+      timestamp: new Date(),
+      media
     });
     setAllMessages(prevState);
     setTracker(tracker + 1);
-    socket.emit('send new message', { msg, room: roomID, senderID: userID });
+    socket.emit('send new message', { msg, room: roomID, senderID: userID, media });
   }
 
   if (!loggedIn) {

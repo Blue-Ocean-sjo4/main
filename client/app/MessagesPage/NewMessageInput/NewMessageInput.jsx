@@ -4,6 +4,7 @@ import FilePicker from './FilePicker.jsx';
 
 const NewMessageInput = ({ handleAddMessage }) => {
   const [currentMessageText, setCurrentMessageText] = useState('');
+  const [currentMessageMedia, setCurrentMessageMedia] = useState([])
   const [showingFilePicker, showFilePicker] = useState(false);
 
   return (
@@ -20,15 +21,16 @@ const NewMessageInput = ({ handleAddMessage }) => {
         onClick={(e) => {
           e.preventDefault();
           if (currentMessageText.length) {
-            handleAddMessage(currentMessageText);
+            handleAddMessage(currentMessageText, currentMessageMedia);
             setCurrentMessageText('');
+            setCurrentMessageMedia([]);
           }
         }
         }>
         <i className="fas fa-pen-nib" />
       </button>
       {
-        showingFilePicker ? <FilePicker /> : null
+        showingFilePicker ? <FilePicker setCurrentMessageMedia={setCurrentMessageMedia} currentMessageMedia={currentMessageMedia} /> : null
       }
       <button id="new-message-upload"
         onMouseEnter={() => { showFilePicker(false) }}
