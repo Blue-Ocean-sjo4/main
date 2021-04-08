@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import NavBar from '../NavBar/NavBar.jsx';
 import './ProfilePage.css';
 
@@ -17,6 +18,7 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username, userData }) => {
     setBio(userData.bio)
     setGender(userData.gender)
     setCountry(userData.country)
+    setPronouns(userData.pronouns)
   }, [])
 
   const handlePictureUpload = (e) => {
@@ -36,7 +38,24 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username, userData }) => {
   };
   const handleProfileUpdate = (e) => {
     e.preventDefault();
-    alert('Profile Updated')
+    // TODO: add modal to indicate when a profile has been updated
+    axios.put('/update', {
+      user_id: userData.userID,
+      username,
+      gender,
+      pronouns: pronouns,
+      country,
+      bio,
+      profilePicture
+    })
+    .then((response) => {
+      // TODO: activate notification modal here
+      console.log(`response from profile update: `, response.data)
+      alert('Profile updated')
+    })
+    .catch((err) => {
+      console.log(`err updating profile: `, err)
+    })
   }
 
   if (!loggedIn) {

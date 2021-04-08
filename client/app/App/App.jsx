@@ -13,7 +13,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [userData, setUserData] = useState({
-    _id: "",
+    userID: "",
     username: "",
     email: "",
     bio: "",
@@ -30,7 +30,7 @@ const App = () => {
     <Router>
       <Switch>
         <Route path="/" exact render={() => (
-          <Home userID={userData._id} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} rooms={userData.rooms} setUserData={setUserData} setCurrentRoom={setCurrentRoom} />
+          <Home userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} rooms={userData.rooms} setUserData={setUserData} setCurrentRoom={setCurrentRoom} />
         )} />
         <Route path="/login" exact render={() => (
           <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} setUsername={setUsername} />
@@ -39,13 +39,13 @@ const App = () => {
           <SignUp />
         )} />
         <Route path="/profile" exact render={() => (
-          <ProfilePage userID={userData._id} userData={userData} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
+          <ProfilePage userID={userData.userID} userData={userData} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
         )} />
         <Route path="/notifications" exact render={() => (
-          <Notifications userID={userData._id} loggedIn={loggedIn} setLoggedIn={setLoggedIn} pendingConnections={userData.pendingConnections} />
+          <Notifications userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} pendingConnections={userData.pendingConnections} />
         )} />
         <Route path="/messages" exact render={() => (
-          <MessagesPage userID={userData._id} loggedIn={loggedIn} setLoggedIn={setLoggedIn} rooms={userData.rooms} currentRoom={currentRoom} />
+          <MessagesPage userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} rooms={userData.rooms} currentRoom={currentRoom} />
         )} />
       </Switch>
     </Router>

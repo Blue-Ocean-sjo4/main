@@ -32,7 +32,7 @@ const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserD
       <NavBar userID={userID} />
       <div className="home-container">
         {rooms.map((room, index) => (
-          <HomeListItem key={room.userID} room={room} setCurrentRoom={setCurrentRoom} />
+          <HomeListItem key={index} room={room} setCurrentRoom={setCurrentRoom} />
         ))}
       </div>
       {/* <div className="home-container">
