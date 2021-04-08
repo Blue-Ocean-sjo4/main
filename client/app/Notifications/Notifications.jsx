@@ -5,7 +5,7 @@ import NotificationsListItem from './NotificationsListItem/NotificationsListItem
 import dummyData from '../../../dummyData.js';
 import './Notifications.css'
 
-const Notifications = ({ loggedIn, setLoggedIn, pendingConnections }) => {
+const Notifications = ({ userID, loggedIn, setLoggedIn, pendingConnections }) => {
 
   // Will need to retrieve username from URL, or state passed from previous page(?)
 
@@ -29,8 +29,8 @@ const Notifications = ({ loggedIn, setLoggedIn, pendingConnections }) => {
     <>
       <NavBar />
       <div className="notifications-container">
-        {pendingConnections.map((connection) => (
-          <NotificationsListItem key={connection.user_id} name={connection.name} bio={connection.bio} country={connection.country} />
+        {pendingConnections.map((connection, i) => (
+          <NotificationsListItem key={i} userID={userID} palID={connection.userID} name={connection.name} bio={connection.bio} country={connection.country} />
         ))}
       </div>
     </>
