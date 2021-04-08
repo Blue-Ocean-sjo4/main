@@ -61,7 +61,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => 
     return () => socket.disconnect();
   }, [currentPal.name]);
 
-  const handleAddMessage = (msg, media = []) => {
+  const handleAddMessage = (msg, media) => {
     const element = document.querySelector('#new-message-input');
     element.value = '';
     const prevState = allMessages;

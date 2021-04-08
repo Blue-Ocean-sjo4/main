@@ -21,8 +21,9 @@ const NewMessageInput = ({ handleAddMessage }) => {
         onClick={(e) => {
           e.preventDefault();
           if (currentMessageText.length) {
-            handleAddMessage(currentMessageText);
+            handleAddMessage(currentMessageText, currentMessageMedia);
             setCurrentMessageText('');
+            setCurrentMessageMedia([]);
           }
         }
         }>
