@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import axios from 'axios';
 import NavBar from '../NavBar/NavBar.jsx';
 import './ProfilePage.css';
 
-const ProfilePage = ({ loggedIn, setLoggedIn, username }) => {
+const ProfilePage = ({ loggedIn, setLoggedIn, username, userData }) => {
 
   const [profilePicture, setProfilePicture] = useState(''); /* Consider data type from backend */
   const [bio, setBio] = useState('');
@@ -14,6 +15,10 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username }) => {
   useEffect(() => {
     // Fetch user data
     // Set states with data
+    setBio(userData.bio)
+    setGender(userData.gender)
+    setCountry(userData.country)
+    setPronouns(userData.pronouns)
   }, [])
 
   const handlePictureUpload = (e) => {
@@ -33,7 +38,24 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username }) => {
   };
   const handleProfileUpdate = (e) => {
     e.preventDefault();
-    alert('Profile Updated')
+    // TODO: add modal to indicate when a profile has been updated
+    axios.put('/update', {
+      user_id: userData.userID,
+      username,
+      gender,
+      pronouns,
+      country,
+      bio,
+      profilePicture
+    })
+    .then((response) => {
+      // TODO: activate notification modal here
+      console.log(`response from profile update: `, response.data)
+      alert('Profile updated')
+    })
+    .catch((err) => {
+      console.log(`err updating profile: `, err)
+    })
   }
 
   if (!loggedIn) {
@@ -320,7 +342,7 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username }) => {
           <label>
             Bio
           <br></br>
-            <textarea className="profile-bio profile-input" type="text" onChange={handleBioChange} placeholder="YOUR BIO" value={bio} maxLength="240"></textarea>
+            <textarea className="profile-bio profile-input" type="text" onChange={handleBioChange} placeholder="YOUR BIO" defaultValue={bio} maxLength="240"></textarea>
           </label>
           <br></br>
           <input className="profile-update-button" type="submit" value="UPDATE PROFILE" onClick={handleProfileUpdate}></input>

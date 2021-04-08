@@ -109,17 +109,20 @@ module.exports.findUserData = async (req, res) => {
 */
 
 module.exports.updateUserData = async (request, response) => {
-  const { user_id, username, gender, pronouns, country, bio } = request.body;
+  const { user_id, username, gender, pronouns, country, bio, profilePicture} = request.body;
 
   try {
     const update = {
       gender,
       pronouns,
       country,
-      bio
+      bio,
+      profilePicture
     };
 
     const userData = await User.findOneAndUpdate({ _id: user_id }, update, { new: true });
+    console.log('USER DATA: ', userData);
+    console.log(`user_id`, user_id)
     response.status(201).send(userData);
   } catch(error) {
     response.status(404).send(error);
@@ -275,12 +278,13 @@ module.exports.rejectPal = async (req, res) => {
   }
 };
 
-module.exports.saveMessages = async (roomID, message, senderID) => {
+module.exports.saveMessages = async (roomID, message, senderID, media) => {
   try {
     let messageObj = {
       senderID: senderID,
       body: message,
-      timestamp: new Date()
+      timestamp: new Date(),
+      media
     };
 
     await Room.update({ _id: roomID }, { $push: { messages: messageObj } });
@@ -356,6 +360,8 @@ module.exports.removePal = async (req, res) => {
 //   console.log(new Date(moment('1991-04-05')));
 //   res.sendStatus(201);
 // };
+
+// db.users.update({}, {$set: {bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'} }, {multi: true})
 
 
 // db.users.update({}, {'$set': {requestedConnections: {} }}, {multi: true})
