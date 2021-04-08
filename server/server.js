@@ -13,7 +13,7 @@ const {
   login, signup, findID, findUserData,
   updateUserData, getMessages,
   findPal, getConnections, acceptPal,
-  rejectPal, saveMessages, removePal } = require('../database/model/queryFunctions.js');
+  rejectPal, saveMessages, removePal, importBio } = require('../database/model/queryFunctions.js');
 const PORT = 1337;
 
 passport.use(new Strategy(async (username, password, done) => {
@@ -113,19 +113,40 @@ app.get('/connections', connectEnsureLogin.ensureLoggedIn(), findUserData);
 
 app.put('/update', connectEnsureLogin.ensureLoggedIn(), updateUserData);
 
-/*
-*-----------------------------------------------------------*
-|                  Get existing messages                    |
-*-----------------------------------------------------------*
-*/
+
+/*-----------------------------------------------------------*
+ |                  Get existing messages                    |
+ *-----------------------------------------------------------*/
+
 app.get('/roomMessages/:room_id', connectEnsureLogin.ensureLoggedIn(), getMessages);
 // app.get('/roomMessages/:room_id', getMessages);
 
+/*-----------------------------------------------------------*
+ |                     Request New Pal                       |
+ *-----------------------------------------------------------*/
+
 // app.post('/newPal/:user_id/:country_code', connectEnsureLogin.ensureLoggedIn(), findPal);
-app.post('/newPal/:user_id/:country', findPal);
-app.put('/acceptPal/:user_id/:user_pal_id', acceptPal);
-app.put('/rejectPal/:user_id/:user_pal_id', rejectPal);
-app.put('/removePal/:user_id/:user_pal_id/:room_id', removePal);
+app.post('/newPal/:user_id/:country', connectEnsureLogin.ensureLoggedIn(), findPal);
+
+/*-----------------------------------------------------------*
+ |                   Accept Pal Request                      |
+ *-----------------------------------------------------------*/
+
+app.put('/acceptPal/:user_id/:user_pal_id', connectEnsureLogin.ensureLoggedIn(), acceptPal);
+
+/*-----------------------------------------------------------*
+ |                   Reject Pal Request                      |
+ *-----------------------------------------------------------*/
+
+app.put('/rejectPal/:user_id/:user_pal_id', connectEnsureLogin.ensureLoggedIn(), rejectPal);
+
+/*-----------------------------------------------------------*
+ |                     Remove Pal                            |
+ *-----------------------------------------------------------*/
+
+app.put('/removePal/:user_id/:user_pal_id/:room_id', connectEnsureLogin.ensureLoggedIn(), removePal);
+
+// app.put('/updatebio', importBio);
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), function(err) {
