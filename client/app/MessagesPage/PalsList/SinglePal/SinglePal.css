@@ -6,6 +6,7 @@
   box-shadow: 2px 2px 0 var(--text-blue);
   margin: 15px 0;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .pal-name,
