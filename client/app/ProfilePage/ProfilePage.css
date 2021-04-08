@@ -51,7 +51,7 @@
   height: 40px;
   width: 600px;
   border-radius: 5px;
-  background-color: var(--message-gray);
+  background-color: var(--input-blue);
   margin-bottom: 20px;
   border: 2px solid var(--midnight-blue);
   margin-top: 5px;
