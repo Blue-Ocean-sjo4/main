@@ -74,8 +74,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: false,
+  cookie : { maxAge: 600000 }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -120,14 +121,15 @@ app.get('/roomMessages/:room_id', connectEnsureLogin.ensureLoggedIn(), getMessag
  |                     Request New Pal                       |
  *-----------------------------------------------------------*/
 
-// app.post('/newPal/:user_id/:country_code', connectEnsureLogin.ensureLoggedIn(), findPal);
 app.post('/newPal/:user_id/:country', connectEnsureLogin.ensureLoggedIn(), findPal);
+// app.post('/newPal/:user_id/:country', findPal);
 
 /*-----------------------------------------------------------*
  |                   Accept Pal Request                      |
  *-----------------------------------------------------------*/
 
 app.put('/acceptPal/:user_id/:user_pal_id', connectEnsureLogin.ensureLoggedIn(), acceptPal);
+// app.put('/acceptPal/:user_id/:user_pal_id', acceptPal);
 
 /*-----------------------------------------------------------*
  |                   Reject Pal Request                      |
