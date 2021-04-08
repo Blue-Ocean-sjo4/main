@@ -17,7 +17,8 @@ const userSchema = mongoose.Schema({
   pronouns: String,
   birthdate: Date,
   pendingConnections: { type: Object, default: {} }, // object of userIds as keys and 0 (pending), 1 (approved), or 2 (reject) as value
-  rooms: { type: Object, default: {} } // object of roomIds and value as userID of connection
+  rooms: { type: Object, default: {} }, // object of roomIds and value as userID of connection
+  requestedConnections: { type: Object, default: {} }, // object of userIds as keys and 0 (pending), 1 (approved), or 2 (reject) as value
 }, { minimize: false });
 
 module.exports.Room = mongoose.model('Room', roomSchema);
