@@ -30,6 +30,12 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms, currentRoom, userID }) => 
   const [currentPal, setCurrentPal] = useState({ pic: '', name: '', pronouns: '', country: '', bio: '' })
 
   useEffect(() => {
+    //make pull request
+    axios.get(`http://localhost:1337/roomMessages/${currentRoom.room.roomID}`)
+      .then((messages) => {
+        setAllMessages(messages.data.messages);
+      })
+
     const { pic, name, country, bio, pronouns } = currentRoom.room;
     setRoomID(currentRoom.room.roomID);
     setCurrentPal({ pic, name, country, bio, pronouns });
