@@ -18,7 +18,7 @@
 
 .title-and-catchphrase {
   color: #fff;
-  width: 40vw;
+  width: 30rem;
   height: 100vh;
 }
 
@@ -44,9 +44,9 @@
   background-color: #fff;
   border: 3px solid var(--midnight-blue);
   color: var(--midnight-blue);
-  margin: 20vh 25vh 0 auto;
-  min-width: 40vh;
-  height: 50vh;
+  margin: 13rem 15rem 0 auto;
+  width: 25rem;
+  height: 29rem;
   border-radius: 5px;
   box-shadow: 4px 4px 0 var(--midnight-blue);
   display: flex;
