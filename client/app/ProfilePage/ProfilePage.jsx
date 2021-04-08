@@ -43,7 +43,7 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username, userData }) => {
       user_id: userData.userID,
       username,
       gender,
-      pronouns: pronouns,
+      pronouns,
       country,
       bio,
       profilePicture
