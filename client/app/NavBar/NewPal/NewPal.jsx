@@ -10,7 +10,11 @@ function NewPal({ showingNewPal, setShowingNewPal, userID }) {
   const [country, setCountry] = useState('');
 
   function handleRegionClick(e, name) {
-    setCountry(name)
+    if (country === name) {
+      setCountry('')
+    } else {
+      setCountry(name)
+    }
   }
 
   function closeModal() {
@@ -42,7 +46,7 @@ function NewPal({ showingNewPal, setShowingNewPal, userID }) {
           <div id="newPal" className="new-pal-modal">
             <div className="new-pal-modal-content">
               <span className="new-pal-modal-close" onClick={closeModal} >&times;</span>
-              Choose the country of your new pal!
+              Choose the country of your new pal! Or, select none and a random country will be selected instead!
               <div id="new-pal-map" className="map">
                 <div style={{ width: 1000, height: 500 }}>
                   <VectorMap map={'world_mill'}
