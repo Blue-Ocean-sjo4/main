@@ -113,19 +113,38 @@ app.get('/connections', connectEnsureLogin.ensureLoggedIn(), findUserData);
 
 app.put('/update', connectEnsureLogin.ensureLoggedIn(), updateUserData);
 
-/*
-*-----------------------------------------------------------*
-|                  Get existing messages                    |
-*-----------------------------------------------------------*
-*/
+
+/*-----------------------------------------------------------*
+ |                  Get existing messages                    |
+ *-----------------------------------------------------------*/
+
 app.get('/roomMessages/:room_id', connectEnsureLogin.ensureLoggedIn(), getMessages);
 // app.get('/roomMessages/:room_id', getMessages);
 
+/*-----------------------------------------------------------*
+ |                     Request New Pal                       |
+ *-----------------------------------------------------------*/
+
 // app.post('/newPal/:user_id/:country_code', connectEnsureLogin.ensureLoggedIn(), findPal);
-app.post('/newPal/:user_id/:country', findPal);
-app.put('/acceptPal/:user_id/:user_pal_id', acceptPal);
-app.put('/rejectPal/:user_id/:user_pal_id', rejectPal);
-app.put('/removePal/:user_id/:user_pal_id/:room_id', removePal);
+app.post('/newPal/:user_id/:country', connectEnsureLogin.ensureLoggedIn(), findPal);
+
+/*-----------------------------------------------------------*
+ |                   Accept Pal Request                      |
+ *-----------------------------------------------------------*/
+
+app.put('/acceptPal/:user_id/:user_pal_id', connectEnsureLogin.ensureLoggedIn(), acceptPal);
+
+/*-----------------------------------------------------------*
+ |                   Reject Pal Request                      |
+ *-----------------------------------------------------------*/
+
+app.put('/rejectPal/:user_id/:user_pal_id', connectEnsureLogin.ensureLoggedIn(), rejectPal);
+
+/*-----------------------------------------------------------*
+ |                     Remove Pal                            |
+ *-----------------------------------------------------------*/
+
+app.put('/removePal/:user_id/:user_pal_id/:room_id', connectEnsureLogin.ensureLoggedIn(), removePal);
 
 // app.put('/updatebio', importBio);
 
