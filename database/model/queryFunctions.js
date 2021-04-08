@@ -111,17 +111,19 @@ module.exports.findUserData = async (req, res) => {
 */
 
 module.exports.updateUserData = async (request, response) => {
-  const { user_id, username, gender, pronoun, country, bio } = request.body;
+  const { user_id, username, gender, pronouns, country, bio } = request.body;
 
   try {
     const update = {
       gender,
-      pronoun,
+      pronouns,
       country,
       bio
     };
 
     const userData = await User.findOneAndUpdate({ _id: user_id }, update, { new: true });
+    console.log('USER DATA: ', userData);
+    console.log(`user_id`, user_id)
     response.status(201).send(userData);
   } catch(error) {
     response.status(404).send(error);

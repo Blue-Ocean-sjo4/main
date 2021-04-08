@@ -39,7 +39,7 @@ const App = () => {
           <SignUp />
         )} />
         <Route path="/profile" exact render={() => (
-          <ProfilePage userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
+          <ProfilePage userID={userData.userID} userData={userData} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
         )} />
         <Route path="/notifications" exact render={() => (
           <Notifications userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} pendingConnections={userData.pendingConnections} />
