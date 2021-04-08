@@ -149,7 +149,9 @@ module.exports.getMessages = async (request, response) => {
   const { room_id } = request.params;
 
   try {
-    response.send(await Room.findOne({ _id: room_id }));
+    const roomData = await Room.findOne({ _id: room_id }).lean();
+    delete roomData._id;
+    response.send(roomData);
   } catch (error) {
     response.status(404).send(error);
   }
@@ -264,7 +266,18 @@ module.exports.rejectPal = async (req, res) => {
 };
 
 module.exports.saveMessages = async (roomID, message, senderID) => {
-  console.log('from query function: ', roomID, message, senderID);
+  try {
+    let messageObj = {
+      senderID: senderID,
+      body: message,
+      timestamp: new Date()
+    };
+
+    await Room.update({ _id: roomID }, { $push: { messages: messageObj } });
+
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // module.exports.test = async (req, res) => {
