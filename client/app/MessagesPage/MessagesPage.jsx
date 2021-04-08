@@ -27,7 +27,6 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms = { room: { roomID: '' } },
   const [tracker, setTracker] = useState(0);
   const [roomID, setRoomID] = useState(currentRoom.room.roomID);
   const [room, setRoom] = useState(currentRoom.room);
-
   const [palsList, setPalsList] = useState(
     rooms.map((room) => {
       return { pic: room.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio, roomID: room.roomID };
@@ -36,19 +35,10 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms = { room: { roomID: '' } },
   const [currentPal, setCurrentPal] = useState({ pic: room.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio });
 
   useEffect(() => {
-    //make pull request
     axios.get(`http://localhost:1337/roomMessages/${roomID}`)
       .then((messages) => {
         setAllMessages(messages.data.messages);
       });
-
-    // const { pic, name, country, bio, pronouns } = room;
-    //setRoomID(currentRoom.room.roomID);
-    // setCurrentPal({ pic, name, country, bio, pronouns });
-    // setPalsList(rooms.reduce((acc, room) => {
-    //   acc.push({ pic: room.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio });
-    //   return acc;
-    // }, []));
   }, [roomID]);
 
   useEffect(() => {
