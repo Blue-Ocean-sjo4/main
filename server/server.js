@@ -49,15 +49,11 @@ const io = require('socket.io')(httpServer);
 io.use((socket, next) => {
   socket.room = socket.handshake.auth.room;
   socket.username = socket.handshake.auth.username;
-  // console.log(socket.room);
-  // console.log(socket.username);
   next();
 });
 
 io.on('connection', socket => {
   console.log('room inside connection', socket.room);
-  // console.log('socket', socket);
-  // console.log(`user ${socket.id} connected!`);
   socket.join(socket.room);
   // send new message
   socket.on('send new message', ({ msg, room, senderID }) => {
@@ -65,8 +61,7 @@ io.on('connection', socket => {
 
     //send data to queryFunctions through saveMessages
     saveMessages(room, msg, senderID);
-    // console.log('this is the sender\'s socketID', socketID);
-    socket.to(room).emit('receive new message', { msg, 'otherSocketID': 'somesocket' });
+    socket.to(room).emit('receive new message', { msg, senderID });
   });
   // receive new message
   socket.on('disconnecting', () => {
