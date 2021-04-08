@@ -16,7 +16,6 @@ module.exports.signup = async (request, response) => {
   const { username, password, email, country, birthdate } = request.body;
   const birthDate = new Date(moment(birthdate));
 
-  // const birthDate = new Date(birthdate.subString(0,3), birthdate.subString(5,6), birthdate.subString(8,9));
   try {
     const doesExist = await User.exists({ username });
 
@@ -26,7 +25,6 @@ module.exports.signup = async (request, response) => {
       const hashPassword = await bcrypt.hash(password, 10);
       await User.create({ username, password: hashPassword, email, country, birthdate: birthDate });
       console.log('else block reached')
-      // response.redirect('/login');
       response.send('registered');
     }
   } catch (error) {
@@ -196,6 +194,7 @@ module.exports.findPal = async (request, response) => {
       }
     ]);
     console.log(randomPal[0].username);
+    // what if there are no available pals to connect with given the criteria?
 
     const updatedPendingConnections = randomPal[0].pendingConnections;
     updatedPendingConnections[user_id] = 0;
