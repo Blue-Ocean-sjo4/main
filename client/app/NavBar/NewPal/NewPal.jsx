@@ -21,6 +21,7 @@ function NewPal({ showingNewPal, setShowingNewPal, userID }) {
   }
 
   function addPal(e) {
+    // if no country, generate random one
     e.preventDefault();
     axios.post(`/newPal/${userID}/${country}`)
       .then(() => { alert('Pal request sent!') })

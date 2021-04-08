@@ -32,3 +32,7 @@
   border: 3px solid var(--birdie-blue);
   border-radius: 50%;
 }
+
+.is-current-pal{
+  background-color: rgba(173, 216, 230, 0.300);
+}
