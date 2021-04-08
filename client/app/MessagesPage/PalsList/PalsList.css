@@ -1,4 +1,5 @@
 #pals-list{
   grid-row-start: 2;
   padding: 10px 20px;
+  overflow: auto;
 }

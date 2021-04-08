@@ -3,6 +3,7 @@ import axios from 'axios';
 import './NewPal.css';
 import { VectorMap } from 'react-jvectormap';
 import countryCodeToFlag from 'country-code-to-flag';
+import randomCountry from 'random-country';
 
 function NewPal({ showingNewPal, setShowingNewPal, userID }) {
 
@@ -22,8 +23,13 @@ function NewPal({ showingNewPal, setShowingNewPal, userID }) {
 
   function addPal(e) {
     // if no country, generate random one
+    var sendingCountry = country
+    if (!country) {
+      sendingCountry = randomCountry();
+      console.log(sendingCountry)
+    }
     e.preventDefault();
-    axios.post(`/newPal/${userID}/${country}`)
+    axios.post(`/newPal/${userID}/${sendingCountry}`)
       .then(() => { alert('Pal request sent!') })
       .then(() => { setShowingNewPal(false) })
       .catch((err) => { alert('error adding new pal, check console'); console.log('err: ', err) })
