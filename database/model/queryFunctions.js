@@ -18,7 +18,7 @@ module.exports.signup = async (request, response) => {
 
   try {
     const doesExist = await User.exists({ username });
-
+a
     if (doesExist) {
       response.sendStatus(409);
     } else {
@@ -177,7 +177,6 @@ module.exports.findPal = async (request, response) => {
     Object.keys(userData.pendingConnections).forEach(user => ineligiblePals.push(Types.ObjectId(user)));
     Object.keys(userData.requestedConnections).forEach(user => ineligiblePals.push(Types.ObjectId(user)));
     // loop through accepted;
-    // Object.values(userData.rooms).forEach(user => ineligiblePals.push(Types.ObjectId(user)));
     // user is requesting someone to be a pal
     // requestedConnections
     const userBirthDate = userData.birthdate;

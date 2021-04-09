@@ -8,7 +8,7 @@ function PalsList({ palsList, setCurrentPal, currentPal, setRoomID }) {
     <div id="pals-list">
       {palsList.map((pal, i) => {
         if (pal.name === currentPal.name) {
-          return <SinglePal isCurrentPal={true} key={i} setCurrentPal={setCurrentPal} pal={pal} />
+          return <SinglePal setRoomID={() => {}} isCurrentPal={true} key={i} setCurrentPal={setCurrentPal} pal={pal} />
         } else {
           return <SinglePal setRoomID={setRoomID} isCurrentPal={false} key={i} setCurrentPal={setCurrentPal} pal={pal} />
         }
