@@ -25,14 +25,14 @@ message object:
 const MessagesPage = ({ loggedIn, setLoggedIn, rooms = { room: { roomID: '' } }, currentRoom, userID }) => {
   const [allMessages, setAllMessages] = useState([]);
   const [tracker, setTracker] = useState(0);
-  const [roomID, setRoomID] = useState(currentRoom.room.roomID);
+  const [roomID, setRoomID] = useState(currentRoom.room?.roomID);
   const [room, setRoom] = useState(currentRoom.room);
   const [palsList, setPalsList] = useState(
     rooms.map((room) => {
-      return { pic: room.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio, roomID: room.roomID };
+      return { pic: room?.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio, roomID: room.roomID };
     })
   );
-  const [currentPal, setCurrentPal] = useState({ pic: room.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio });
+  const [currentPal, setCurrentPal] = useState({ pic: room?.pic, name: room?.name, pronouns: room?.pronouns, country: room?.country, bio: room?.bio });
 
   useEffect(() => {
     axios.get(`http://localhost:1337/roomMessages/${roomID}`)
@@ -43,7 +43,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms = { room: { roomID: '' } },
 
   useEffect(() => {
     const messagesList = document.querySelector('#messages-list-container');
-    messagesList.scrollTo(0, messagesList.scrollHeight);
+    messagesList?.scrollTo(0, messagesList.scrollHeight);
   }, [allMessages.length]);
 
   useEffect(() => {
