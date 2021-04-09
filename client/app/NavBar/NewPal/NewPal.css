@@ -117,3 +117,11 @@
   background-color: var(--birdie-blue);
   transition: background-color .2s;
 }
+
+.productDetailPageDark .new-pal-modal-content {
+  background-color: rgba(0, 0, 0, 0.925);
+}
+
+.productDetailPageDark .new-pal-prompt {
+  color: white;
+}
