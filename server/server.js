@@ -56,12 +56,13 @@ io.on('connection', socket => {
   console.log('room inside connection', socket.room);
   socket.join(socket.room);
   // send new message
-  socket.on('send new message', ({ msg, room, senderID }) => {
+  socket.on('send new message', ({ msg, room, senderID, media }) => {
     console.log(msg);
+    // console.log(media);
 
     //send data to queryFunctions through saveMessages
-    saveMessages(room, msg, senderID);
-    socket.to(room).emit('receive new message', { msg, senderID });
+    saveMessages(room, msg, senderID, media);
+    socket.to(room).emit('receive new message', { msg, senderID, media });
   });
   // receive new message
   socket.on('disconnecting', () => {
@@ -74,8 +75,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
   secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: false
+  resave: true,
+  saveUninitialized: false,
+  cookie : { maxAge: 600000 }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -120,14 +122,15 @@ app.get('/roomMessages/:room_id', connectEnsureLogin.ensureLoggedIn(), getMessag
  |                     Request New Pal                       |
  *-----------------------------------------------------------*/
 
-// app.post('/newPal/:user_id/:country_code', connectEnsureLogin.ensureLoggedIn(), findPal);
 app.post('/newPal/:user_id/:country', connectEnsureLogin.ensureLoggedIn(), findPal);
+// app.post('/newPal/:user_id/:country', findPal);
 
 /*-----------------------------------------------------------*
  |                   Accept Pal Request                      |
  *-----------------------------------------------------------*/
 
 app.put('/acceptPal/:user_id/:user_pal_id', connectEnsureLogin.ensureLoggedIn(), acceptPal);
+// app.put('/acceptPal/:user_id/:user_pal_id', acceptPal);
 
 /*-----------------------------------------------------------*
  |                   Reject Pal Request                      |
