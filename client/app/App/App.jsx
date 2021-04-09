@@ -22,7 +22,8 @@ const App = () => {
     pronouns: "",
     birthdate: "",
     pendingConnections: [],
-    rooms: []
+    rooms: [],
+    profilePicture: ""
   });
   const [currentRoom, setCurrentRoom] = useState({});
   const [darkMode, setdarkMode] = useState(false);

@@ -46,7 +46,9 @@ module.exports.findID = (id) => User.findById({ _id: id });
 */
 module.exports.findUserData = async (req, res) => {
   try {
-    const loggedInUser = await User.findOne({ username: req.query.username }).lean();
+    const loggedInUser = await User.findOne({ username: req.query.username })
+      .select({ password: 0 })
+      .lean();
     // console.log(loggedInUser);
     const rooms = Object.entries(loggedInUser.rooms);
     let roomsPayload = [];
@@ -61,7 +63,8 @@ module.exports.findUserData = async (req, res) => {
             name: connection.username,
             bio: connection.bio,
             country: connection.country,
-            birthdate: connection.birthdate
+            birthdate: connection.birthdate,
+            profilePicture: connection.profilePicture
           };
       })
     );
@@ -79,7 +82,8 @@ module.exports.findUserData = async (req, res) => {
               name: connection.username,
               bio: connection.bio,
               country: connection.country,
-              birthdate: connection.birthdate
+              birthdate: connection.birthdate,
+              profilePicture: connection.profilePicture
             };
           }));
       }
@@ -163,19 +167,15 @@ module.exports.postMessage = async (request, response) => {
   }
 };
 
-// TODO: updated schema to include requestedConnections
 module.exports.findPal = async (request, response) => {
   try {
     const { user_id, country } = request.params;
     const userData = await User.findOne({ _id: user_id }).lean();
     const ineligiblePals = [Types.ObjectId(user_id)];
-    // loop through pending;
+
     Object.keys(userData.pendingConnections).forEach(user => ineligiblePals.push(Types.ObjectId(user)));
     Object.keys(userData.requestedConnections).forEach(user => ineligiblePals.push(Types.ObjectId(user)));
-    // loop through accepted;
-    // Object.values(userData.rooms).forEach(user => ineligiblePals.push(Types.ObjectId(user)));
-    // user is requesting someone to be a pal
-    // requestedConnections
+
     const userBirthDate = userData.birthdate;
     const legalAge = new Date(moment().subtract(18, 'years'));
 
