@@ -23,7 +23,7 @@ const MessagesPageBanner = ({ name, pronouns, bio, profilePic, userID }) => {
       {/* <img className="current-pal-profile-pic" src={profilePic} alt="Pal's Profile Picture"></img> */}
 
       <div className="current-pal-info" >
-        <p className="pal-name">{`${name} | ${pronouns}`}</p>
+        <p className="pal-name">{`${name} ${pronouns ? `| ${pronouns}` : ''}`}</p>
         <p className="pal-bio">{bio}</p>
       </div>
 
