@@ -6,7 +6,7 @@ import HomeListItem from './HomeListItem/HomeListItem.jsx';
 import axios from 'axios';
 import './Home.css';
 
-const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserData, setCurrentRoom, toggleDarkMode, darkMode }) => {
+const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserData, setCurrentRoom, darkMode, toggleDarkMode }) => {
 
   useEffect(() => {
     axios.get(`/connections?username=${username}`)
@@ -26,8 +26,7 @@ const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserD
       <Redirect to="/login" />
     )
   }
-
-
+  console.log(darkMode)
   return (
     <>
       <NavBar userID={userID} />
@@ -44,9 +43,10 @@ const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserD
       <div className='darkModeButton'>
         <label>
           <input onClick={toggleDarkMode} type="checkbox"></input>
-          <span className={ darkMode? 'slider round dark': 'slider round' }>
+          <span className={ darkMode ? 'slider round dark': 'slider round' }>
             {
-              !darkMode?
+              !darkMode
+              ?
               <div id='darkModeMoon'>
                 <ion-icon name="moon"></ion-icon>
               </div>
