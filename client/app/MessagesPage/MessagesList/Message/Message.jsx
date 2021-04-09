@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Message.css';
 
-const Message = ({ message, myID }) => {
+const Message = ({ message, myID, showingImage, showImage, setModalURL }) => {
 
-  function openImage(e) {
 
+
+  function openImage(url) {
+    setModalURL(url);
+    showImage(true);
   }
 
-  function openOther() {
-
-  }
 
   return (<div className={message.senderID === myID ? 'message-by-me' : 'message-by-pal'} >
     <div className="message-body">{message.body}</div>
@@ -18,7 +18,7 @@ const Message = ({ message, myID }) => {
         {
           message.media.map((media, i) => {
             if (media.mimetype.split('/')[0] === 'image') {
-              return (<img onClick={openImage} className="message-media-image" src={media.url}></img>)
+              return (<img onClick={() => { openImage(media.url) }} className="message-media-image" src={media.url}></img>)
             } else if (media.mimetype.split('/')[0] === 'audio') {
               return (<a target="_blank" href={media.url}><img className="message-media-image" src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Icon_sound_loudspeaker.svg"></img></a>)
             } else {
