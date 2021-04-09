@@ -18,11 +18,11 @@ const Message = ({ message, myID, showingImage, showImage, setModalURL }) => {
         {
           message.media.map((media, i) => {
             if (media.mimetype.split('/')[0] === 'image') {
-              return (<img onClick={() => { openImage(media.url) }} className="message-media-image" src={media.url}></img>)
+              return (<img key={i} onClick={() => { openImage(media.url) }} className="message-media-item" src={media.url}></img>)
             } else if (media.mimetype.split('/')[0] === 'audio') {
-              return (<a target="_blank" href={media.url}><img className="message-media-image" src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Icon_sound_loudspeaker.svg"></img></a>)
+              return (<a key={i} target="_blank" href={media.url}><img className="message-media-item" src="https://upload.wikimedia.org/wikipedia/commons/c/c9/Icon_sound_loudspeaker.svg"></img></a>)
             } else {
-              return (<a target="_blank" href={media.url}><img className="message-media-image" src="https://i.pinimg.com/originals/7f/d2/e4/7fd2e46b2da9819e667fb75caf475cf7.png"></img></a>)
+              return (<a key={i} target="_blank" href={media.url}><img className="message-media-item" src="https://i.pinimg.com/originals/7f/d2/e4/7fd2e46b2da9819e667fb75caf475cf7.png"></img></a>)
             }
           })
         }

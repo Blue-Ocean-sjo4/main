@@ -39,3 +39,20 @@
 #new-message-form button i {
   font-size: 1.25rem;
 }
+
+.message-media-item {
+  border-radius: 2px;
+  border: 2px solid rgb(77, 77, 77);
+  margin: 5px ;
+  height: 40px;
+  width: 40px;
+}
+.message-media-item-spacer{
+  margin: 5px ;
+  height: 40px;
+  width: 40px;
+}
+
+.new-message-media{
+  margin-left: 3%;
+}
