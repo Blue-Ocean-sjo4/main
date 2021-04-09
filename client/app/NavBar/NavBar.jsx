@@ -29,6 +29,9 @@ const NavBar = ({ userID }) => {
           <span><ion-icon name="person-circle-outline"></ion-icon></span>
         </Link>
       </span>
+      <span>
+        <button onClick={() => window.location.reload()}>Log Out</button>
+      </span>
     </div>
   )
 }
