@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './NewPal.css';
 import { VectorMap } from 'react-jvectormap';
+import { ToastContainer, toast } from 'react-toastify';
 import countryCodeToFlag from 'country-code-to-flag';
 import randomCountry from 'random-country';
+import 'react-toastify/dist/ReactToastify.css';
 
 function NewPal({ showingNewPal, setShowingNewPal, userID }) {
 
@@ -37,11 +39,12 @@ function NewPal({ showingNewPal, setShowingNewPal, userID }) {
     e.preventDefault();
     axios.post(`/newPal/${userID}/${sendingCountry}`)
       .then(() => { showConfirmation(true) })
-      .catch((err) => { alert('error adding new pal, check console'); console.log('err: ', err) })
+      .catch((err) => { toast('error adding new pal, check console'); console.log('err: ', err) })
   }
 
   return (
     <div className="new-pal-wrapper">
+      <ToastContainer />
       {
         showingNewPal ?
           <div id="newPal" className="new-pal-modal">

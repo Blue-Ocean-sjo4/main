@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import Login from '../Login/Login.jsx';
+import 'react-toastify/dist/ReactToastify.css';
 import './SignUp.css';
 
 const SignUp = () => {
@@ -43,7 +45,7 @@ const SignUp = () => {
       })
       .catch((error) => {
         console.log(`error`, error)
-        alert('username already taken')
+        toast('Username already taken')
       })
   }
 
@@ -55,6 +57,7 @@ const SignUp = () => {
 
   return (
     <div className="signup-page">
+      <ToastContainer />
       <div className="title-and-catchphrase" >
         <h1 className="login-page-title" >Correspond</h1>
         <div className="catchphrase">Turn The Page. Meet A Friend.</div>

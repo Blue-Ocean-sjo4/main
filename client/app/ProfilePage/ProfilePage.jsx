@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import ProfilePageFilePicker from './ProfilePageFilePicker.jsx';
 import NavBar from '../NavBar/NavBar.jsx';
+import 'react-toastify/dist/ReactToastify.css';
 import './ProfilePage.css';
 
 const ProfilePage = ({ loggedIn, setLoggedIn, username, userData, }) => {
@@ -54,7 +56,7 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username, userData, }) => {
       .then((response) => {
         // TODO: activate notification modal here
         console.log(`response from profile update: `, response.data)
-        alert('Profile updated')
+        toast('Profile updated')
       })
       .catch((err) => {
         console.log(`err updating profile: `, err)
@@ -70,6 +72,7 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username, userData, }) => {
   return (
     <>
       <NavBar />
+      <ToastContainer />
       <div className="profile-container">
         <div className="profile-header header">{`${username}'s Profile`}</div>
         <div className="profile-pic-container">
