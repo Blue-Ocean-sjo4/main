@@ -1,0 +1,19 @@
+.remove-pal-container {
+  grid-column: 3 / 4;
+  place-self: center;
+}
+
+.remove-pal-button {
+  border: none;
+  border-radius: 5px;
+  height: 24px;
+  background-color: var(--background);
+  color: var(--text-blue);
+  font-weight: 600;
+}
+
+.remove-pal-button:hover {
+  background-color: var(--ocean-blue);
+  color: var(--input-blue);
+  cursor: pointer;
+}

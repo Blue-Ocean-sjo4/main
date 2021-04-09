@@ -6,11 +6,12 @@ import './HomeListItem.css';
 const HomeListItem = ({ room, setCurrentRoom }) => {
   // TODO: Link up with messages team, discuss fetching database messages
 
-  console.log(room);
+  const handleRemove = (e) => {
+  }
 
   return (
     <Link className="pal-messages-link" to="/messages" onClick={() => {
-      setCurrentRoom({room})
+      setCurrentRoom({ room })
     }}>
       <div className="pal-container" >
         <div className="pal-item-picture-container">

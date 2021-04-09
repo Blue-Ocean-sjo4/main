@@ -1,7 +1,8 @@
 .pal-messages-link {
+  grid-column: 2 / 3;
   margin: 10px auto;
   height: 120px;
-  width: 75%;
+  width: 95%;
   border-radius: 5px;
   background-color: rgba(204, 218, 222, 0.15);
   color: var(--midnight-blue);

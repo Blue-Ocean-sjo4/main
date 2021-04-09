@@ -66,6 +66,7 @@
     "react-dom": "^16.14.0",
     "react-jvectormap": "0.0.16",
     "react-router-dom": "^5.2.0",
+    "react-toastify": "^7.0.3",
     "socket.io": "^4.0.1",
     "socket.io-client": "^4.0.1",
     "style-loader": "^2.0.0"
