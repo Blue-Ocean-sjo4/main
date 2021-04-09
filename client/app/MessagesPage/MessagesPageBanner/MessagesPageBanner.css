@@ -20,7 +20,7 @@
   color: var(--lighter-blue);
 }
 
-ion-icon {
+.messages-page-banner-icons {
   font-size: 2.25rem;
   color: var(--lighter-blue);
   cursor: pointer;
@@ -31,6 +31,7 @@ ion-icon {
   height: 70px;
   border-radius: 50%;
   border: 2px solid var(--birdie-blue);
+  overflow: hidden;
 }
 
 .current-pal-profile-pic,
