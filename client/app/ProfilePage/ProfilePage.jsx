@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
+import ProfilePageFilePicker from './ProfilePageFilePicker.jsx';
 import NavBar from '../NavBar/NavBar.jsx';
 import './ProfilePage.css';
 
-const ProfilePage = ({ loggedIn, setLoggedIn, username, userData }) => {
+const ProfilePage = ({ loggedIn, setLoggedIn, username, userData, }) => {
 
-  const [profilePicture, setProfilePicture] = useState(''); /* Consider data type from backend */
+  const [profilePicture, setProfilePicture] = useState('');
+  const [showingFilePicker, setShowingFilePicker] = useState(false);
   const [bio, setBio] = useState('');
   const [gender, setGender] = useState('');
   const [pronouns, setPronouns] = useState('');
@@ -19,6 +21,7 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username, userData }) => {
     setGender(userData.gender)
     setCountry(userData.country)
     setPronouns(userData.pronouns)
+    setProfilePicture(userData.profilePicture)
   }, [])
 
   const handlePictureUpload = (e) => {
@@ -48,14 +51,14 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username, userData }) => {
       bio,
       profilePicture
     })
-    .then((response) => {
-      // TODO: activate notification modal here
-      console.log(`response from profile update: `, response.data)
-      alert('Profile updated')
-    })
-    .catch((err) => {
-      console.log(`err updating profile: `, err)
-    })
+      .then((response) => {
+        // TODO: activate notification modal here
+        console.log(`response from profile update: `, response.data)
+        alert('Profile updated')
+      })
+      .catch((err) => {
+        console.log(`err updating profile: `, err)
+      })
   }
 
   if (!loggedIn) {
@@ -71,12 +74,21 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username, userData }) => {
         <div className="profile-header header">{`${username}'s Profile`}</div>
         <div className="profile-pic-container">
           <div className="profile-pic-cropper">
-            <img className="profile-pic-display" src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" alt="avatar" />
+            <img className="profile-pic-display" src={profilePicture} onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg';
+            }}
+            />
           </div>
-          <label className="profile-pic-upload">
-            <input type="file"></input>
+          {
+            showingFilePicker ? <ProfilePageFilePicker profilePicture={profilePicture} setProfilePicture={setProfilePicture} /> : null
+          }
+          <div className="profile-pic-upload"
+            onMouseEnter={() => { setShowingFilePicker(false) }}
+            onClick={(e) => { e.preventDefault(); setShowingFilePicker(true) }}
+          >
             UPLOAD
-          </label>
+          </div>
         </div>
         <form className="profile-details">
           <label>
