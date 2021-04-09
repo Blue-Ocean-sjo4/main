@@ -11,6 +11,8 @@ import './Home.css';
 
 const Home = ({ userID, loggedIn, setLoggedIn, username = "", rooms = [], setUserData, setCurrentRoom, userData }) => {
 
+  const [listItemClass, setListItemClass] = useState("home-list-item-container")
+
   const notifyTest = () => {
     toast('Poggers in the chat');
   }
@@ -37,9 +39,9 @@ const Home = ({ userID, loggedIn, setLoggedIn, username = "", rooms = [], setUse
       <NavBar userID={userID} />
       <div className="home-container">
         {rooms.map((room, index) => (
-          <div className="home-list-item-container">
-            <HomeListItem key={index} room={room} setCurrentRoom={setCurrentRoom} />
-            {/* <RemovePal /> */}
+          <div className={listItemClass} key={index} >
+            <HomeListItem room={room} setCurrentRoom={setCurrentRoom} />
+            <RemovePal userID={userID} palID={room.userID} roomID={room.roomID} setListItemClass={setListItemClass} />
           </div>
         ))}
       </div>
