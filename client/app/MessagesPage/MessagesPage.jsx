@@ -29,10 +29,10 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms = { room: { roomID: '' } },
   const [room, setRoom] = useState(currentRoom.room);
   const [palsList, setPalsList] = useState(
     rooms.map((room) => {
-      return { pic: room?.pic, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio, roomID: room.roomID };
+      return { pic: room?.profilePicture, name: room.name, pronouns: room.pronouns, country: room.country, bio: room.bio, roomID: room.roomID };
     })
   );
-  const [currentPal, setCurrentPal] = useState({ pic: room?.pic, name: room?.name, pronouns: room?.pronouns, country: room?.country, bio: room?.bio });
+  const [currentPal, setCurrentPal] = useState({ pic: room?.profilePicture, name: room?.name, pronouns: room?.pronouns, country: room?.country, bio: room?.bio });
 
   useEffect(() => {
     axios.get(`http://localhost:1337/roomMessages/${roomID}`)
