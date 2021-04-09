@@ -64,7 +64,8 @@ module.exports.findUserData = async (req, res) => {
             bio: connection.bio,
             country: connection.country,
             birthdate: connection.birthdate,
-            profilePicture: connection.profilePicture
+            profilePicture: connection.profilePicture,
+            pronouns: connection.pronouns
           };
       })
     );
@@ -83,7 +84,8 @@ module.exports.findUserData = async (req, res) => {
               bio: connection.bio,
               country: connection.country,
               birthdate: connection.birthdate,
-              profilePicture: connection.profilePicture
+              profilePicture: connection.profilePicture,
+              pronouns: connection.pronouns
             };
           }));
       }
