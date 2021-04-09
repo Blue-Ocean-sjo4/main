@@ -46,7 +46,9 @@ module.exports.findID = (id) => User.findById({ _id: id });
 */
 module.exports.findUserData = async (req, res) => {
   try {
-    const loggedInUser = await User.findOne({ username: req.query.username }).lean();
+    const loggedInUser = await User.findOne({ username: req.query.username })
+      .select({ password: 0 })
+      .lean();
     // console.log(loggedInUser);
     const rooms = Object.entries(loggedInUser.rooms);
     let roomsPayload = [];
@@ -61,7 +63,8 @@ module.exports.findUserData = async (req, res) => {
             name: connection.username,
             bio: connection.bio,
             country: connection.country,
-            birthdate: connection.birthdate
+            birthdate: connection.birthdate,
+            profilePicture: connection.profilePicture
           };
       })
     );
@@ -79,7 +82,8 @@ module.exports.findUserData = async (req, res) => {
               name: connection.username,
               bio: connection.bio,
               country: connection.country,
-              birthdate: connection.birthdate
+              birthdate: connection.birthdate,
+              profilePicture: connection.profilePicture
             };
           }));
       }
