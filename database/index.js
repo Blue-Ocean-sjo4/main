@@ -11,6 +11,6 @@ mongoose.connect(
     }
   })
   .then(() => console.log('Mongoose connected'))
-  .catch((error) => console.log('connection fails'));
+  .catch(() => console.log('connection fails'));
 
 module.exports = mongoose;
