@@ -25,30 +25,37 @@ const App = () => {
     rooms: []
   });
   const [currentRoom, setCurrentRoom] = useState({});
+  const [darkMode, setdarkMode] = useState(false);
+
+  function toggleDarkMode() {
+    setdarkMode(!darkMode);
+  }
 
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact render={() => (
-          <Home userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} rooms={userData.rooms} setUserData={setUserData} setCurrentRoom={setCurrentRoom} />
-        )} />
-        <Route path="/login" exact render={() => (
-          <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} setUsername={setUsername} />
-        )} />
-        <Route path="/signup" exact render={() => (
-          <SignUp />
-        )} />
-        <Route path="/profile" exact render={() => (
-          <ProfilePage userID={userData.userID} userData={userData} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
-        )} />
-        <Route path="/notifications" exact render={() => (
-          <Notifications userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} pendingConnections={userData.pendingConnections} />
-        )} />
-        <Route path="/messages" exact render={() => (
-          <MessagesPage userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} rooms={userData.rooms} currentRoom={currentRoom} />
-        )} />
-      </Switch>
-    </Router>
+    <div className={ darkMode? 'productDetailPageDark': 'productDetailPageLight' }>
+      <Router>
+        <Switch>
+          <Route path="/" exact render={() => (
+            <Home darkMode={darkMode} toggleDarkMode={toggleDarkMode} userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} rooms={userData.rooms} setUserData={setUserData} setCurrentRoom={setCurrentRoom} />
+          )} />
+          <Route path="/login" exact render={() => (
+            <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} setUsername={setUsername} />
+          )} />
+          <Route path="/signup" exact render={() => (
+            <SignUp />
+          )} />
+          <Route path="/profile" exact render={() => (
+            <ProfilePage userID={userData.userID} userData={userData} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
+          )} />
+          <Route path="/notifications" exact render={() => (
+            <Notifications userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} pendingConnections={userData.pendingConnections} />
+          )} />
+          <Route path="/messages" exact render={() => (
+            <MessagesPage userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} rooms={userData.rooms} currentRoom={currentRoom} />
+          )} />
+        </Switch>
+      </Router>
+    </div>
   )
 }
 
