@@ -12,10 +12,18 @@ const MessagesPageBanner = ({ name, pronouns, bio, profilePic, userID }) => {
         </Link>
       </button>
 
-      <img className="current-pal-profile-pic" src={profilePic} alt="Pal's Profile Picture"></img>
+      <img
+        className="current-pal-profile-pic"
+        src={
+          profilePic
+            ? profilePic
+            : 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'
+          }
+      />
+      {/* <img className="current-pal-profile-pic" src={profilePic} alt="Pal's Profile Picture"></img> */}
 
       <div className="current-pal-info" >
-        <p className="pal-name">{`${name} | ${pronouns}`}</p>
+        <p className="pal-name">{`${name} ${pronouns ? `| ${pronouns}` : ''}`}</p>
         <p className="pal-bio">{bio}</p>
       </div>
 
