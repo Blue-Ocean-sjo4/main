@@ -20,9 +20,9 @@
   font-size: 4rem;
   margin-left: 5%;
   margin-bottom: 20px;
-  text-shadow: 1px 1px 0 #959595,
-               2px 2px 0 #808080,
-               3px 3px 0 #757575;
+  text-shadow: 1px 1px 0 #9f9f9f,
+               2px 2px 0 #7f7f7f,
+               3px 3px 0 #5f5f5f;
 }
 
 .catchphrase {
@@ -39,7 +39,7 @@
   border: 3px solid var(--midnight-blue);
   color: var(--midnight-blue);
   margin: auto;
-  margin-right: 15rem;
+  margin-right: 15vw;
   width: 25rem;
   height: 29rem;
   border-radius: 5px;
