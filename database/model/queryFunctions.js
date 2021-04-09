@@ -16,7 +16,6 @@ module.exports.signup = async (request, response) => {
   const { username, password, email, country, birthdate } = request.body;
   const birthDate = new Date(moment(birthdate));
 
-  // const birthDate = new Date(birthdate.subString(0,3), birthdate.subString(5,6), birthdate.subString(8,9));
   try {
     const doesExist = await User.exists({ username });
 
@@ -26,7 +25,6 @@ module.exports.signup = async (request, response) => {
       const hashPassword = await bcrypt.hash(password, 10);
       await User.create({ username, password: hashPassword, email, country, birthdate: birthDate });
       console.log('else block reached')
-      // response.redirect('/login');
       response.send('registered');
     }
   } catch (error) {
@@ -111,14 +109,15 @@ module.exports.findUserData = async (req, res) => {
 */
 
 module.exports.updateUserData = async (request, response) => {
-  const { user_id, username, gender, pronouns, country, bio } = request.body;
+  const { user_id, username, gender, pronouns, country, bio, profilePicture} = request.body;
 
   try {
     const update = {
       gender,
       pronouns,
       country,
-      bio
+      bio,
+      profilePicture
     };
 
     const userData = await User.findOneAndUpdate({ _id: user_id }, update, { new: true });
@@ -195,6 +194,7 @@ module.exports.findPal = async (request, response) => {
       }
     ]);
     console.log(randomPal[0].username);
+    // what if there are no available pals to connect with given the criteria?
 
     const updatedPendingConnections = randomPal[0].pendingConnections;
     updatedPendingConnections[user_id] = 0;
@@ -278,12 +278,13 @@ module.exports.rejectPal = async (req, res) => {
   }
 };
 
-module.exports.saveMessages = async (roomID, message, senderID) => {
+module.exports.saveMessages = async (roomID, message, senderID, media) => {
   try {
     let messageObj = {
       senderID: senderID,
       body: message,
-      timestamp: new Date()
+      timestamp: new Date(),
+      media
     };
 
     await Room.update({ _id: roomID }, { $push: { messages: messageObj } });
@@ -359,6 +360,8 @@ module.exports.removePal = async (req, res) => {
 //   console.log(new Date(moment('1991-04-05')));
 //   res.sendStatus(201);
 // };
+
+// db.users.update({}, {$set: {bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'} }, {multi: true})
 
 
 // db.users.update({}, {'$set': {requestedConnections: {} }}, {multi: true})

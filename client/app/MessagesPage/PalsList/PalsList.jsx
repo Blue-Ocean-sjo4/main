@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import SinglePal from './SinglePal/SinglePal.jsx'
 import './PalsList.css'
 
-function PalsList({ palsList, setCurrentPal, currentPal }) {
+function PalsList({ palsList, setCurrentPal, currentPal, setRoomID }) {
 
   return (
     <div id="pals-list">
@@ -10,7 +10,7 @@ function PalsList({ palsList, setCurrentPal, currentPal }) {
         if (pal.name === currentPal.name) {
           return <SinglePal isCurrentPal={true} key={i} setCurrentPal={setCurrentPal} pal={pal} />
         } else {
-          return <SinglePal isCurrentPal={false} key={i} setCurrentPal={setCurrentPal} pal={pal} />
+          return <SinglePal setRoomID={setRoomID} isCurrentPal={false} key={i} setCurrentPal={setCurrentPal} pal={pal} />
         }
       })}
     </div>
