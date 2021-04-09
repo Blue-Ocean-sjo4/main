@@ -19,3 +19,12 @@
   grid-column-end: 3;
   background-color: #D3D3D3;
 }
+
+.message-media-image {
+  border-radius: 2px;
+  border: 2px solid rgb(77, 77, 77);
+  margin: 5px ;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+}
