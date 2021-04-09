@@ -25,11 +25,23 @@
   color: var(--text-blue);
 }
 
-ion-icon {
+.nav-notifications,
+.nav-profile,
+.nav-new-pal {
   font-size: 2.25rem;
   color: var(--lighter-blue);
 }
 
-ion-icon:hover {
+.nav-notifications:hover,
+.nav-profile:hover,
+.nav-new-pal:hover  {
   cursor: pointer;
 }
+
+/* .nav-profile:hover {
+  cursor: pointer;
+}
+
+.nav-new-pal:hover {
+  cursor: pointer;
+} */
