@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 const RemovePal = () => {
   return (
-    <div>
-
+    <div className="remove-pal-container">
+      <button className="remove-pal-button">Un-Pal</button>
     </div>
   )
 }
