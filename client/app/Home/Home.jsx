@@ -9,13 +9,15 @@ import './Home.css';
 const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserData, setCurrentRoom }) => {
 
   useEffect(() => {
-    axios.get(`/connections?username=${username}`)
+    if (username) {
+      axios.get(`/connections?username=${username}`)
       .then((response) => {
         console.log('connections response data: ', response.data)
         setUserData(response.data)
       })
-      .catch((err) => { console.log(`err`, err) })
-  }, [])
+      .catch((err) => { console.log(`err`, err) });
+    }
+  }, [username])
 
   // useEffect(() => {
   //   setUserData(dummyData.dummyData)

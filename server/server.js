@@ -55,10 +55,8 @@ io.use((socket, next) => {
 io.on('connection', socket => {
   console.log('room inside connection', socket.room);
   socket.join(socket.room);
-  // send new message
   socket.on('send new message', ({ msg, room, senderID, media }) => {
     console.log(msg);
-    // console.log(media);
 
     //send data to queryFunctions through saveMessages
     saveMessages(room, msg, senderID, media);
@@ -90,7 +88,6 @@ app.post(
   passport.authenticate('local'),
   (req, res) => {
     console.log('req.body', req.body);
-    // res.redirect(url.format({pathname: '/', query: { username: req.body.username }}));
     res.send('Success');
 });
 
@@ -137,6 +134,7 @@ app.put('/acceptPal/:user_id/:user_pal_id', connectEnsureLogin.ensureLoggedIn(),
  *-----------------------------------------------------------*/
 
 app.put('/rejectPal/:user_id/:user_pal_id', connectEnsureLogin.ensureLoggedIn(), rejectPal);
+// app.put('/rejectPal/:user_id/:user_pal_id', rejectPal);
 
 /*-----------------------------------------------------------*
  |                     Remove Pal                            |
