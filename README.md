@@ -11,9 +11,8 @@
 - Provides open space to meet people from other cultures and share about anything
 - Users can control their connections by accepting or declining requests, or removing current connections
 
-
 ## Tech Stack
-- include logos here
+[https://miro.medium.com/max/700/0*UqGyYmWCRQnjLzSk.jpg]
 
 ## Technical challenges we anticipated
 - why, what was the plan to overcome those challenges?
