@@ -1,4 +1,5 @@
 :root {
+  /* Light Mode Colors */
   --birdie-blue: #008FCC;
   --midnight-blue: #202473;
   --message-gray: #E4E4E4;
@@ -7,6 +8,10 @@
   --lighter-blue: #B2EDFF;
   --text-blue: #003049;
   --input-blue: #E8F0FE;
+
+  /* Dark Mode Colors */
+  --dark-background: rgb(6, 36, 53);
+  --dark-border: rgb(0, 24, 32);
 }
 
 body {

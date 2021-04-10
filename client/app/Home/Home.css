@@ -26,16 +26,16 @@
 /* ************* */
 
 .productDetailPageDark {
-  background-color: rgb(6, 36, 53);
+  background-color: var(--dark-background);
 }
 
 .productDetailPageDark .home-container {
-  background-color: rgb(0, 48, 73);
+  background-color: var(--text-blue);
 }
 
 .productDetailPageDark .pal-messages-link {
-  border-color: rgb(0, 24, 32);
-  box-shadow: 2px 2px 0 rgb(0, 24, 32);
+  border-color: var(--dark-border);
+  box-shadow: 2px 2px 0 var(--dark-border);
   background-color: rgba(0, 0, 0, .15);
 }
 
