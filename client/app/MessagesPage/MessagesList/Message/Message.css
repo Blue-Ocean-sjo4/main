@@ -20,6 +20,12 @@
   background-color: #D3D3D3;
 }
 
+.productDetailPageDark .message-by-me,
+.productDetailPageDark .message-by-pal {
+  background-color: rgba(58, 58, 58, 0.418);
+  color: white;
+}
+
 .message-media-item {
   border-radius: 2px;
   border: 2px solid rgb(77, 77, 77);
