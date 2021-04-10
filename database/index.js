@@ -10,7 +10,7 @@ mongoose.connect(
       authSource: 'admin'
     }
   })
-  .then(() => console.log('Mongoose connected'))
+  .then(() => console.log('Mongoose connected', process.env.FILESTACK_TOKEN))
   .catch(() => console.log('connection fails'));
 
 module.exports = mongoose;
