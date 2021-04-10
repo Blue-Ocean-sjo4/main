@@ -45,6 +45,10 @@
 
 
 ## What research was required?
+- Integrating web sockets
+- Authenticating user sessions
+- How to display more aesthetic notifications
+
 
 ## Workflow and key lessons
 - Your git workflow, style guides, commit guides, etc
