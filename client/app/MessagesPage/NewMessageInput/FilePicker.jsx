@@ -1,13 +1,13 @@
 import React from 'react';
 import { PickerOverlay } from 'filestack-react';
 // import { TOKEN } from '../../../../filepickerConfig.js';
-const client = require('filestack-js').init(process.env.FILESTACK_TOKEN);
+const client = require('filestack-js').init(process.env.REACT_APP_FILESTACK_TOKEN);
 
 function FilePicker({ setCurrentMessageMedia, currentMessageMedia }) {
 
   return (
     <PickerOverlay
-      apikey={process.env.FILESTACK_TOKEN}
+      apikey={process.env.REACT_APP_FILESTACK_TOKEN}
       onSuccess={
         (res) => {
           console.log('res: ', res)
