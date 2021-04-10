@@ -1,14 +1,16 @@
-# Correspond - Turn The Page. Meet A Friend
+# Correspond - Turn The Page. Meet A Friend.
 
-### [Wilson Cheah](https://github.com/chyyeeah), Teva Dagai, Karim Zamrini, Evan Jordan, Adnan Noori, Khoi Dao, Jaspreet Atwal
+### [Wilson Cheah](https://github.com/chyyeeah), [Teva Dagai](https://github.com/tdagai), [Karim Zamrini](https://github.com/zamrini), [Evan Jordan](https://github.com/evanjordan42), [Adnan Noori](https://github.com/AdnanNoori), [Khoi Dao](https://github.com/Khoidao55), [Jaspreet Atwal](https://github.com/JSAtwal25)
 
 ## Introduction
-#### this project was a brief 1-week sprint where our team built an MVP for a client.
+#### Correspond is an international pen-pal application which allows users to connect from anywhere in the world and chat in real time.
 
 ## What does the app do?
-- what problem does it solve? who uses it?
-- why was it built?
-- user inputs and outputs
+- Allow users to select any country and connect with a user from that country
+- Gives users the ability to chat instantly and share stories or media
+- Provides open space to meet people from other cultures and share about anything
+- Users can control their connections by accepting or declining requests, or removing current connections
+
 
 ## Tech Stack
 - include logos here
