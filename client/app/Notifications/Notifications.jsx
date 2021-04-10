@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar.jsx';
 import NotificationsListItem from './NotificationsListItem/NotificationsListItem.jsx';
-import dummyData from '../../../dummyData.js';
 import './Notifications.css'
 
 const Notifications = ({ userID, loggedIn, setLoggedIn, pendingConnections }) => {
