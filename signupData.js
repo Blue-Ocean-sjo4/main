@@ -460,9 +460,9 @@ const countryCodes = Object.keys(countryListAlpha2);
 //   const randomBday = `${randomYear}-${randomMonth}-${randomDay}`;
 //   try {
 //     const response = await axios.post('http://localhost:1337/signup', {
-//       username: name,
+//       username: name.toLowerCase(),
 //       password: 'testing123',
-//       email: `${name}@earthlink.com`,
+//       email: `${name.toLowerCase()}@earthlink.com`,
 //       country: countryCodes[Math.floor(Math.random() * countryCodes.length)],
 //       birthdate: randomBday
 //     });
