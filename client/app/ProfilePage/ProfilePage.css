@@ -114,3 +114,12 @@
 input[type="file"] {
   display: none;
 }
+
+.productDetailPageDark .profile-container {
+  background-color: rgba(0, 0, 0, 0.925);
+}
+
+.productDetailPageDark .profile-header,
+.productDetailPageDark .profile-details {
+  color: white;
+}

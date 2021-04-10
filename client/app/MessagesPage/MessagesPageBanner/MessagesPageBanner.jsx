@@ -28,15 +28,15 @@ const MessagesPageBanner = ({ name, pronouns, bio, profilePic, userID }) => {
       </div>
 
       <div className="messages-page-banner-icons">
-        <button type="button">
+        <button className="nav-new-pal" type="button">
           <ion-icon name="person-add-outline"></ion-icon>
         </button>
         <button type="button">
-          <Link to="/notifications" >
+          <Link className="nav-notifications" to="/notifications" >
             <ion-icon name="notifications-outline"></ion-icon>
           </Link>
         </button>
-        <Link to="/profile" >
+        <Link className="nav-profile" to="/profile" >
           <ion-icon name="person-circle-outline"></ion-icon>
         </Link>
       </div>

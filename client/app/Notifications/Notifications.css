@@ -9,3 +9,13 @@
   align-items: center;
   overflow-y: auto;
 }
+
+.productDetailPageDark .notifications-container,
+.productDetailPageDark .connection-container {
+  background-color: rgba(0, 0, 0, 0.925);
+}
+
+.productDetailPageDark .connection-item-name,
+.productDetailPageDark .connection-item-bio {
+  color: white;
+}
