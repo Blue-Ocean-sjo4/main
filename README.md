@@ -12,7 +12,10 @@
 - Users can control their connections by accepting or declining requests, or removing current connections
 
 ## Tech Stack
-![alt text](https://cdn.discordapp.com/attachments/827288263110295586/830507721907634196/68747470733a2f2f6d69726f2e6d656469756d2e636f6d2f6d61782f3730302f302a55714779596d574352516e6a4c7a536b.png)
+<p align="center">
+  <img width="460" height="300" src="https://cdn.discordapp.com/attachments/827288263110295586/830507721907634196/68747470733a2f2f6d69726f2e6d656469756d2e636f6d2f6d61782f3730302f302a55714779596d574352516e6a4c7a536b.png">
+</p>
+
 
 ## Technical challenges we anticipated
 - why, what was the plan to overcome those challenges?
