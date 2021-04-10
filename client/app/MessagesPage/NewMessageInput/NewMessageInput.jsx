@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './NewMessageInput.css';
-import FilePicker from './FilePicker.jsx';
+// import FilePicker from './FilePicker.jsx';
 
 const NewMessageInput = ({ handleAddMessage }) => {
   const [currentMessageText, setCurrentMessageText] = useState('');
@@ -47,14 +47,14 @@ const NewMessageInput = ({ handleAddMessage }) => {
           }>
           <i className="fas fa-pen-nib" />
         </button>
-        {
+        {/* {
           showingFilePicker ? <FilePicker setCurrentMessageMedia={setCurrentMessageMedia} currentMessageMedia={currentMessageMedia} /> : null
         }
         <button id="new-message-upload"
           onMouseEnter={() => { showFilePicker(false) }}
           onClick={(e) => { e.preventDefault(); showFilePicker(true) }}>
           <i className="fas fa-upload"></i>
-        </button>
+        </button> */}
         {/* <button onClick={(e) => {
           e.preventDefault();
           var old = currentMessageMedia;

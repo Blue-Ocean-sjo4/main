@@ -27,8 +27,6 @@ const App = () => {
   });
   const [currentRoom, setCurrentRoom] = useState({});
 
-  console.log(process.env.TOKEN);
-
   return (
     <Router>
       <Switch>

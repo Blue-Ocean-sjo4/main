@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
-import ProfilePageFilePicker from './ProfilePageFilePicker.jsx';
+// import ProfilePageFilePicker from './ProfilePageFilePicker.jsx';
 import NavBar from '../NavBar/NavBar.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 import './ProfilePage.css';
@@ -83,7 +83,7 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username, userData, }) => {
             }}
             />
           </div>
-          {
+          {/* {
             showingFilePicker ? <ProfilePageFilePicker profilePicture={profilePicture} setProfilePicture={setProfilePicture} /> : null
           }
           <div className="profile-pic-upload"
@@ -91,7 +91,7 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username, userData, }) => {
             onClick={(e) => { e.preventDefault(); setShowingFilePicker(true) }}
           >
             UPLOAD
-          </div>
+          </div> */}
         </div>
         <form className="profile-details">
           <label>
