@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './MessagesPageBanner.css';
+import NewPal from '../../NavBar/NewPal/NewPal.jsx'
+import '../../NavBar/NewPal/NewPal.css'
 
 const MessagesPageBanner = ({ name, pronouns, bio, profilePic, userID }) => {
+
+  const [showingNewPal, setShowingNewPal] = useState(false)
+
+  function showNewPal() {
+    setShowingNewPal(true)
+  }
+
   return (
     <div id="messages-page-banner-container" >
 
@@ -18,7 +27,7 @@ const MessagesPageBanner = ({ name, pronouns, bio, profilePic, userID }) => {
           profilePic
             ? profilePic
             : 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'
-          }
+        }
       />
       {/* <img className="current-pal-profile-pic" src={profilePic} alt="Pal's Profile Picture"></img> */}
 
@@ -27,22 +36,22 @@ const MessagesPageBanner = ({ name, pronouns, bio, profilePic, userID }) => {
         <p className="pal-bio">{bio}</p>
       </div>
 
-      <div className="messages-page-banner-icons">
-        <button type="button">
-          <ion-icon name="person-add-outline"></ion-icon>
-        </button>
-        <button type="button">
+      <span className="messages-page-banner-icons">
+        <span>
           <Link to="/notifications" >
             <ion-icon name="notifications-outline"></ion-icon>
           </Link>
-        </button>
+        </span>
         <Link to="/profile" >
           <ion-icon name="person-circle-outline"></ion-icon>
         </Link>
-      </div>
+      </span>
 
     </div>
   );
 };
 
 export default MessagesPageBanner;
+
+
+
