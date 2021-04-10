@@ -7,13 +7,12 @@
 
 #messages-page-left {
   display: grid;
-  grid-template-rows: 10% 80% 10%;
+  grid-template-rows: 10% 78% 12%;
 }
 
 #messages-page-right{
   display: grid;
   grid-template-rows: 10% 90%;
-  /* border-left: 2px solid var(--ocean-blue); */
   background-color: var(--background);
 }
 
