@@ -15,7 +15,7 @@ const {
   updateUserData, getMessages,
   findPal, getConnections, acceptPal,
   rejectPal, saveMessages, removePal, importBio } = require('../database/model/queryFunctions.js');
-const PORT = 1337;
+// const PORT = 1337;
 
 passport.use(new Strategy(async (username, password, done) => {
   try {
@@ -154,4 +154,4 @@ app.get('/*', (req, res) => {
 });
 
 
-httpServer.listen(PORT, () => console.log(`listening on http://localhost:${PORT}`));
+httpServer.listen(process.env.PORT, () => console.log(`listening on http://localhost:${process.env.PORT}`));
