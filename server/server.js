@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 const session = require('express-session');
+require('dotenv').config();
 const connectEnsureLogin = require('connect-ensure-login');
 const {
   login, signup, findID, findUserData,
