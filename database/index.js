@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 // const { DB_IP } = require('../config.js');
 mongoose.connect(
-  // `mongodb+srv://${DB_IP}/blueocean`,
   `mongodb+srv://${process.env.DB_IP}/blueocean`,
   {
     useNewUrlParser: true,
