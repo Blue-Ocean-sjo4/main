@@ -13,7 +13,7 @@
 
 ## Tech Stack
 <p align="center">
-  <img src="https://i.imgur.com/PgxvxLx.png">
+  <img src="https://cdn.discordapp.com/attachments/827288263110295586/830505317182734396/68747470733a2f2f6d69726f2e6d656469756d2e636f6d2f6d61782f3730302f302a55714779596d574352516e6a4c7a536b.png">
 </p>
 
 
