@@ -3,7 +3,7 @@ import countryCodeToFlag from "country-code-to-flag";
 import axios from 'axios';
 import './NotificationsListItem.css';
 
-const NotificationsListItem = ({ userID, palID, name, bio, country }) => {
+const NotificationsListItem = ({ userID, palID, name, bio, country, pic }) => {
   const [buttonsDisplay, setButtonsDisplay] = useState(0);
 
   let buttonClass = buttonsDisplay === 0 ? "notification-buttons" : "notification-buttons-hidden";
@@ -39,7 +39,9 @@ const NotificationsListItem = ({ userID, palID, name, bio, country }) => {
     <>
       <div className="connection-container">
         <div className="connection-item-picture-container">
-          <img className="connection-item-picture" src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" alt=""></img>
+          {/* <img className="connection-item-picture" src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" alt=""></img> */}
+          <img className="connection-item-picture" src={pic ? pic : 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg' }
+          />
         </div>
         {/* <img className="connection-item-picture" src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" alt=""></img> */}
         <div className="connection-item-name">{name}</div>

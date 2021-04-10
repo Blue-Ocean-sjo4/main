@@ -1,3 +1,7 @@
+.new-messages-form-container {
+  display: flex;
+}
+
 #new-message-form {
   grid-row: 3;
   position: relative;

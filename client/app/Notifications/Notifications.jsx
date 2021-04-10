@@ -30,7 +30,7 @@ const Notifications = ({ userID, loggedIn, setLoggedIn, pendingConnections }) =>
       <NavBar />
       <div className="notifications-container">
         {pendingConnections.map((connection, i) => (
-          <NotificationsListItem key={i} userID={userID} palID={connection.userID} name={connection.name} bio={connection.bio} country={connection.country} />
+          <NotificationsListItem key={i} userID={userID} palID={connection.userID} name={connection.name} bio={connection.bio} country={connection.country} pic={connection.profilePicture} />
         ))}
       </div>
     </>
