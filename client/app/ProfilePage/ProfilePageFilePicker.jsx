@@ -1,13 +1,13 @@
 import React from 'react'
 import { PickerOverlay } from 'filestack-react';
-import { TOKEN } from '../../../filepickerConfig.js';
-const client = require('filestack-js').init(TOKEN);
+// import { TOKEN } from '../../../filepickerConfig.js';
+const client = require('filestack-js').init(process.env.TOKEN);
 
 const ProfilePageFilePicker = ({ profilePicture, setProfilePicture }) => {
   // TODO add profile page state here (profilePic and SetProfilePic)
   return (
     <PickerOverlay
-      apikey={TOKEN}
+      apikey={process.env.TOKEN}
       onSuccess={
         (res) => {
           console.log('res: ', res)
