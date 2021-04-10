@@ -4,6 +4,7 @@ import { PickerOverlay } from 'filestack-react';
 const client = require('filestack-js').init(process.env.TOKEN);
 
 function FilePicker({ setCurrentMessageMedia, currentMessageMedia }) {
+  console.log(process.env.TOKEN);
 
   return (
     <PickerOverlay
