@@ -453,23 +453,23 @@ const countryListAlpha2 = {
 
 const countryCodes = Object.keys(countryListAlpha2);
 
-randomNames.forEach(async name => {
-  const randomYear = 1970 + Math.floor(Math.random() * 40);
-  const randomMonth = 1 + Math.floor(Math.random() * 12);
-  const randomDay = 1 + Math.floor(Math.random() *25);
-  const randomBday = `${randomYear}-${randomMonth}-${randomDay}`;
-  try {
-    const response = await axios.post('http://localhost:1337/signup', {
-      username: name,
-      password: 'testing123',
-      email: `${name}@earthlink.com`,
-      country: countryCodes[Math.floor(Math.random() * countryCodes.length)],
-      birthdate: randomBday
-    });
-    console.log(name);
-  } catch (error) {
-    console.error(error);
-  }
-});
+// randomNames.forEach(async name => {
+//   const randomYear = 1970 + Math.floor(Math.random() * 40);
+//   const randomMonth = 1 + Math.floor(Math.random() * 12);
+//   const randomDay = 1 + Math.floor(Math.random() *25);
+//   const randomBday = `${randomYear}-${randomMonth}-${randomDay}`;
+//   try {
+//     const response = await axios.post('http://localhost:1337/signup', {
+//       username: name,
+//       password: 'testing123',
+//       email: `${name}@earthlink.com`,
+//       country: countryCodes[Math.floor(Math.random() * countryCodes.length)],
+//       birthdate: randomBday
+//     });
+//     console.log(name);
+//   } catch (error) {
+//     console.error(error);
+//   }
+// });
 
 console.log(randomNames.length);
