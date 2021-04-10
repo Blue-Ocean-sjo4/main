@@ -13,7 +13,7 @@
 
 ## Tech Stack
 <p align="center">
-  <img src="https://www.offsetup.com/assets/techlogos/mern.png">
+  <img src="https://i.imgur.com/BjYIm6l.png">
 </p>
 
 
