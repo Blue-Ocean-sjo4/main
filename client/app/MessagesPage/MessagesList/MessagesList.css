@@ -1,6 +1,6 @@
 #messages-list-container {
   overflow: auto;
-  max-height: 80vh;
+  max-height: 78vh;
   grid-row: 2;
   align-self: end;
   display: grid;
