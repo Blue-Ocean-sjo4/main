@@ -35,7 +35,7 @@ const MessagesPage = ({ loggedIn, setLoggedIn, rooms = { room: { roomID: '' } },
   const [currentPal, setCurrentPal] = useState({ pic: room?.profilePicture, name: room?.name, pronouns: room?.pronouns, country: room?.country, bio: room?.bio });
 
   useEffect(() => {
-    axios.get(`http://localhost:1337/roomMessages/${roomID}`)
+    axios.get(`/roomMessages/${roomID}`)
       .then((messages) => {
         setAllMessages(messages.data.messages);
       });
