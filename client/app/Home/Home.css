@@ -10,6 +10,16 @@
   overflow-y: auto;
 }
 
+.home-list-item-container {
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+  width: 100%;
+}
+
+.home-list-item-container-hidden {
+  display: none;
+}
+
 .productDetailPageDark,
 .productDetailPageDark .pal-messages-link,
 .productDetailPageDark .pal-container,

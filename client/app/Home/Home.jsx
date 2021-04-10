@@ -17,6 +17,8 @@ const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserD
     toast('Poggers in the chat');
   }
 
+  console.log(darkMode);
+
   useEffect(() => {
     if (username) {
       axios.get(`/connections?username=${username}`)
@@ -33,7 +35,6 @@ const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserD
       <Redirect to="/login" />
     )
   }
-  console.log(darkMode)
   return (
     <>
       <NavBar userID={userID} />

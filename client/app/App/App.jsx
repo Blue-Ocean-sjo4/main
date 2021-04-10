@@ -37,7 +37,7 @@ const App = () => {
       <Router>
         <Switch>
           <Route path="/" exact render={() => (
-            <Home userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} rooms={userData.rooms} setUserData={setUserData} setCurrentRoom={setCurrentRoom} userData={userData} />
+            <Home userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} rooms={userData.rooms} setUserData={setUserData} setCurrentRoom={setCurrentRoom} userData={userData}  darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
           )} />
           <Route path="/login" exact render={() => (
             <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} setUsername={setUsername} />
