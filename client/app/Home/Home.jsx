@@ -38,12 +38,16 @@ const Home = ({ userID, loggedIn, setLoggedIn, username = "", rooms = [], setUse
     <>
       <NavBar userID={userID} />
       <div className="home-container">
-        {rooms.map((room, index) => (
+        <div className="home-header">PAL LIST</div>
+        {rooms.length > 0 ?
+        rooms.map((room, index) => (
           <div className={listItemClass} key={index} >
             <HomeListItem room={room} setCurrentRoom={setCurrentRoom} />
             <RemovePal userID={userID} palID={room.userID} roomID={room.roomID} setListItemClass={setListItemClass} />
           </div>
-        ))}
+        )) : 
+        <div className="home-empty-list">Make a pal by clicking the <ion-icon name="person-add-outline"></ion-icon> icon in the navigation bar</div>
+        }
       </div>
     </>
   )

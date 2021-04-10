@@ -29,12 +29,21 @@ const Notifications = ({ userID, loggedIn, setLoggedIn, pendingConnections }) =>
     <>
       <NavBar />
       <div className="notifications-container">
-        {pendingConnections.map((connection, i) => (
+        <div className="notifications-header">NEW PAL REQUESTS</div>
+        {pendingConnections.length > 0 ? 
+        pendingConnections.map((connection, i) => (
           <NotificationsListItem key={i} userID={userID} palID={connection.userID} name={connection.name} bio={connection.bio} country={connection.country} pic={connection.profilePicture} />
-        ))}
+        )) : 
+        <div className="notifications-empty-list">No Pending Requests</div>
+        }
       </div>
     </>
   )
 }
 
 export default Notifications;
+
+
+// {pendingConnections.map((connection, i) => (
+//   <NotificationsListItem key={i} userID={userID} palID={connection.userID} name={connection.name} bio={connection.bio} country={connection.country} pic={connection.profilePicture} />
+// ))}
