@@ -18,10 +18,14 @@ body {
   margin: 0;
   padding: 0;
   background-color: var(--background);
-  transition: background-color .2;
+  transition: background-color .2, color .2s;
 }
 
 #app {
   height: 100%;
   width: 100%;
+}
+
+.productDetailPageLight {
+  transition: background-color .2s;
 }

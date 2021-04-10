@@ -5,7 +5,7 @@ import NotificationsListItem from './NotificationsListItem/NotificationsListItem
 import dummyData from '../../../dummyData.js';
 import './Notifications.css'
 
-const Notifications = ({ userID, loggedIn, setLoggedIn, pendingConnections }) => {
+const Notifications = ({ userID, loggedIn, setLoggedIn, pendingConnections, darkMode, toggleDarkMode }) => {
 
   // Will need to retrieve username from URL, or state passed from previous page(?)
 
@@ -27,7 +27,7 @@ const Notifications = ({ userID, loggedIn, setLoggedIn, pendingConnections }) =>
 
   return (
     <>
-      <NavBar />
+      <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <div className="notifications-container">
         {pendingConnections.map((connection, i) => (
           <NotificationsListItem key={i} userID={userID} palID={connection.userID} name={connection.name} bio={connection.bio} country={connection.country} pic={connection.profilePicture} />

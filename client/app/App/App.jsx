@@ -49,7 +49,7 @@ const App = () => {
             <ProfilePage userID={userData.userID} userData={userData} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
           )} />
           <Route path="/notifications" exact render={() => (
-            <Notifications userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} pendingConnections={userData.pendingConnections} />
+            <Notifications userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} pendingConnections={userData.pendingConnections} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
           )} />
           <Route path="/messages" exact render={() => (
             <MessagesPage userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} rooms={userData.rooms} currentRoom={currentRoom} />
