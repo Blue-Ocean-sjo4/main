@@ -28,6 +28,10 @@ const NavBar = ({ userID }) => {
         <Link to="/profile" className="nav-profile">
           <span><ion-icon name="person-circle-outline"></ion-icon></span>
         </Link>
+        <span className="nav-profile" >
+          {/* <button onClick={() => window.location.reload()}>Log Out</button> */}
+          <ion-icon onClick={() => window.location.reload()} name="log-out-outline"></ion-icon>
+        </span>
       </span>
     </div>
   )
