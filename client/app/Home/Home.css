@@ -27,6 +27,7 @@
 
 .productDetailPageDark {
   background-color: var(--dark-background);
+  /* transition: background-color .4; */
 }
 
 .productDetailPageDark .home-container {
