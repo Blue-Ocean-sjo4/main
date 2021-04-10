@@ -38,6 +38,8 @@
 .productDetailPageDark .connection-item-name,
 .productDetailPageDark .connection-item-bio {
   transition: color .2s;
+}
+
 .notifications-container::-webkit-scrollbar {
   display: none;
 }
