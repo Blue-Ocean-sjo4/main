@@ -10,12 +10,19 @@
   overflow-y: auto;
 }
 
-.productDetailPageDark .notifications-container,
-.productDetailPageDark .connection-container {
-  background-color: rgba(0, 0, 0, 0.925);
+.notifications-container::-webkit-scrollbar {
+  display: none;
 }
 
-.productDetailPageDark .connection-item-name,
-.productDetailPageDark .connection-item-bio {
-  color: white;
+.notifications-header {
+  color: var(--midnight-blue);
+  font-size: 32px;
+  font-weight: 600;
+  margin: 20px 0px 10px;
+}
+
+.notifications-empty-list {
+  place-self: center;
+  color: var(--midnight-blue);
+  font-size: 24px;
 }

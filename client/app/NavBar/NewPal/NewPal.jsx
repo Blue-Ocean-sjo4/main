@@ -31,7 +31,6 @@ function NewPal({ showingNewPal, setShowingNewPal, userID }) {
   }
 
   function addPal(e) {
-    // if no country, generate random one
     var sendingCountry = country
     if (!country) {
       sendingCountry = randomCountry();

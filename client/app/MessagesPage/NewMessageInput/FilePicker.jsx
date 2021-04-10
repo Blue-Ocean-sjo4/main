@@ -10,8 +10,7 @@ function FilePicker({ setCurrentMessageMedia, currentMessageMedia }) {
       apikey={TOKEN}
       onSuccess={
         (res) => {
-          console.log('res: ', res)
-          var newMedia = currentMessageMedia;
+          var newMedia = [...currentMessageMedia];
           newMedia.push({ filename: res.filesUploaded[0].filename, mimetype: res.filesUploaded[0].mimetype, url: res.filesUploaded[0].url });
           setCurrentMessageMedia(newMedia)
         }
