@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
+import 'react-toastify/dist/ReactToastify.css';
 import './Login.css';
 
 const Login = ({ loggedIn, setLoggedIn, username, setUsername }) => {
@@ -35,7 +37,7 @@ const Login = ({ loggedIn, setLoggedIn, username, setUsername }) => {
       .catch((error) => {
         console.log('Login failure');
         console.log(`error`, error);
-        alert('Invalid login credentials')
+        toast('Invalid login credentials')
       })
   }
 
@@ -47,6 +49,7 @@ const Login = ({ loggedIn, setLoggedIn, username, setUsername }) => {
 
   return (
     <div className="login-page">
+      <ToastContainer />
       <div className="title-and-catchphrase" >
         <h1 className="login-page-title" >Correspond</h1>
         <div className="catchphrase">Turn The Page. Meet A Friend.</div>

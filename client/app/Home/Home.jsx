@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import NavBar from '../NavBar/NavBar.jsx';
 import dummyData from '../../../dummyData.js';
 import HomeListItem from './HomeListItem/HomeListItem.jsx';
+import RemovePal from './RemovePal/RemovePal.jsx';
 import axios from 'axios';
+import 'react-toastify/dist/ReactToastify.css';
 import './Home.css';
 
-const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserData, setCurrentRoom }) => {
+const Home = ({ userID, loggedIn, setLoggedIn, username = "", rooms = [], setUserData, setCurrentRoom, userData }) => {
+
+  const [listItemClass, setListItemClass] = useState("home-list-item-container")
+
+  const notifyTest = () => {
+    toast('Poggers in the chat');
+  }
 
   useEffect(() => {
     if (username) {
       axios.get(`/connections?username=${username}`)
-      .then((response) => {
-        console.log('connections response data: ', response.data)
-        setUserData(response.data)
-      })
-      .catch((err) => { console.log(`err`, err) });
+        .then((response) => {
+          console.log('connections response data: ', response.data)
+          setUserData(response.data)
+        })
+        .catch((err) => { console.log(`err`, err) });
     }
   }, [username])
-
-  // useEffect(() => {
-  //   setUserData(dummyData.dummyData)
-  // }, [])
 
   if (!loggedIn) {
     return (
@@ -34,14 +39,12 @@ const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserD
       <NavBar userID={userID} />
       <div className="home-container">
         {rooms.map((room, index) => (
-          <HomeListItem key={index} room={room} setCurrentRoom={setCurrentRoom} />
+          <div className={listItemClass} key={index} >
+            <HomeListItem room={room} setCurrentRoom={setCurrentRoom} />
+            <RemovePal userID={userID} palID={room.userID} roomID={room.roomID} setListItemClass={setListItemClass} />
+          </div>
         ))}
       </div>
-      {/* <div className="home-container">
-        {rooms.map((pal) => (
-          <HomeListItem key={pal.userID} name={pal.name} bio={pal.bio} country={pal.country} />
-        ))}
-      </div> */}
     </>
   )
 }
