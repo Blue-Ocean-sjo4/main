@@ -13,7 +13,7 @@
 
 ## Tech Stack
 <p align="center">
-  <img src="https://i.imgur.com/BjYIm6l.png">
+  <img src="https://i.imgur.com/PgxvxLx.png">
 </p>
 
 
