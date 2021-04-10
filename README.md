@@ -1,6 +1,6 @@
-# Catchy headline / cool graphic
+# Correspond - Turn The Page. Meet A Friend
 
-### names & links of contributors
+### [Wilson Cheah](https://github.com/chyyeeah), Teva Dagai, Karim Zamrini, Evan Jordan, Adnan Noori, Khoi Dao, Jaspreet Atwal
 
 ## Introduction
 #### this project was a brief 1-week sprint where our team built an MVP for a client.
