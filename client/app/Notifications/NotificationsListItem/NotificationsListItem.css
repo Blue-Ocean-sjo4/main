@@ -31,7 +31,7 @@
 .connection-item-country {
   grid-area: 1 / 3 / 3 / 4;
   place-self: center;
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
 .connection-item-picture-container {
