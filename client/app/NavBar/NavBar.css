@@ -38,14 +38,6 @@
   cursor: pointer;
 }
 
-/* .nav-profile:hover {
-  cursor: pointer;
-}
-
-.nav-new-pal:hover {
-  cursor: pointer;
-} */
-
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
           DARK THEME BUTTON
@@ -68,7 +60,6 @@
   z-index: 2000;
   color: var(--lighter-blue);
   transition: color .4s;
-  /* color: white; */
 }
 
 #darkModeSun {
