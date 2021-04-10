@@ -8,7 +8,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
+  overflow-y: scroll;
+}
+
+.home-container::-webkit-scrollbar {
+  display: none;
 }
 
 .home-list-item-container {
@@ -58,3 +62,26 @@
   transition: color .2s;
 }
 
+.home-header {
+  color: var(--midnight-blue);
+  font-size: 32px;
+  font-weight: 600;
+  margin: 20px 0px 10px;
+}
+
+.home-empty-list {
+  place-self: center;
+  color: var(--midnight-blue);
+  font-size: 24px;
+}
+
+.home-empty-list ion-icon {
+  margin: 0px;
+  padding: 0px;
+  font-size: 1.5rem;
+  color: var(--midnight-blue);
+}
+
+.home-empty-list ion-icon:hover {
+  cursor: default;
+}

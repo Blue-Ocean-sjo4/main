@@ -13,7 +13,8 @@ const { Types } = require('mongoose');
 
 module.exports.signup = async (request, response) => {
   console.log('request body:', request.body);
-  const { username, password, email, country, birthdate } = request.body;
+  const username = request.body.username.toLowerCase();
+  const { password, email, country, birthdate } = request.body;
   const birthDate = new Date(moment(birthdate));
 
   try {
@@ -33,7 +34,7 @@ module.exports.signup = async (request, response) => {
   }
 };
 
-module.exports.login = (username) => User.findOne({ username });
+module.exports.login = (username) => User.findOne({ username: username.toLowerCase() });
 
 module.exports.findID = (id) => User.findById({ _id: id });
 
@@ -46,7 +47,7 @@ module.exports.findID = (id) => User.findById({ _id: id });
 */
 module.exports.findUserData = async (req, res) => {
   try {
-    const loggedInUser = await User.findOne({ username: req.query.username })
+    const loggedInUser = await User.findOne({ username: req.query.username.toLowerCase() })
       .select({ password: 0 })
       .lean();
     // console.log(loggedInUser);
@@ -115,7 +116,8 @@ module.exports.findUserData = async (req, res) => {
 */
 
 module.exports.updateUserData = async (request, response) => {
-  const { user_id, username, gender, pronouns, country, bio, profilePicture} = request.body;
+  const username = request.body.username.toLowerCase();
+  const { user_id, gender, pronouns, country, bio, profilePicture} = request.body;
 
   try {
     const update = {
@@ -155,19 +157,19 @@ module.exports.getMessages = async (request, response) => {
   }
 };
 
-module.exports.postMessage = async (request, response) => {
-  const { room_id } = request.params;
+// module.exports.postMessage = async (request, response) => {
+//   const { room_id } = request.params;
 
-  try {
-    const room = await Room.findOne({ _id: room_id });
-    if (room.room_id) {
-      // waiting for socket implementation
-      room.messages.push();
-    }
-  } catch (error) {
-    response.status(404).send(error);
-  }
-};
+//   try {
+//     const room = await Room.findOne({ _id: room_id });
+//     if (room.room_id) {
+//       // waiting for socket implementation
+//       room.messages.push();
+//     }
+//   } catch (error) {
+//     response.status(404).send(error);
+//   }
+// };
 
 module.exports.findPal = async (request, response) => {
   try {
