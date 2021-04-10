@@ -12,7 +12,7 @@
 - Users can control their connections by accepting or declining requests, or removing current connections
 
 ## Tech Stack
-[https://miro.medium.com/max/700/0*UqGyYmWCRQnjLzSk.jpg]
+![alt text](https://miro.medium.com/max/700/0*UqGyYmWCRQnjLzSk.jpg)
 
 ## Technical challenges we anticipated
 - why, what was the plan to overcome those challenges?
