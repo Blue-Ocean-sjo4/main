@@ -8,7 +8,7 @@ import NewMessageInput from './NewMessageInput/NewMessageInput.jsx';
 import PalsList from './PalsList/PalsList.jsx'
 import './MessagesPage.css';
 
-const socket = io('http://localhost:1337', { autoConnect: false });
+const socket = io('https://stormy-peak-37607.herokuapp.com', { autoConnect: false });
 
 /*
 
