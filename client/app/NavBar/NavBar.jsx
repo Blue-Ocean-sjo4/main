@@ -4,16 +4,35 @@ import './NavBar.css';
 import './NewPal/NewPal.css'
 import NewPal from './NewPal/NewPal.jsx'
 
-const NavBar = ({ userID }) => {
-
+const NavBar = ({ userID, darkMode, toggleDarkMode }) => {
   const [showingNewPal, setShowingNewPal] = useState(false)
 
   function showNewPal() {
     setShowingNewPal(true)
   }
 
+  console.log(darkMode);
+
   return (
     <div className="nav-bar">
+      <div className='darkModeButton'>
+        <label>
+          <input onClick={toggleDarkMode} type="checkbox"></input>
+          <span className={ darkMode ? 'slider round dark': 'slider round' }>
+            {
+              !darkMode
+              ?
+              <div id='darkModeMoon'>
+                <ion-icon name="moon"></ion-icon>
+              </div>
+              :
+              <div id='darkModeSun'>
+                <ion-icon name="sunny"></ion-icon>
+              </div>
+            }
+          </span>
+        </label>
+      </div>
       <Link to="/" className="nav-title">
         <span>CORRESPOND</span>
       </Link>

@@ -61,21 +61,12 @@
   outline: none;
 }
 
-/* .profile-input:hover {
-  cursor: pointer;
-} */
-
 .profile-bio {
   height: 140;
   resize: none;
   padding: 5px;
   text-indent: 0px;
 }
-
-/* .profile-bio:hover {
-  cursor: text;
-} */
-
 
 .profile-update-button {
   height: 30px;
@@ -115,11 +106,40 @@ input[type="file"] {
   display: none;
 }
 
+/* ************* */
+/*   Dark Mode   */
+/* ************* */
+
 .productDetailPageDark .profile-container {
-  background-color: rgba(0, 0, 0, 0.925);
+  background-color: rgb(0, 48, 73);
 }
 
-.productDetailPageDark .profile-header,
+.productDetailPageDark .profile-header {
+  color: var(--lighter-blue);
+}
+
+.productDetailPageDark .profile-pic-cropper {
+  border-color: rgb(0, 24, 32);
+}
+
+.productDetailPageDark .profile-pic-upload,
+.productDetailPageDark .profile-update-button {
+  border-color: var(--ocean-blue);
+  background-color: var(--ocean-blue);
+}
+
+.productDetailPageDark .profile-pic-upload:hover,
+.productDetailPageDark .profile-update-button:hover {
+  background-color: var(--text-blue);
+}
+
 .productDetailPageDark .profile-details {
   color: white;
+}
+
+.productDetailPageDark .profile-input,
+.productDetailPageDark .profile-bio {
+  border-color: rgb(0, 24, 32);
+  background-color: rgba(0, 0, 0, .1);
+  color: var(--background);
 }

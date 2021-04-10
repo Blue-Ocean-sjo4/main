@@ -17,8 +17,6 @@ const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserD
     toast('Poggers in the chat');
   }
 
-  console.log(darkMode);
-
   useEffect(() => {
     if (username) {
       axios.get(`/connections?username=${username}`)
@@ -37,7 +35,7 @@ const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserD
   }
   return (
     <>
-      <NavBar userID={userID} />
+      <NavBar userID={userID} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <div className="home-container">
         {rooms.map((room, index) => (
           <div className={listItemClass} key={index} >
@@ -51,7 +49,7 @@ const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserD
           <HomeListItem key={pal.userID} name={pal.name} bio={pal.bio} country={pal.country} />
         ))}
       </div> */}
-      <div className='darkModeButton'>
+      {/* <div className='darkModeButton'>
         <label>
           <input onClick={toggleDarkMode} type="checkbox"></input>
           <span className={ darkMode ? 'slider round dark': 'slider round' }>
@@ -68,7 +66,7 @@ const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserD
             }
           </span>
         </label>
-      </div>
+      </div> */}
     </>
   )
 }

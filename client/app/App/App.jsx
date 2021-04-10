@@ -37,7 +37,7 @@ const App = () => {
       <Router>
         <Switch>
           <Route path="/" exact render={() => (
-            <Home userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} rooms={userData.rooms} setUserData={setUserData} setCurrentRoom={setCurrentRoom} userData={userData}  darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+            <Home userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} rooms={userData.rooms} setUserData={setUserData} setCurrentRoom={setCurrentRoom} userData={userData} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
           )} />
           <Route path="/login" exact render={() => (
             <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} setUsername={setUsername} />
@@ -46,7 +46,7 @@ const App = () => {
             <SignUp />
           )} />
           <Route path="/profile" exact render={() => (
-            <ProfilePage userID={userData.userID} userData={userData} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} />
+            <ProfilePage userID={userData.userID} userData={userData} loggedIn={loggedIn} setLoggedIn={setLoggedIn} username={username} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
           )} />
           <Route path="/notifications" exact render={() => (
             <Notifications userID={userData.userID} loggedIn={loggedIn} setLoggedIn={setLoggedIn} pendingConnections={userData.pendingConnections} />
