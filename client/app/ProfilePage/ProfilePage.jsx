@@ -7,7 +7,7 @@ import NavBar from '../NavBar/NavBar.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 import './ProfilePage.css';
 
-const ProfilePage = ({ loggedIn, setLoggedIn, username, userData, }) => {
+const ProfilePage = ({ loggedIn, setLoggedIn, username, userData, darkMode, toggleDarkMode }) => {
 
   const [profilePicture, setProfilePicture] = useState('');
   const [showingFilePicker, setShowingFilePicker] = useState(false);
@@ -71,7 +71,7 @@ const ProfilePage = ({ loggedIn, setLoggedIn, username, userData, }) => {
 
   return (
     <>
-      <NavBar />
+      <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <ToastContainer />
       <div className="profile-container">
         <div className="profile-header header">{`${username}'s Profile`}</div>

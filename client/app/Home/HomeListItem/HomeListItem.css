@@ -9,6 +9,7 @@
   border: 2px solid var(--text-blue);
   text-decoration: none;
   box-shadow: 2px 2px 0 var(--text-blue);
+  transition: background-color .2s, border-color .2s, box-shadow .2s, color .2s;
 }
 
 .pal-container {

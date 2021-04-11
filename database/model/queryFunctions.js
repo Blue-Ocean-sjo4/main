@@ -5,14 +5,11 @@ const { Types } = require('mongoose');
 
 /*
 *-----------------------------------------------------------*
-|                                                           |
 |            Create a new user with /signup                 |
-|                                                           |
 *-----------------------------------------------------------*
 */
 
 module.exports.signup = async (request, response) => {
-  console.log('request body:', request.body);
   const username = request.body.username.toLowerCase();
   const { password, email, country, birthdate } = request.body;
   const birthDate = new Date(moment(birthdate));
@@ -25,7 +22,6 @@ module.exports.signup = async (request, response) => {
     } else {
       const hashPassword = await bcrypt.hash(password, 10);
       await User.create({ username, password: hashPassword, email, country, birthdate: birthDate });
-      console.log('else block reached')
       response.send('registered');
     }
   } catch (error) {
@@ -40,9 +36,7 @@ module.exports.findID = (id) => User.findById({ _id: id });
 
 /*
 *-----------------------------------------------------------*
-|                                                           |
 |              Find the User and send User Data             |
-|                                                           |
 *-----------------------------------------------------------*
 */
 module.exports.findUserData = async (req, res) => {
@@ -50,7 +44,6 @@ module.exports.findUserData = async (req, res) => {
     const loggedInUser = await User.findOne({ username: req.query.username.toLowerCase() })
       .select({ password: 0 })
       .lean();
-    // console.log(loggedInUser);
     const rooms = Object.entries(loggedInUser.rooms);
     let roomsPayload = [];
     let pendingConnectionsPayload = [];
@@ -116,7 +109,6 @@ module.exports.findUserData = async (req, res) => {
 */
 
 module.exports.updateUserData = async (request, response) => {
-  const username = request.body.username.toLowerCase();
   const { user_id, gender, pronouns, country, bio, profilePicture} = request.body;
 
   try {
@@ -128,9 +120,8 @@ module.exports.updateUserData = async (request, response) => {
       profilePicture
     };
 
-    const userData = await User.findOneAndUpdate({ _id: user_id }, update, { new: true });
-    console.log('USER DATA: ', userData);
-    console.log(`user_id`, user_id)
+    const userData = await User.findOneAndUpdate({ _id: user_id }, update, { new: true })
+      .select({ password: 0 });
     response.status(201).send(userData);
   } catch(error) {
     response.status(404).send(error);
@@ -157,24 +148,10 @@ module.exports.getMessages = async (request, response) => {
   }
 };
 
-// module.exports.postMessage = async (request, response) => {
-//   const { room_id } = request.params;
-
-//   try {
-//     const room = await Room.findOne({ _id: room_id });
-//     if (room.room_id) {
-//       // waiting for socket implementation
-//       room.messages.push();
-//     }
-//   } catch (error) {
-//     response.status(404).send(error);
-//   }
-// };
-
 module.exports.findPal = async (request, response) => {
   try {
     const { user_id, country } = request.params;
-    const userData = await User.findOne({ _id: user_id }).lean();
+    const userData = await User.findOne({ _id: user_id });
     const ineligiblePals = [Types.ObjectId(user_id)];
 
     Object.keys(userData.pendingConnections).forEach(user => ineligiblePals.push(Types.ObjectId(user)));
@@ -197,22 +174,25 @@ module.exports.findPal = async (request, response) => {
         $sample: { size: 1 }
       }
     ]);
-    console.log(randomPal[0].username);
     // what if there are no available pals to connect with given the criteria?
 
-    const updatedPendingConnections = randomPal[0].pendingConnections;
-    updatedPendingConnections[user_id] = 0;
-    await User.findOneAndUpdate({ _id: randomPal[0]._id }, { pendingConnections: updatedPendingConnections });
+    if (!randomPal[0]) {
+      response.sendStatus(404);
+    } else {
+      randomPal[0].pendingConnections[user_id] = 0;
+      await User.findOneAndUpdate({ _id: randomPal[0]._id }, { pendingConnections: randomPal[0].pendingConnections });
 
-    const updatedRequestedConnections = userData.requestedConnections;
-    updatedRequestedConnections[randomPal[0]._id] = 0;
-    await User.findOneAndUpdate({ _id: user_id }, { requestedConnections: updatedRequestedConnections });
+      userData.requestedConnections[randomPal[0]._id] = 0;
+      userData.markModified('requestedConnections');
+      await userData.save();
 
-    response.sendStatus(200);
+      response.sendStatus(200);
+    }
   } catch (error) {
     console.error(error);
     response.sendStatus(400);
   }
+
 };
 
 module.exports.acceptPal = async (req, res) => {
@@ -223,33 +203,20 @@ module.exports.acceptPal = async (req, res) => {
     const newRoom = await Room.create({ userOneID: user_id, userTwoID: user_pal_id });
     const newRoomId = newRoom._id;
 
-    // remove palId from userId's pending connections
-    // add the room_id to userId's rooms with palId
-    const userData = await User.findOne({ _id: user_id }).lean();
-    const updatedPendingConnections = userData.pendingConnections;
-    updatedPendingConnections[user_pal_id] = 1;
-    const updatedRooms = userData.rooms;
-    updatedRooms[newRoomId] = user_pal_id;
-    await User.findOneAndUpdate(
-      { _id: user_id },
-      {
-        pendingConnections: updatedPendingConnections,
-        rooms: updatedRooms
-      }
-    );
+    const userData = await User.findOne({ _id: user_id });
+    userData.pendingConnections[user_pal_id] = 1;
+    userData.rooms[newRoomId] = user_pal_id;
+    userData.markModified('pendingConnections');
+    userData.markModified('rooms');
+    await userData.save();
 
     // add the room_id to palId's rooms with userId
-    const palData = await User.findOne({ _id: user_pal_id }).lean();
-    const updatedPalRooms = palData.rooms;
-    updatedPalRooms[newRoomId] = user_id;
-    const updatedRequestedConnections = palData.requestedConnections;
-    updatedRequestedConnections[user_id] = 1;
-    await User.findOneAndUpdate(
-      { _id: user_pal_id },
-      {
-        rooms: updatedPalRooms,
-        requestedConnections: updatedRequestedConnections
-      });
+    const palData = await User.findOne({ _id: user_pal_id });
+    palData.requestedConnections[user_id] = 1;
+    palData.rooms[newRoomId] = user_id;
+    palData.markModified('requestedConnections');
+    palData.markModified('rooms');
+    await palData.save();
 
     res.sendStatus(200);
   } catch (error) {
@@ -261,19 +228,15 @@ module.exports.acceptPal = async (req, res) => {
 module.exports.rejectPal = async (req, res) => {
   const { user_id, user_pal_id} = req.params;
   try {
-    const userData = await User.findOne({ _id: user_id }).lean();
-    const updatedPendingConnections = userData.pendingConnections;
-    updatedPendingConnections[user_pal_id] = 2;
-    await User.findOneAndUpdate(
-      { _id: user_id },
-      { pendingConnections: updatedPendingConnections });
+    const userData = await User.findOne({ _id: user_id });
+    userData.pendingConnections[user_pal_id] = 2;
+    userData.markModified('pendingConnections');
+    await userData.save();
 
-    const palData = await User.findOne({ _id: user_pal_id }).lean();
-    const updatedPalPendingConnections = userData.requestedConnections;
-    updatedPalPendingConnections[user_id] = 2;
-    await User.findOneAndUpdate(
-      { _id: user_pal_id },
-      { requestedConnections: updatedPalPendingConnections });
+    const palData = await User.findOne({ _id: user_pal_id });
+    palData.requestedConnections[user_id] = 2;
+    palData.markModified('requestedConnections');
+    await palData.save();
 
     res.sendStatus(200);
   } catch (error) {
@@ -303,43 +266,26 @@ module.exports.removePal = async (req, res) => {
 
   try {
     await Room.deleteOne({ _id: room_id });
-    const userData = await User.findOne({ _id: user_id }).lean();
-    const palData = await User.findOne({ _id: user_pal_id }).lean();
+    const userData = await User.findOne({ _id: user_id });
+    const palData = await User.findOne({ _id: user_pal_id });
     delete userData.rooms[room_id];
     delete palData.rooms[room_id];
+    userData.markModified('rooms');
+    palData.markModified('rooms');
 
     if (userData.pendingConnections[user_pal_id]) {
       userData.pendingConnections[user_pal_id] = 3;
       palData.requestedConnections[user_id] = 3;
-      await User.findOneAndUpdate(
-        { _id: user_id },
-        {
-          pendingConnections: userData.pendingConnections,
-          rooms: userData.rooms
-         });
-      await User.findOneAndUpdate(
-        { _id: user_pal_id },
-        {
-          requestedConnections: palData.requestedConnections,
-          rooms: palData.rooms
-         });
+      userData.markModified('pendingConnections');
+      palData.markModified('requestedConnections');
     } else {
-      console.log('inside else block');
       userData.requestedConnections[user_pal_id] = 3;
       palData.pendingConnections[user_id] = 3;
-      await User.findOneAndUpdate(
-        { _id: user_id },
-        {
-          requestedConnections: userData.requestedConnections,
-          rooms: userData.rooms
-         });
-      await User.findOneAndUpdate(
-        { _id: user_pal_id },
-        {
-          pendingConnections: palData.pendingConnections,
-          rooms: palData.rooms
-         });
+      userData.markModified('requestedConnections');
+      palData.markModified('pendingConnections');
     }
+    await userData.save();
+    await palData.save();
 
     res.sendStatus(200)
   } catch (error) {
@@ -347,25 +293,3 @@ module.exports.removePal = async (req, res) => {
     res.sendStatus(404);
   }
 };
-
-// module.exports.importBio = async (req, res) => {
-//   try {
-//     await User.updateMany({}, { bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' });
-//     res.sendStatus(200);
-//   } catch(error) {
-//     console.log(error);
-//     res.sendStatus(404);
-//   }
-// }
-// module.exports.test = async (req, res) => {
-//   await Test.create({ testDate: moment() });
-//   const results = await Test.find({});
-//   const testDate = results[0].testDate;
-//   console.log(new Date(moment('1991-04-05')));
-//   res.sendStatus(201);
-// };
-
-// db.users.update({}, {$set: {bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'} }, {multi: true})
-
-
-// db.users.update({}, {'$set': {requestedConnections: {} }}, {multi: true})

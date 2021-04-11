@@ -44,6 +44,19 @@
   font-size: 1.25rem;
 }
 
+.productDetailPageDark .message-by-me,
+.productDetailPageDark .message-by-pal {
+  background-color: rgba(58, 58, 58, 0.418);
+  color: white;
+}
+
+.productDetailPageDark #new-message-upload,
+.productDetailPageDark #submit-new-message,
+.productDetailPageDark #new-message-input {
+  background-color: rgba(58, 58, 58, 0.418);
+  color: white;
+}
+
 .message-media-item-thumb {
   border-radius: 2px;
   border: 2px solid rgb(77, 77, 77);
