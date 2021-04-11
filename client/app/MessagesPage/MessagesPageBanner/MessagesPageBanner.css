@@ -1,6 +1,5 @@
 #messages-page-banner-container {
   background-color: var(--ocean-blue);
-  /* border-bottom: 2px solid var(--birdie-blue); */
   display: grid;
   grid-template-columns: 5% 10% 60% 25%;
 }
@@ -22,8 +21,16 @@
 
 .messages-page-banner-icons {
   font-size: 2.25rem;
-  color: var(--lighter-blue);
+  /* color: var(--lighter-blue); */
   cursor: pointer;
+  align-self: center;
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+#messaging-page-notifications,
+#messaging-page-my-profile {
+  color: var(--lighter-blue);
 }
 
 .current-pal-profile-pic {
@@ -37,12 +44,6 @@
 .current-pal-profile-pic,
 .messages-page-back {
   place-self: center;
-}
-
-.messages-page-banner-icons {
-  align-self: center;
-  margin-left: auto;
-  margin-right: 20px;
 }
 
 .current-pal-info {
