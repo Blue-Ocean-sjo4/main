@@ -4,7 +4,7 @@
 - Make sure you have a Heroku account created
 
 ## Deployment
-1. From the room directory, on the terminal, type `heroku create`
+1. From the root directory, on the terminal, type `heroku create`
   - This will create a new heroku project
 2. Push the deployment branch to heroku with `git push heroku heroku-atlas-deployment:master`
 3. Set up the environment variables (heroku refers to them as "Config Vars")
