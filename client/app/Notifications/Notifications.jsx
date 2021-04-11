@@ -4,7 +4,7 @@ import NavBar from '../NavBar/NavBar.jsx';
 import NotificationsListItem from './NotificationsListItem/NotificationsListItem.jsx';
 import './Notifications.css'
 
-const Notifications = ({ userID, loggedIn, setLoggedIn, pendingConnections }) => {
+const Notifications = ({ userID, loggedIn, setLoggedIn, pendingConnections, darkMode, toggleDarkMode }) => {
 
   // Will need to retrieve username from URL, or state passed from previous page(?)
 
@@ -26,7 +26,7 @@ const Notifications = ({ userID, loggedIn, setLoggedIn, pendingConnections }) =>
 
   return (
     <>
-      <NavBar />
+      <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <div className="notifications-container">
         <div className="notifications-header">NEW PAL REQUESTS</div>
         {pendingConnections.length > 0 ? 

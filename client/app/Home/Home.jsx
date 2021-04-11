@@ -36,7 +36,7 @@ const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserD
   }
   return (
     <>
-      <NavBar userID={userID} />
+      <NavBar userID={userID} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <div className="home-container">
         <div className="home-header">PAL LIST</div>
         {rooms.length > 0 ?
