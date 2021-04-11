@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import NavBar from '../NavBar/NavBar.jsx';
-import dummyData from '../../../dummyData.js';
 import HomeListItem from './HomeListItem/HomeListItem.jsx';
 import RemovePal from './RemovePal/RemovePal.jsx';
 import axios from 'axios';
@@ -16,6 +15,8 @@ const Home = ({ userID, loggedIn, setLoggedIn, username="", rooms = [], setUserD
   const notifyTest = () => {
     toast('Poggers in the chat');
   }
+
+  console.log(darkMode);
 
   useEffect(() => {
     if (username) {
